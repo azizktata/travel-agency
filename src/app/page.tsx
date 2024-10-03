@@ -2,11 +2,12 @@ import Header from "@/components/ui/header";
 import Image from "next/image";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Footer from "@/components/ui/footer";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <main>
-      <Header />
       <div className="carousel">
         <Image
           src={"/hero-desktop.jpg"}
@@ -15,13 +16,15 @@ export default function Home() {
           objectFit="cover"
         />
         <div className="carousel-content">
-          <h1 className="carousel-title">
-            Notre <span> Programme </span> De Mois
-          </h1>
+          <h1 className="carousel-title">caprice travel & Event’s</h1>
           <p className="description">
-            amco laboris nisi ut aliquip ex ea commodo consequat
+            amco laboris nisi ut aliquip ex ea commodo coad minim veniam, quis
+            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequatnsequat
           </p>
-          <button className="learn_more-btn">learn more</button>
+          <Link href="/program">
+            <button className="learn_more-btn"> learn more</button>
+          </Link>
         </div>
       </div>
 
@@ -43,9 +46,9 @@ export default function Home() {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
-            <a>
+            <Link href="/program">
               learn more <i className="fa-solid fa-up-right-from-square"></i>
-            </a>
+            </Link>
           </div>
           <div className="service-card color-3">
             <i className="icon fa-solid fa-person-hiking"></i>
@@ -54,6 +57,50 @@ export default function Home() {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="our_package">
+        <h2>Our Program</h2>
+        <div className="package-container">
+          <Image
+            src={"/destination-1.jpg"}
+            alt="destination-2"
+            layout="responsive"
+            width={300}
+            height={200}
+            objectFit="cover"
+          />
+
+          <div className="package-details">
+            <h3>
+              <i className="fa-solid fa-location-dot"></i>
+              <span> Paris, France </span>
+            </h3>
+            <p>
+              <i className="fa-regular fa-clock"></i>7 Days
+            </p>
+            <p>
+              <i className="fa-regular fa-calendar"></i>Availibility: Sept 2024
+              - Dec 2024
+            </p>
+          </div>
+          <div className="price-container">
+            <h3>
+              {" "}
+              <strong>$2000 </strong>{" "}
+            </h3>
+            <div className="stars">
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+            </div>
+            <Link href="/program">
+              <button>Voir details</button>
+            </Link>
           </div>
         </div>
       </div>
@@ -107,7 +154,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="about">
+      <div id="about" className="about">
         <h2>Why Choose Us ?</h2>
         <Image
           src={"/photo-grp.jpg"}
@@ -154,61 +201,21 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="our_package">
-        <h2>Our Program</h2>
-        <div className="package-container">
-          <Image
-            src={"/destination-1.jpg"}
-            alt="destination-2"
-            layout="responsive"
-            width={300}
-            height={200}
-            objectFit="cover"
-          />
-
-          <div className="package-details">
-            <h3>
-              <i className="fa-solid fa-location-dot"></i>
-              <span> Paris, France </span>
-            </h3>
-            <p>
-              <i className="fa-regular fa-clock"></i>7 Days
-            </p>
-            <p>
-              <i className="fa-regular fa-calendar"></i>Availibility: Sept 2024
-              - Dec 2024
-            </p>
-          </div>
-          <div className="price-container">
-            <h3>
-              {" "}
-              <strong>$2000 </strong>{" "}
-            </h3>
-            <div className="stars">
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-            </div>
-            <button>Voir details</button>
-          </div>
-        </div>
-      </div>
-
       <div className="bookNow">
         <div className="book-call">
           <h1>
-            Ask for Your <span> Visa </span>{" "}
+            Ask for Your <span> Visa </span>
           </h1>
           <p>Demand visa for this Month's program</p>
         </div>
-        <button>
-          Demand Now <i className="fa-solid fa-caret-right"></i>
-        </button>
+        <Link href="/program">
+          <button>
+            Demand Now <i className="fa-solid fa-caret-right"></i>
+          </button>
+        </Link>
       </div>
 
-      <div className="contact">
+      <div id="contact" className="contact">
         <h2>Contact Us</h2>
         <form className="contact-form">
           <input type="text" placeholder="Name" />
@@ -218,14 +225,7 @@ export default function Home() {
         </form>
       </div>
 
-      <footer>
-        <div className="socials">
-          <i className="fa-brands fa-facebook"></i>
-          <i className="fa-brands fa-instagram"></i>
-          <i className="fa-brands fa-twitter"></i>
-        </div>
-        <p>© 2021 Travel Agency | captsa@booking.com</p>
-      </footer>
+      <Footer />
       {/* <Carousel */}
     </main>
   );

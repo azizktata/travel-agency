@@ -17,6 +17,7 @@ body {
   --light-color: #81f3ff;
   /* --green-color: #54ecc4; */
   --green-color: #0ecdc3;
+  --darker-green-color: #0c9891;
 }
 h2::after {
   content: "";
@@ -33,8 +34,16 @@ header {
   width: 100%;
   margin-bottom: 2rem;
 }
+.isActive {
+  border-bottom: 1px solid black;
+  padding-bottom: 0.25em;
+}
 header h1 {
   margin: 0;
+  padding: 0;
+  color: black;
+  /* color: linear-gradient(90deg, #0ecdc3, #0c9891); */
+  text-decoration: none;
 }
 .header-container {
   height: 80px;
@@ -52,7 +61,7 @@ ul {
 }
 nav a {
   text-decoration: none;
-  padding: 0 1em;
+  margin: 0 1em;
   color: #171717;
   font-size: 1.25rem;
 }
@@ -60,17 +69,17 @@ nav a:hover {
   color: #7a7a7a;
 }
 .callus-btn {
-  padding: 0.75em 2em;
+  padding: 0.75em 1.75em;
   border-radius: 5px;
   border: 0;
   background-color: var(--green-color);
   color: white;
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
 .callus-btn:hover {
-  background-color: rgb(110, 202, 130);
+  background-color: var(--darker-green-color);
 }
 .callus-btn span {
   margin-left: 0.5em;
@@ -91,7 +100,6 @@ nav a:hover {
     transform: translateX(100%);
   }
   nav {
-    /* display: none; */
     position: fixed;
     z-index: 2;
 
@@ -101,28 +109,25 @@ nav a:hover {
     margin: 0;
     height: 100vh;
     right: 0;
-    background-color: aliceblue;
-    border: 1px solid black;
+    background-color: #333;
+    color: white;
     transform: translateX(0);
-    width: 40%;
-    /* justify-content: center; */
+    width: 50%;
     padding: 1em;
     transition: transform 0.3s ease-in-out;
   }
   nav ul {
     flex-direction: column;
-    align-items: center;
-    gap: 1em;
-
+    width: 100%;
+    gap: 1.5em;
     margin: 0;
     padding: 0;
+    align-items: center;
   }
+
   nav a {
-    padding: 0.5em 0;
-    width: 100%;
-    text-align: center;
     font-size: 1.75rem;
-    /* width: 100%; */
+    color: white;
   }
   .close-btn {
     display: block;
@@ -139,10 +144,6 @@ nav a:hover {
   }
 }
 
-/* ====================
- end header
-=======================*/
-
 /* ===================
 start Carousel
 ======================*/
@@ -151,7 +152,6 @@ start Carousel
   display: grid;
   grid-template-columns: 1rem repeat(3, minmax(0, 1fr)) 1rem;
   grid-auto-rows: 100px;
-  border-radius: 10px;
   overflow: hidden;
   position: relative;
   margin-bottom: 5em;
@@ -159,6 +159,7 @@ start Carousel
 .carousel-title {
   font-size: 3rem;
   margin-bottom: 1em;
+  text-transform: uppercase;
 }
 .carousel-title span {
   color: var(--green-color);
@@ -213,29 +214,28 @@ img {
   padding: 0.5em 2.75em;
   border-radius: 3px;
   border: 0;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 1.2px;
   cursor: pointer;
   background-color: var(--green-color);
   color: white;
-  transform: scale(1);
-  transition: transform 0.3s ease-in-out;
+
+  transition: background-color 0.3s ease-in-out;
 }
 .learn_more-btn:hover {
-  transform: scale(1.1);
+  background-color: var(--darker-green-color);
 }
 
 @media screen and (min-width: 768px) {
   .carousel-content {
-    min-width: 700px;
-    grid-column: 2;
-    padding-left: 2.75em;
+    grid-column: 2 / span 2;
   }
   .carousel {
     width: 90%;
     margin: 0 auto;
     margin-bottom: 7em;
+    border-radius: 7px;
   }
 }
 /* ================
@@ -251,14 +251,7 @@ Services
   gap: 1em;
   margin-bottom: 2em;
 }
-/* .services h2::after {
-  content: "";
-  display: block;
-  width: 50px;
-  height: 3px;
-  background-color: var(--secondary-color);
-  margin: 0.5em auto;
-} */
+
 .service-cards {
   justify-content: center;
   display: flex;
@@ -269,7 +262,7 @@ Services
 .service-card {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+
   text-align: center;
   margin: 0 auto;
   max-width: 70%;
@@ -400,7 +393,6 @@ About us
 }
 .about-content {
   grid-column: 3 / -2;
-  margin-left: 4em;
 }
 .about-numbers {
   display: flex;
@@ -433,6 +425,7 @@ About us
     flex-direction: column;
     justify-content: space-between;
     align-self: stretch;
+    margin-left: 2em;
   }
   .about-content p {
     margin: 0;
@@ -457,7 +450,7 @@ Our Program
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 70%;
   border-radius: 8px;
   overflow: hidden;
   margin: 0 auto;
@@ -485,7 +478,7 @@ Our Program
 .fa-location-dot {
   font-size: 1.5rem;
   color: var(--green-color);
-  margin-right: 1em;
+  margin-right: 0.5em;
 }
 .fa-star {
   color: rgba(250, 195, 44, 0.8);
@@ -518,7 +511,7 @@ Our Program
 }
 .price-container button:focus,
 .price-container button:hover {
-  background-color: var(--light-color);
+  background-color: var(--darker-green-color);
 }
 
 @media screen and (min-width: 768px) {
@@ -528,8 +521,8 @@ Our Program
   .package-container {
     flex-direction: row;
     width: 90%;
-    gap: 2em;
-    padding: 2em;
+    gap: 0;
+    padding: 1em;
   }
   .package-container img {
     max-height: 300px;
@@ -538,7 +531,7 @@ Our Program
   .package-details {
   }
   .price-container {
-    padding: 0 3em;
+    padding: 0 2em;
     border-left: 1px solid rgba(60, 64, 67, 0.15);
   }
 }
@@ -592,6 +585,12 @@ Call To Action
   font-weight: 700;
   font-size: 0.95em;
   margin-bottom: 2em;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+.bookNow button:focus,
+.bookNow button:hover {
+  background-color: var(--darker-green-color);
 }
 
 @media screen and (min-width: 768px) {
@@ -634,15 +633,18 @@ Contact us
 }
 
 .contact-form button {
-  padding: 1em;
-  border-radius: 5px;
-  border: 0;
-  background-color: var(--green-color);
+  display: inline-block;
+  padding: 1.75em 2em;
+
+  text-transform: uppercase;
+  font-weight: 700;
   color: white;
-  font-size: 1.25rem;
-  letter-spacing: 1px;
+  margin-bottom: 2em;
+  background-color: var(--green-color);
+  border: 0;
+  transition: background-color 250ms;
+  letter-spacing: 2px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
 }
 .contact-form textarea {
   padding: 1.75em;
@@ -650,8 +652,10 @@ Contact us
   text-align: inherit;
 }
 .contact-form button:hover {
-  background-color: rgb(95, 153, 107);
+  background-color: var(--darker-green-color);
+  transform: translate(1px, 1px);
 }
+
 @media screen and (min-width: 768px) {
   .contact {
     margin-bottom: 7em;
@@ -686,4 +690,135 @@ footer {
 }
 .socials i {
   padding: 2em;
+}
+
+/* ==============
+Program Page
+================*/
+.program-main h1 {
+  text-align: center;
+  margin-bottom: 2em;
+}
+.program-main h1::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: var(--green-color);
+  margin: 0.5em auto;
+}
+.program-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 2em;
+}
+.program-container h3 {
+  margin-bottom: 1em;
+}
+.visa-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  border: 1;
+}
+.visa-form-container input {
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.visa-form-container input:focus {
+  outline: none;
+  border: 1px solid #000;
+}
+.order-title {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+.visa-order-container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 1.5em 2em;
+  display: flex;
+  flex-direction: column;
+  background-color: #f6f6f6;
+  margin-bottom: 2em;
+  border-radius: 3px;
+  box-shadow: 10px 10px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.order-visa-btn {
+  display: inline-block;
+  padding: 1.75em 2em;
+
+  text-transform: uppercase;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 2em;
+  background-color: var(--green-color);
+  border: 0;
+  transition: background-color 250ms;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+.order-visa-btn:hover,
+.order-visa-btn:focus {
+  background-color: var(--darker-green-color);
+  transform: translate(1px, 1px);
+}
+.accordion {
+  text-decoration: none;
+  color: #868686;
+  cursor: pointer;
+
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+@media screen and (min-width: 768px) {
+  .visa-form-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .order-visa-btn {
+    grid-column: 1 / -1;
+  }
+}
+@media screen and (min-width: 900px) {
+  .program-main {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    width: 100%;
+    height: 100vh;
+    border-top: 1px solid #ccc;
+  }
+  .visa-title {
+    margin-top: 0;
+    margin-top: 1em;
+  }
+  .program-container {
+    width: 50%;
+  }
+  .visa-form-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .order-visa-btn {
+    grid-column: 1 / -1;
+  }
+  .visa-total {
+    width: 40%;
+    height: 100vh;
+    border-left: 1px solid #ccc;
+  }
+  .visa-order-container {
+    width: 100%;
+    padding-top: 4em;
+    padding-bottom: 2em;
+    padding-right: 3em;
+    padding-left: 3em;
+    height: 100%;
+  }
 }

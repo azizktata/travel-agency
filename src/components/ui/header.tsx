@@ -1,11 +1,17 @@
 "use client";
+import clsx from "clsx";
+import Link from "next/link";
 import React from "react";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
   return (
     <header>
       <div className="header-container">
-        <h1>Logo</h1>
+        <Link href={"/"}>
+          <h1>caprice</h1>
+        </Link>
         <nav className="nav">
           <ul>
             <li
@@ -18,16 +24,20 @@ export default function Header() {
               &times;
             </li>
             <li>
-              {" "}
-              <a href="">Our Program</a>{" "}
+              <Link
+                href="/program"
+                className={clsx({
+                  isActive: pathname === "/program",
+                })}
+              >
+                Our Program
+              </Link>
             </li>
             <li>
-              {" "}
-              <a href="">About </a>{" "}
+              <Link href="/#about">About </Link>
             </li>
             <li>
-              {" "}
-              <a href=""> Contact</a>{" "}
+              <Link href="/#contact"> Contact</Link>
             </li>
           </ul>
         </nav>
