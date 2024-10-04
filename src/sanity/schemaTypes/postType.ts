@@ -76,9 +76,9 @@ export const postType = defineType({
       media: 'mainImage',
     },
     prepare(selection) {
-      const {title, subtitle, dateDebut, dateFin, media} = selection
+      const {title, subtitle, dateDebut, media} = selection
       const titleFormatted = title || 'Untitled'
-      // const date = `${dateDebut} ${dateFin}`
+
       return {
         title: titleFormatted,
         subtitle: subtitle,

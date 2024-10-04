@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
-import { inter, lusitana } from "@/components/ui/fonts";
-import Header from "@/components/ui/header";
+import { inter } from "@/components/ui/fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",

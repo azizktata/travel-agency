@@ -28,7 +28,7 @@ export default async function Home() {
   const postImageUrl = post?.mainImage
     ? urlFor(post?.mainImage)?.width(300).height(200).url()
     : null;
-  const pageImg = page?.image ? urlFor(page?.image)?.url() : null;
+  // const pageImg = page?.image ? urlFor(page?.image)?.url() : null;
 
   return (
     <main>
@@ -231,7 +231,7 @@ export default async function Home() {
           <h1>
             Ask for Your <span> Visa </span>
           </h1>
-          <p>Demand visa for this Month's program</p>
+          <p>Demand visa for this Month program</p>
         </div>
         <Link href="/program">
           <button>

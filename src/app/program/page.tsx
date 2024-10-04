@@ -8,7 +8,6 @@ import Link from "next/link";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { dataset, projectId } from "@/sanity/env";
-import Footer from "@/components/ui/footer";
 
 const POST_QUERY2 = defineQuery(`*[
   _type == "post"
@@ -66,7 +65,7 @@ export default async function Program() {
             </h5>
             {post?.activites &&
               post?.activites.map((activite: string) => (
-                <div className="program-card">
+                <div key={activite} className="program-card">
                   <p>{activite}</p>
                 </div>
               ))}
