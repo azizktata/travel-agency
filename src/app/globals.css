@@ -28,7 +28,7 @@ h2::after {
   margin: 0.5em auto;
 }
 h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 header {
   width: 100%;
@@ -129,7 +129,7 @@ nav a:hover {
   }
 
   nav a {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
     color: white;
   }
   .close-btn {
@@ -160,15 +160,15 @@ start Carousel
   margin-bottom: 5em;
 }
 .carousel-title {
-  font-size: 3rem;
-  margin-bottom: 1em;
+  font-size: 2.5rem;
+  margin-bottom: 0.5em;
   text-transform: uppercase;
 }
 .carousel-title span {
   color: var(--green-color);
 }
 .description {
-  font-size: 1.125rem;
+  font-size: 1rem;
   margin-top: 0;
   margin-bottom: 1.75em;
 }
@@ -378,7 +378,9 @@ Destinations
   .destination-card img {
     max-height: 300px;
   }
-
+  .destinations {
+    margin-bottom: 10em;
+  }
   .destination-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -393,31 +395,41 @@ About us
 ==================*/
 
 .about {
-  display: grid;
-  grid-template-columns: 1rem repeat(2, 1fr) 1rem;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1em;
-  margin-bottom: 5em;
+  margin: 0 auto;
+  margin-bottom: 7em;
+  width: 90%;
 }
 .about h2 {
-  grid-column: 1 / -1;
   text-align: center;
 }
 .about img {
-  grid-column: 2 / 3;
   align-self: stretch;
   object-fit: cover;
 }
-.about-content {
-  grid-column: 3 / -2;
-}
+
 .about-numbers {
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: baseline;
-  gap: 1em;
+  /* gap: 1em; */
   font-weight: 600;
+}
+.about-numbers div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.about-numbers div p {
+  margin: 0;
+  padding: 0;
 }
 .about-numbers strong {
   font-size: 2rem;
@@ -426,11 +438,16 @@ About us
 
 @media screen and (min-width: 768px) {
   .about {
+    display: grid;
     grid-template-columns: 1fr 1fr;
     width: 90%;
     margin: 0 auto;
     align-items: flex-start;
-    margin-bottom: 5em;
+    margin-bottom: 7em;
+  }
+  .about h2 {
+    grid-column: 1 / -1;
+    justify-self: center;
   }
   .about img {
     grid-column: 1 / 2;
@@ -441,7 +458,7 @@ About us
     grid-column: 2 / -1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-self: stretch;
     margin-left: 2em;
   }
@@ -452,6 +469,7 @@ About us
   }
   .about-numbers {
     margin-bottom: 2em;
+    justify-content: space-around;
   }
 }
 
@@ -577,6 +595,7 @@ Call To Action
 .book-call {
   display: flex;
   flex-direction: column;
+  text-align: center;
   align-items: center;
   gap: 1em;
   margin-bottom: 2em;

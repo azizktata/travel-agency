@@ -33,7 +33,7 @@ export default function Header() {
                   isActive: pathname === "/program",
                 })}
               >
-                Our Program
+                Programme
               </Link>
             </li>
             <li>
