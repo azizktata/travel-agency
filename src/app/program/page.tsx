@@ -72,7 +72,6 @@ export default async function Program() {
               ))}
             <br></br>
             <br></br>
-            <br></br>
           </div>
         </div>
 
@@ -103,7 +102,6 @@ export default async function Program() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

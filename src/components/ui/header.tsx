@@ -9,7 +9,11 @@ export default function Header() {
   return (
     <header>
       <div className="header-container">
-        <h1>caprice</h1>
+        <h1>
+          <Link className="logo" href="/">
+            caprice{" "}
+          </Link>{" "}
+        </h1>
 
         <nav className="nav">
           <ul>

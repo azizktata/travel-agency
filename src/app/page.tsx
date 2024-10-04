@@ -103,8 +103,8 @@ export default async function Home() {
             src={postImageUrl || "https://via.placeholder.com/300x200"}
             alt="destination-2"
             layout="responsive"
-            width={300}
-            height={200}
+            width={500}
+            height={300}
             objectFit="cover"
           />
 

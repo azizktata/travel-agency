@@ -33,6 +33,10 @@ h2 {
 header {
   width: 100%;
 }
+.logo {
+  text-decoration: none;
+  color: #000;
+}
 .isActive {
   border-bottom: 1px solid black;
   padding-bottom: 0.25em;
@@ -464,7 +468,7 @@ Our Program
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 70%;
+  width: 80%;
   border-radius: 8px;
   overflow: hidden;
   margin: 0 auto;
@@ -479,12 +483,10 @@ Our Program
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* margin: 0 auto; */
   align-items: start;
   width: 100%;
-  /* margin: 0 auto; */
   gap: 1em;
-  /* margin-bottom: 5em; */
+
   padding: 0 2em;
   font-size: 1.125rem;
 }
@@ -530,18 +532,20 @@ Our Program
   background-color: var(--darker-green-color);
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 950px) {
   .our_package {
     margin-bottom: 7em;
   }
   .package-container {
     flex-direction: row;
-    width: 90%;
+    width: 70%;
     gap: 0;
     padding: 1em;
   }
   .package-container img {
+    min-height: 200px;
     max-height: 300px;
+    max-width: 500px;
     width: 100%;
     object-fit: cover;
   }
@@ -551,6 +555,8 @@ Our Program
     border-left: 1px solid rgba(60, 64, 67, 0.15);
     margin-top: 0;
   }
+}
+@media screen and (min-width: 768px) {
 }
 /*==================
 Call To Action
@@ -614,6 +620,7 @@ Call To Action
   .bookNow {
     flex-direction: row;
     justify-content: space-around;
+    width: 70%;
   }
   .book-call {
     align-items: flex-start;
@@ -693,20 +700,6 @@ Contact us
   .contact-form button {
     grid-column: 1 / -1;
   }
-}
-
-/* ==============
-FOOTER
-=================*/
-
-footer {
-  background-color: #333;
-  color: white;
-  padding: 1em;
-  text-align: center;
-}
-.socials i {
-  padding: 2em;
 }
 
 /* ==============
@@ -808,7 +801,6 @@ h5 {
   outline: none;
   transition: background-color 0.3s ease-in-out;
 }
-
 @media screen and (min-width: 768px) {
   .visa-form-container {
     display: grid;
@@ -818,10 +810,7 @@ h5 {
     grid-column: 1 / -1;
   }
 }
-@media screen and (min-width: 900px) {
-  footer {
-    display: none;
-  }
+@media screen and (min-width: 1100px) {
   .program-main {
     display: flex;
     flex-direction: row;
@@ -842,14 +831,11 @@ h5 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
-  .order-visa-btn {
-    grid-column: 1 / -1;
-  }
+
   .visa-total {
     width: 40%;
     height: 100%;
     border-left: 1px solid #ccc;
-    justify-self: stretch;
   }
   .visa-order-container {
     width: 100%;
@@ -859,4 +845,17 @@ h5 {
     padding-left: 3em;
     height: 100%;
   }
+}
+/* ==============
+FOOTER
+=================*/
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+.socials i {
+  padding: 2em;
 }
