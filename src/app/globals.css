@@ -41,8 +41,8 @@ header h1 {
   margin: 0;
   padding: 0;
   color: black;
-  /* color: linear-gradient(90deg, #0ecdc3, #0c9891); */
-  text-decoration: none;
+  /* color: linear-gradient(90deg, #0ecdc3, #0c9891);
+  text-decoration: none; */
 }
 .header-container {
   height: 80px;
@@ -62,7 +62,7 @@ nav a {
   text-decoration: none;
   margin: 0 1em;
   color: #171717;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
 }
 nav a:hover {
   color: #7a7a7a;
@@ -228,7 +228,13 @@ img {
 
 @media screen and (min-width: 768px) {
   .carousel-content {
-    grid-column: 2 / span 2;
+    grid-column: 1 / -1;
+    /* justify-items: center; */
+    align-items: center;
+    text-align: center;
+    max-width: 900px;
+    /* align-self: flex-start; */
+    /* justify-self: start; */
   }
   .carousel-content h1 {
     font-size: 3.5rem;
@@ -323,7 +329,6 @@ Services
   .service-cards {
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
   }
 }
 
@@ -538,9 +543,9 @@ Our Program
   .package-container img {
     max-height: 300px;
     width: 100%;
+    object-fit: cover;
   }
-  .package-details {
-  }
+
   .price-container {
     padding: 0 2em;
     border-left: 1px solid rgba(60, 64, 67, 0.15);
@@ -814,6 +819,9 @@ h5 {
   }
 }
 @media screen and (min-width: 900px) {
+  footer {
+    display: none;
+  }
   .program-main {
     display: flex;
     flex-direction: row;
@@ -839,8 +847,9 @@ h5 {
   }
   .visa-total {
     width: 40%;
-    height: 100vh;
+    height: 100%;
     border-left: 1px solid #ccc;
+    justify-self: stretch;
   }
   .visa-order-container {
     width: 100%;

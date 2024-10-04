@@ -9,9 +9,8 @@ export default function Header() {
   return (
     <header>
       <div className="header-container">
-        <Link href={"/"}>
-          <h1>caprice</h1>
-        </Link>
+        <h1>caprice</h1>
+
         <nav className="nav">
           <ul>
             <li

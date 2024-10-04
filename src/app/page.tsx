@@ -4,7 +4,7 @@ import Image from "next/image";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Footer from "@/components/ui/footer";
 import Link from "next/link";
-import { client } from "@/sanity/lib/client";
+import { client } from "@/sanity/client";
 import { defineQuery } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
@@ -41,8 +41,20 @@ export default async function Home() {
           objectFit="cover"
         />
         <div className="carousel-content">
-          <h1 className="carousel-title">{page?.titre}</h1>
-          <p className="description">{page?.description}</p>
+          <h1 className="carousel-title">
+            {page?.titre || "Travels & Events"}
+          </h1>
+
+          {page?.description ? (
+            <p className="description">{page?.description}</p>
+          ) : (
+            <p className="description">
+              Welcome to Caprice Travel, your dedicated travel companion since
+              2019. Our mission is to craft exceptional travel experiences that
+              connect you with the world in ways that inspire
+            </p>
+          )}
+
           <Link href="/program">
             <button className="learn_more-btn"> learn more</button>
           </Link>
@@ -99,20 +111,22 @@ export default async function Home() {
           <div className="package-details">
             <h3>
               <i className="fa-solid fa-location-dot"></i>
-              <span> {post?.destination} </span>
+              <span> {post?.destination || "Marroc"} </span>
             </h3>
             <p>
-              <i className="fa-regular fa-clock"></i> {post?.duration}
+              <i className="fa-regular fa-clock"></i>{" "}
+              {post?.duration || "10 days"}
             </p>
             <p>
               <i className="fa-regular fa-calendar"></i>
-              {post?.startDate} - {post?.endDate}
+              {post?.startDate || "2024-01-01"} -{" "}
+              {post?.endDate || "2024-01-01"}
             </p>
           </div>
           <div className="price-container">
             <h3>
               {" "}
-              <strong>DT {post?.prix} </strong>
+              <strong>{post?.prix || "0"} DT </strong>
             </h3>
             <div className="stars">
               <i className="fa-solid fa-star"></i>
@@ -188,17 +202,20 @@ export default async function Home() {
           objectFit="cover"
         />
         <div className="about-content">
-          <p>
-            {/* Welcome to Caprice Travel, your dedicated travel companion since
-            2019. Our mission is to craft exceptional travel experiences that
-            connect you with the world in ways that inspire, rejuvenate, and
-            enrich your life. Whether you’re seeking a beach escape, a cultural
-            tour through Europe, or a thrilling adventure in the wild, we have
-            you covered. Our experienced team of travel experts is passionate
-            about delivering personalized service, curating trips that reflect
-            your unique tastes and interests. */}
-            {page?.about}
-          </p>
+          {page?.about ? (
+            page.about
+          ) : (
+            <p>
+              Welcome to Caprice Travel, your dedicated travel companion since
+              2019. Our mission is to craft exceptional travel experiences that
+              connect you with the world in ways that inspire, rejuvenate, and
+              enrich your life. Whether you’re seeking a beach escape, a
+              cultural tour through Europe, or a thrilling adventure in the
+              wild, we have you covered. Our experienced team of travel experts
+              is passionate about delivering personalized service, curating
+              trips that reflect your unique tastes and interests.
+            </p>
+          )}
 
           <div className="about-numbers">
             <div>

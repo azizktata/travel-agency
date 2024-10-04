@@ -251,11 +251,42 @@ export type POST_QUERYResult = {
   activites?: Array<string>;
 } | null;
 
+// Source: ../agence-voyage/src/app/program/page.tsx
+// Variable: POST_QUERY2
+// Query: *[  _type == "post"  ][0]
+export type POST_QUERY2Result = {
+  _id: string;
+  _type: "post";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  titre?: string;
+  description?: string;
+  destination?: string;
+  startDate?: string;
+  endDate?: string;
+  prix?: number;
+  duration?: string;
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  activites?: Array<string>;
+} | null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[\n_type==\"page\"][0]": PAGE_QUERYResult;
-    "*[\n  _type == \"post\"\n  ][0]": POST_QUERYResult;
+    "*[\n  _type == \"post\"\n  ][0]": POST_QUERYResult | POST_QUERY2Result;
   }
 }

@@ -1,5 +1,5 @@
 import Header from "@/components/ui/header";
-import { client } from "@/sanity/lib/client";
+import { client } from "@/sanity/client";
 import Image from "next/image";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -7,12 +7,13 @@ import { defineQuery } from "next-sanity";
 import Link from "next/link";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { dataset, projectId } from "@/sanity/env";
+import Footer from "@/components/ui/footer";
 
 const POST_QUERY2 = defineQuery(`*[
   _type == "post"
   ][0]`);
 
+const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
   projectId && dataset
     ? imageUrlBuilder({ projectId, dataset }).image(source)
@@ -28,7 +29,7 @@ export default async function Program() {
       <Header />
       <div className="program-main">
         <div className="program-container">
-          <h1>{post?.titre}</h1>
+          <h1>{post?.titre || "Programme"}</h1>
           <Link className="accordion" href={"/"}>
             <i className="fa-solid fa-angle-left"></i> Home / Programme
           </Link>
@@ -69,6 +70,9 @@ export default async function Program() {
                   <p>{activite}</p>
                 </div>
               ))}
+            <br></br>
+            <br></br>
+            <br></br>
           </div>
         </div>
 
@@ -99,6 +103,7 @@ export default async function Program() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
