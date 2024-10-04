@@ -1,0 +1,5 @@
+{
+    "path": "../agence-voyage/src/**/*.{ts,tsx,js,jsx}", 
+    "schema": "./schema.json",
+    "generates": "../agence-voyage/src/sanity/types.ts"
+}

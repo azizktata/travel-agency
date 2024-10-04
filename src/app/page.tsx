@@ -4,10 +4,35 @@ import Image from "next/image";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Footer from "@/components/ui/footer";
 import Link from "next/link";
+import { client } from "@/sanity/lib/client";
+import { defineQuery } from "next-sanity";
+import imageUrlBuilder from "@sanity/image-url";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-export default function Home() {
+const PAGE_QUERY = defineQuery(`*[
+_type=="page"][0]`);
+
+const POST_QUERY = defineQuery(`*[
+  _type == "post"
+  ][0]`);
+
+const { projectId, dataset } = client.config();
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset
+    ? imageUrlBuilder({ projectId, dataset }).image(source)
+    : null;
+
+export default async function Home() {
+  const page = await client.fetch(PAGE_QUERY);
+  const post = await client.fetch(POST_QUERY);
+  const postImageUrl = post?.mainImage
+    ? urlFor(post?.mainImage)?.width(300).height(200).url()
+    : null;
+  const pageImg = page?.image ? urlFor(page?.image)?.url() : null;
+
   return (
     <main>
+      <Header />
       <div className="carousel">
         <Image
           src={"/hero-desktop.jpg"}
@@ -16,12 +41,8 @@ export default function Home() {
           objectFit="cover"
         />
         <div className="carousel-content">
-          <h1 className="carousel-title">caprice travel & Event’s</h1>
-          <p className="description">
-            amco laboris nisi ut aliquip ex ea commodo coad minim veniam, quis
-            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequatnsequat
-          </p>
+          <h1 className="carousel-title">{page?.titre}</h1>
+          <p className="description">{page?.description}</p>
           <Link href="/program">
             <button className="learn_more-btn"> learn more</button>
           </Link>
@@ -35,16 +56,18 @@ export default function Home() {
             <i className="icon fa-solid fa-map-location-dot"></i>
             <h3>Check Our Program</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Explore our exclusive travel package this month, offering
+              unforgettable adventures, relaxation, and cultural
+              experiences—tailored just for you.
             </p>
           </div>
           <div className="service-card color-2">
             <i className=" icon fa-brands fa-cc-visa"></i>{" "}
             <h3>Post for a Visa</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Need a visa for your next trip? Our visa application service
+              ensures that you get your travel documents quickly and
+              efficiently, so you can focus on planning your adventure.
             </p>
             <Link href="/program">
               learn more <i className="fa-solid fa-up-right-from-square"></i>
@@ -54,8 +77,8 @@ export default function Home() {
             <i className="icon fa-solid fa-person-hiking"></i>
             <h3>Pay and Go</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ready to embark on your journey? Pack your bags and get ready for
+              an adventure of a lifetime!
             </p>
           </div>
         </div>
@@ -65,7 +88,7 @@ export default function Home() {
         <h2>Our Program</h2>
         <div className="package-container">
           <Image
-            src={"/destination-1.jpg"}
+            src={postImageUrl || "https://via.placeholder.com/300x200"}
             alt="destination-2"
             layout="responsive"
             width={300}
@@ -76,20 +99,20 @@ export default function Home() {
           <div className="package-details">
             <h3>
               <i className="fa-solid fa-location-dot"></i>
-              <span> Paris, France </span>
+              <span> {post?.destination} </span>
             </h3>
             <p>
-              <i className="fa-regular fa-clock"></i>7 Days
+              <i className="fa-regular fa-clock"></i> {post?.duration}
             </p>
             <p>
-              <i className="fa-regular fa-calendar"></i>Availibility: Sept 2024
-              - Dec 2024
+              <i className="fa-regular fa-calendar"></i>
+              {post?.startDate} - {post?.endDate}
             </p>
           </div>
           <div className="price-container">
             <h3>
               {" "}
-              <strong>$2000 </strong>{" "}
+              <strong>DT {post?.prix} </strong>
             </h3>
             <div className="stars">
               <i className="fa-solid fa-star"></i>
@@ -133,7 +156,7 @@ export default function Home() {
             />
             <h3>
               <i className="fa-solid fa-location-dot"></i>
-              <span> Paris, France </span>
+              <span> Marroc </span>
             </h3>
           </div>
 
@@ -148,7 +171,7 @@ export default function Home() {
             />
             <h3>
               <i className="fa-solid fa-location-dot"></i>{" "}
-              <span> Paris, France </span>
+              <span> Maldives </span>
             </h3>
           </div>
         </div>
@@ -166,34 +189,36 @@ export default function Home() {
         />
         <div className="about-content">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-            aliquip ex ea commodo consequat ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+            {/* Welcome to Caprice Travel, your dedicated travel companion since
+            2019. Our mission is to craft exceptional travel experiences that
+            connect you with the world in ways that inspire, rejuvenate, and
+            enrich your life. Whether you’re seeking a beach escape, a cultural
+            tour through Europe, or a thrilling adventure in the wild, we have
+            you covered. Our experienced team of travel experts is passionate
+            about delivering personalized service, curating trips that reflect
+            your unique tastes and interests. */}
+            {page?.about}
           </p>
 
           <div className="about-numbers">
             <div>
               <p>
                 {" "}
-                <strong>+12K </strong>{" "}
+                <strong>+10K </strong>{" "}
               </p>
               <p>Happy Customers</p>
             </div>
             <div>
               <p>
                 {" "}
-                <strong> +500</strong>
+                <strong> +12</strong>
               </p>
               <p>Destinations</p>
             </div>
             <div>
               <p>
                 {" "}
-                <strong>+30 </strong>{" "}
+                <strong>+5 </strong>{" "}
               </p>
               <p>Years of Experience</p>
             </div>

@@ -1,47 +1,75 @@
 import Header from "@/components/ui/header";
+import { client } from "@/sanity/lib/client";
+import Image from "next/image";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { defineQuery } from "next-sanity";
 import Link from "next/link";
+import imageUrlBuilder from "@sanity/image-url";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { dataset, projectId } from "@/sanity/env";
+import Footer from "@/components/ui/footer";
 
-export default function Program() {
+const POST_QUERY2 = defineQuery(`*[
+  _type == "post"
+  ][0]`);
+
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset
+    ? imageUrlBuilder({ projectId, dataset }).image(source)
+    : null;
+export default async function Program() {
+  const post = await client.fetch(POST_QUERY2);
+  const postImageUrl = post?.mainImage
+    ? urlFor(post.mainImage)?.width(500).height(310).url()
+    : null;
+
   return (
     <>
+      <Header />
       <div className="program-main">
         <div className="program-container">
-          <h1>Programme</h1>
+          <h1>{post?.titre}</h1>
           <Link className="accordion" href={"/"}>
-            <i className="fa-solid fa-angle-left"></i> Home
+            <i className="fa-solid fa-angle-left"></i> Home / Programme
           </Link>
-          <h3>Notre Programme de mois</h3>
+
+          <Image
+            src={postImageUrl || "https://via.placeholder.com/500x310"}
+            alt="destination-2"
+            layout="responsive"
+            width={500}
+            height={310}
+            objectFit="cover"
+          />
+
           <div className="program-cards">
-            <div className="program-card">
-              <h4>1er semaine</h4>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
-            <div className="program-card">
-              <h4>2eme semaine</h4>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
-            <div className="program-card">
-              <h4>3eme semaine</h4>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
-            <div className="program-card">
-              <h4>4eme semaine</h4>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
+            <h4> {post?.description} </h4>
+
+            <h5>
+              Destination: <span>{post?.destination} </span>{" "}
+            </h5>
+
+            <h5>
+              Date:{" "}
+              <span>
+                {" "}
+                {post?.startDate} - {post?.endDate}
+              </span>{" "}
+            </h5>
+
+            <h5>
+              Prix: <span>{post?.prix} </span>{" "}
+            </h5>
+            <h5>
+              Duree: <span> {post?.duration}</span>{" "}
+            </h5>
+            {post?.activites &&
+              post?.activites.map((activite: string) => (
+                <div className="program-card">
+                  <p>{activite}</p>
+                </div>
+              ))}
           </div>
         </div>
 
