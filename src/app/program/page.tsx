@@ -7,7 +7,6 @@ import { defineQuery } from "next-sanity";
 import Link from "next/link";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import Footer from "@/components/ui/footer";
 
 const POST_QUERY2 = defineQuery(`*[
   _type == "post"
