@@ -9,6 +9,8 @@ import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import VisaForm from "@/components/ui/VisaForm";
 
+const options = { next: { revalidate: 60 } };
+
 const POST_QUERY2 = defineQuery(`*[
   _type == "post"
   ][0]`);
@@ -19,14 +21,14 @@ const urlFor = (source: SanityImageSource) =>
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 export default async function Program() {
-  const post = await client.fetch(POST_QUERY2);
+  const post = await client.fetch(POST_QUERY2, {}, options);
   const postImageUrl = post?.mainImage
     ? urlFor(post.mainImage)?.width(500).height(310).url()
     : null;
 
   return (
     <>
-      <Header />
+      <Header change={true} title={undefined} />
       <div className="program-main">
         <div className="program-container">
           <h1>{post?.titre || "Programme"}</h1>
@@ -35,7 +37,7 @@ export default async function Program() {
           </Link>
 
           <Image
-            src={postImageUrl || "https://via.placeholder.com/500x310"}
+            src={postImageUrl || "/maldive.jpg"}
             alt="destination-2"
             layout="responsive"
             width={500}

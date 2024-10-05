@@ -4,14 +4,19 @@ import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 
-export default function Header() {
+export default function Header({
+  change = false,
+  title = "caprice",
+  contact = "58 344 400",
+}) {
   const pathname = usePathname();
+  const blackStyle = change ? { color: "black" } : { color: "white" };
   return (
     <header>
       <div className="header-container">
         <h1>
-          <Link className="logo" href="/">
-            caprice{" "}
+          <Link style={blackStyle} className="logo" href="/">
+            {title}{" "}
           </Link>{" "}
         </h1>
 
@@ -28,6 +33,7 @@ export default function Header() {
             </li>
             <li>
               <Link
+                style={blackStyle}
                 href="/program"
                 className={clsx({
                   isActive: pathname === "/program",
@@ -37,14 +43,19 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link href="/#about">About </Link>
+              <Link style={blackStyle} href="/#about">
+                About{" "}
+              </Link>
             </li>
             <li>
-              <Link href="/#contact"> Contact</Link>
+              <Link style={blackStyle} href="/#contact">
+                {" "}
+                Contact
+              </Link>
             </li>
           </ul>
           <button className="callus-btn">
-            <i className="fa-solid fa-phone"></i> <span>45711258</span>
+            <i className="fa-solid fa-phone"></i> <span>{contact}</span>
           </button>
         </nav>
         <div

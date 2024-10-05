@@ -9,11 +9,16 @@ import { defineQuery } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
+const options = { next: { revalidate: 60 } };
+
 const PAGE_QUERY = defineQuery(`*[
 _type=="page"][0]`);
 
 const POST_QUERY = defineQuery(`*[
   _type == "post"
+  ][0]`);
+const CONTACT_QUERY = defineQuery(`*[
+  _type == "contact"
   ][0]`);
 
 const { projectId, dataset } = client.config();
@@ -23,8 +28,9 @@ const urlFor = (source: SanityImageSource) =>
     : null;
 
 export default async function Home() {
-  const page = await client.fetch(PAGE_QUERY);
-  const post = await client.fetch(POST_QUERY);
+  const page = await client.fetch(PAGE_QUERY, {}, options);
+  const post = await client.fetch(POST_QUERY, {}, options);
+  const contact = await client.fetch(CONTACT_QUERY, {}, options);
   const postImageUrl = post?.mainImage
     ? urlFor(post?.mainImage)?.width(300).height(200).url()
     : null;
@@ -32,14 +38,9 @@ export default async function Home() {
 
   return (
     <main>
-      <Header />
       <div className="carousel">
-        <Image
-          src={"/hero-desktop.jpg"}
-          alt="hero"
-          layout="fill"
-          objectFit="cover"
-        />
+        <Header title={page?.logoName} contact={contact?.telephone} />
+        <Image src={"/hero-6.jpg"} alt="hero" layout="fill" objectFit="cover" />
         <div className="carousel-content">
           <h1 className="carousel-title">
             {page?.titre || "Travels & Events"}
@@ -100,7 +101,7 @@ export default async function Home() {
         <h2>Our Program</h2>
         <div className="package-container">
           <Image
-            src={postImageUrl || "https://via.placeholder.com/300x200"}
+            src={postImageUrl || "/maldive.jpg"}
             alt="destination-2"
             layout="responsive"
             width={500}
@@ -142,66 +143,9 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* <div className="destinations">
-        <h2>Previous Destinations</h2>
-        <div className="destination-cards">
-          <div className="destination-card ">
-            <Image
-              src={"/destination-1.jpg"}
-              alt="destination-1"
-              layout="responsive"
-              width={300}
-              height={200}
-              objectFit="cover"
-            />
-            <h3>
-              <i className="fa-solid fa-location-dot"></i>
-              <span> Paris, France </span>
-            </h3>
-          </div>
-          <div className="destination-card ">
-            <Image
-              src={"/destination-1.jpg"}
-              alt="destination-2"
-              layout="responsive"
-              width={300}
-              height={200}
-              objectFit="cover"
-            />
-            <h3>
-              <i className="fa-solid fa-location-dot"></i>
-              <span> Marroc </span>
-            </h3>
-          </div>
-
-          <div className="destination-card ">
-            <Image
-              src={"/destination-1.jpg"}
-              alt="destination-2"
-              layout="responsive"
-              width={300}
-              height={200}
-              objectFit="cover"
-            />
-            <h3>
-              <i className="fa-solid fa-location-dot"></i>{" "}
-              <span> Maldives </span>
-            </h3>
-          </div>
-        </div>
-      </div> */}
       <div className="destinations">
         <h2>Previous Destinations</h2>
         <div className="destination-cards">
-          {/* <Image
-            src={"/destination-1.jpg"}
-            alt="destination-1"
-            layout="responsive"
-            width={300}
-            height={200}
-            objectFit="cover"
-          /> */}
-
           <Image
             src={"/destination-2.jpg"}
             alt="destination-2"
@@ -293,13 +237,15 @@ export default async function Home() {
       </div>
 
       <div className="bookNow">
+        <Image src={"/hero-2.jpg"} alt="hero" layout="fill" objectFit="cover" />
+
         <div className="book-call">
           <h1>
             Ask for Your <span> Visa </span>
           </h1>
           <p>Demand visa for this Month program</p>
         </div>
-        <Link href="/program">
+        <Link className="check-prog" href="/program">
           <button>
             Check the Program <i className="fa-solid fa-caret-right"></i>
           </button>
@@ -329,7 +275,7 @@ export default async function Home() {
         ></iframe>
       </div>
 
-      <Footer />
+      <Footer email={contact?.email} fb={contact?.facebook} />
       {/* <Carousel */}
     </main>
   );
