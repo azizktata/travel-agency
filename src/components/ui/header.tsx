@@ -43,10 +43,10 @@ export default function Header() {
               <Link href="/#contact"> Contact</Link>
             </li>
           </ul>
+          <button className="callus-btn">
+            <i className="fa-solid fa-phone"></i> <span>45711258</span>
+          </button>
         </nav>
-        <button className="callus-btn">
-          <i className="fa-solid fa-phone"></i> <span>45711258</span>
-        </button>
         <div
           onClick={() => {
             document.querySelector("nav")?.classList.remove("hide-menu");

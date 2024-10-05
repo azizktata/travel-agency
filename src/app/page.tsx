@@ -142,7 +142,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="destinations">
+      {/* <div className="destinations">
         <h2>Previous Destinations</h2>
         <div className="destination-cards">
           <div className="destination-card ">
@@ -188,6 +188,55 @@ export default async function Home() {
               <span> Maldives </span>
             </h3>
           </div>
+        </div>
+      </div> */}
+      <div className="destinations">
+        <h2>Previous Destinations</h2>
+        <div className="destination-cards">
+          {/* <Image
+            src={"/destination-1.jpg"}
+            alt="destination-1"
+            layout="responsive"
+            width={300}
+            height={200}
+            objectFit="cover"
+          /> */}
+
+          <Image
+            src={"/destination-2.jpg"}
+            alt="destination-2"
+            layout="responsive"
+            width={1920}
+            height={1080}
+            objectFit="cover"
+          />
+
+          <Image
+            src={"/destination-3.jpg"}
+            alt="destination-2"
+            layout="responsive"
+            width={300}
+            height={200}
+            objectFit="cover"
+          />
+
+          <Image
+            src={"/destination-5.jpg"}
+            alt="destination-2"
+            layout="responsive"
+            width={300}
+            height={200}
+            objectFit="cover"
+          />
+
+          <Image
+            src={"/destination-6.jpg"}
+            alt="destination-2"
+            layout="responsive"
+            width={300}
+            height={200}
+            objectFit="cover"
+          />
         </div>
       </div>
 
@@ -252,12 +301,12 @@ export default async function Home() {
         </div>
         <Link href="/program">
           <button>
-            Demand Now <i className="fa-solid fa-caret-right"></i>
+            Check the Program <i className="fa-solid fa-caret-right"></i>
           </button>
         </Link>
       </div>
 
-      <div id="contact" className="contact">
+      {/* <div id="contact" className="contact">
         <h2>Contact Us</h2>
         <form className="contact-form">
           <input type="text" placeholder="Name" />
@@ -265,6 +314,19 @@ export default async function Home() {
           <textarea placeholder="Message"></textarea>
           <button className="submit-btn">Submit</button>
         </form>
+      </div> */}
+
+      <div className="location">
+        <h2>Our Location</h2>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3192.6780880772712!2d10.25781777568998!3d36.85018497223294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd4aaa7de67f05%3A0x2107db4dcf53251c!2s1%20Rue%20du%20lac%2C%20Tunis!5e0!3m2!1sfr!2stn!4v1728110669533!5m2!1sfr!2stn"
+          width="600"
+          height="450"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
       </div>
 
       <Footer />
