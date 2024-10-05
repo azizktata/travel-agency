@@ -7,7 +7,7 @@ export default function Footer({
   return (
     <footer>
       <div className="socials">
-        <a href={fb}>
+        <a target="_blank" href={fb}>
           <i className="fa-brands fa-facebook"></i>
         </a>
         <i className="fa-brands fa-instagram"></i>
