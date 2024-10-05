@@ -12,6 +12,7 @@ export default function VisaForm() {
     passport: null,
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (e: any) => {
     const { name, value, type, files } = e.target;
     if (type === "file") {
@@ -21,6 +22,7 @@ export default function VisaForm() {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     let imageAsset;
