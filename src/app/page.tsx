@@ -67,7 +67,10 @@ export default async function Home() {
         <div className="service-cards">
           <div className="service-card color-1">
             <i className="icon fa-solid fa-map-location-dot"></i>
-            <h3>Check Our Program</h3>
+            <a href="#program">
+              {" "}
+              <h3>Check Our Program</h3>
+            </a>
             <p>
               Explore our exclusive travel package this month, offering
               unforgettable adventures, relaxation, and cultural
@@ -76,7 +79,9 @@ export default async function Home() {
           </div>
           <div className="service-card color-2">
             <i className=" icon fa-brands fa-cc-visa"></i>{" "}
-            <h3>Post for a Visa</h3>
+            <Link href="/program">
+              <h3>Post for a Visa</h3>
+            </Link>
             <p>
               Need a visa for your next trip? Our visa application service
               ensures that you get your travel documents quickly and
@@ -97,7 +102,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="our_package">
+      <div id="program" className="our_package">
         <h2>Our Program</h2>
         <div className="package-container">
           <Image

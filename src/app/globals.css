@@ -48,9 +48,6 @@ header {
 header h1 {
   margin: 0;
   padding: 0;
-  /* color: black; */
-  /* color: linear-gradient(90deg, #0ecdc3, #0c9891);
-  text-decoration: none; */
 }
 .header-container {
   height: 80px;
@@ -331,8 +328,10 @@ Services
 }
 .service-card a {
   cursor: pointer;
-  color: rgb(128, 128, 128);
+  /* color: rgb(128, 128, 128); */
+  color: black;
   align-self: center;
+  text-decoration: none;
 }
 @media screen and (min-width: 768px) {
   .services {
@@ -408,6 +407,8 @@ About us
   justify-content: space-between;
   align-items: baseline;
   font-weight: 600;
+  background-color: #ebebeb;
+  padding: 1em 0;
 }
 .about-numbers div {
   display: flex;
@@ -638,7 +639,7 @@ Call To Action
 }
 .bookNow button:focus,
 .bookNow button:hover {
-  background-color: var(--darker-green-color);
+  background-color: #434730;
 }
 
 @media screen and (min-width: 768px) {

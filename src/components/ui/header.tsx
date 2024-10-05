@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 export default function Header({
   change = false,
-  title = "caprice",
+  title = "Caprice",
   contact = "58 344 400",
 }) {
   const pathname = usePathname();
