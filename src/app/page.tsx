@@ -20,6 +20,9 @@ _type=="page"][0]`);
 const POST_QUERY = defineQuery(`*[
   _type == "post"
   ]`);
+const POST_CART_QUERY = defineQuery(`*[
+  _type == "post"
+  ]`);
 const HOTEL_QUERY = defineQuery(`*[
   _type == "hotel"
   ]`);

@@ -73,11 +73,11 @@ nav a {
   text-decoration: none;
   margin: 0;
   /* color: #171717; */
-  font-size: 1.25rem;
-  margin: 0 2em;
+  font-size: 1rem;
+  margin: 0 1.5em;
 }
 nav a:hover {
-  color: #dedede;
+  color: #c2c2c2;
 }
 .callus-btn {
   display: inline-block;
@@ -123,7 +123,7 @@ nav a:hover {
     margin: 0;
     height: 100vh;
     right: 0;
-    background-color: #333;
+    background-color: #151515;
     color: white;
     transform: translateX(0);
     width: 50%;
@@ -313,7 +313,7 @@ voyages
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #ff5a5f; /* Custom background color for the price */
+  background-color: #ff5a5f;
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
@@ -355,11 +355,7 @@ voyages
   bottom: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  ); /* Linear gradient from bottom to top */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
   color: white;
   text-align: center;
   opacity: 1;
@@ -368,11 +364,11 @@ voyages
 @media screen and (min-width: 768px) {
   .card-list {
     display: flex;
+    justify-content: space-around;
   }
   .card {
-    /* max-width: 300px;
-    max-height: 300px; */
-    min-width: 400px;
+    min-width: 300px;
+    max-width: 400px;
     width: 100%;
   }
   .card-hotel-info {
@@ -382,13 +378,7 @@ voyages
   .card-hotel-info h3 {
     margin-bottom: 0;
   }
-  /* .card-info {
-    opacity: 0;
-  }
 
-  .card:hover .card-info {
-    opacity: 1;
-  } */
   .card img {
     min-height: 400px;
     object-fit: cover;
@@ -862,4 +852,50 @@ footer {
 .socials i {
   padding: 2em;
   color: white;
+}
+
+/* ================
+List des Programmes
+===================*/
+.list-main {
+  width: 100%;
+  background-color: #ccc;
+}
+.list-container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding-top: 2em;
+}
+.list-container a {
+  align-self: self-start;
+  text-decoration: none;
+  color: #868686;
+}
+.accordion {
+  display: flex;
+}
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.filter-options {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.filter-options select {
+  padding: 0.5em 1em;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 0.75em;
+}
+.elements-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  min-height: 100vh;
+  gap: 1em;
+  align-items: start;
 }

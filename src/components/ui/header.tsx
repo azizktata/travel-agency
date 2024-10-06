@@ -34,23 +34,22 @@ export default function Header({
             <li>
               <Link
                 style={blackStyle}
-                href="/program"
+                href="/programmes"
                 className={clsx({
-                  isActive: pathname === "/program",
+                  isActive: pathname === "/programmes",
                 })}
               >
-                Programme
+                Programmes
               </Link>
             </li>
             <li>
-              <Link style={blackStyle} href="/#about">
-                About{" "}
+              <Link style={blackStyle} href="/programmes?Type=voyage-organise">
+                Voyages Organisés
               </Link>
             </li>
             <li>
-              <Link style={blackStyle} href="/#contact">
-                {" "}
-                Contact
+              <Link style={blackStyle} href="/programmes?Type=voyage-carte">
+                Voyage à la carte
               </Link>
             </li>
           </ul>

@@ -20,45 +20,50 @@ const urlFor = (source: SanityImageSource) =>
 export default function Card({ type = "voyage", post }) {
   return (
     <div className="card ">
-      <Image
-        src={urlFor(post?.mainImage)?.url() || "/maldive.jpg"}
-        alt="destination-2"
-        layout="responsive"
-        width={400}
-        height={450}
-      />
-      {type == "voyage" && (
-        <>
-          <div className="card-info">
-            <h3>{post?.destination}</h3>
-          </div>
-          <p className="price">{post?.prix}dt</p>
-        </>
-      )}
-      {type == "hotel" && (
-        <>
-          <div className="card-hotel-info">
-            <h3>{post?.nom}</h3>
-            <p>
-              {post?.etoile}
-              <i className="fa-solid fa-star"></i>
-            </p>
-          </div>
+      <Link
+        className="hover:underline"
+        href={`/programmes/${post?.slug?.current}`}
+      >
+        <Image
+          src={urlFor(post?.mainImage)?.url() || "/maldive.jpg"}
+          alt="destination-2"
+          layout="responsive"
+          width={400}
+          height={450}
+        />
+        {type == "voyage" && (
+          <>
+            <div className="card-info">
+              <h3>{post?.destination}</h3>
+            </div>
+            <p className="price">{post?.prix}dt</p>
+          </>
+        )}
+        {type == "hotel" && (
+          <>
+            <div className="card-hotel-info">
+              <h3>{post?.nom}</h3>
+              <p>
+                {post?.etoile}
+                <i className="fa-solid fa-star"></i>
+              </p>
+            </div>
 
-          {post?.periodes
-            ? post?.periodes?.map((p) => {
-                const { periode, tarif } = p;
-                return (
-                  <p className="tarif">
-                    {periode} : {tarif}dt
-                  </p>
-                );
-              })
-            : null}
+            {post?.periodes
+              ? post?.periodes?.map((p) => {
+                  const { periode, tarif } = p;
+                  return (
+                    <p className="tarif">
+                      {periode} : {tarif}dt
+                    </p>
+                  );
+                })
+              : null}
 
-          <p className="price">{post?.prix}dt</p>
-        </>
-      )}
+            <p className="price">{post?.prix}dt</p>
+          </>
+        )}
+      </Link>
     </div>
   );
 }
