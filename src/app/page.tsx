@@ -8,6 +8,9 @@ import { client } from "@/sanity/client";
 import { defineQuery } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import Carousel from "@/components/carousel";
+import Slider from "@/components/slider";
+import Card from "@/components/card";
 
 const options = { next: { revalidate: 60 } };
 
@@ -16,7 +19,10 @@ _type=="page"][0]`);
 
 const POST_QUERY = defineQuery(`*[
   _type == "post"
-  ][0]`);
+  ]`);
+const HOTEL_QUERY = defineQuery(`*[
+  _type == "hotel"
+  ]`);
 const CONTACT_QUERY = defineQuery(`*[
   _type == "contact"
   ][0]`);
@@ -24,170 +30,91 @@ const CONTACT_QUERY = defineQuery(`*[
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
   projectId && dataset
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
+    ? imageUrlBuilder({ projectId, dataset }).image(source).quality(100)
     : null;
 
 export default async function Home() {
   const page = await client.fetch(PAGE_QUERY, {}, options);
-  const post = await client.fetch(POST_QUERY, {}, options);
+  const posts = await client.fetch(POST_QUERY, {}, options);
+  const hotels = await client.fetch(HOTEL_QUERY, {}, options);
   const contact = await client.fetch(CONTACT_QUERY, {}, options);
-  const postImageUrl = post?.mainImage
-    ? urlFor(post?.mainImage)?.width(300).height(200).url()
-    : null;
+  // const postImageUrl = post?.mainImage
+  //   ? urlFor(post?.mainImage)?.width(300).height(200).url()
+  //   : null;
   // const pageImg = page?.image ? urlFor(page?.image)?.url() : null;
 
   return (
     <main>
       <div className="carousel">
         <Header title={page?.logoName} contact={contact?.telephone} />
-        <Image src={"/hero-6.jpg"} alt="hero" layout="fill" objectFit="cover" />
-        <div className="carousel-content">
-          <h1 className="carousel-title">
-            {page?.titre || "Travels & Events"}
-          </h1>
-
-          {page?.description ? (
-            <p className="description">{page?.description}</p>
-          ) : (
-            <p className="description">
-              Welcome to Caprice Travel, your dedicated travel companion since
-              2019. Our mission is to craft exceptional travel experiences that
-              connect you with the world in ways that inspire
-            </p>
-          )}
-
-          <Link href="/program">
-            <button className="learn_more-btn"> learn more</button>
-          </Link>
-        </div>
+        <Carousel
+          carousel={page?.carousel}
+          titre={page?.titre}
+          description={page?.description}
+        />
       </div>
 
-      <div className="services">
-        <h2>Our Services</h2>
-        <div className="service-cards">
-          <div className="service-card color-1">
-            <i className="icon fa-solid fa-map-location-dot"></i>
-            <a href="#program">
-              {" "}
-              <h3>Check Our Program</h3>
-            </a>
-            <p>
-              Explore our exclusive travel package this month, offering
-              unforgettable adventures, relaxation, and cultural
-              experiences—tailored just for you.
-            </p>
-          </div>
-          <div className="service-card color-2">
-            <i className=" icon fa-brands fa-cc-visa"></i>{" "}
-            <Link href="/program">
-              <h3>Post for a Visa</h3>
-            </Link>
-            <p>
-              Need a visa for your next trip? Our visa application service
-              ensures that you get your travel documents quickly and
-              efficiently, so you can focus on planning your adventure.
-            </p>
-            <Link href="/program">
-              learn more <i className="fa-solid fa-up-right-from-square"></i>
-            </Link>
-          </div>
-          <div className="service-card color-3">
-            <i className="icon fa-solid fa-person-hiking"></i>
-            <h3>Pay and Go</h3>
-            <p>
-              Ready to embark on your journey? Pack your bags and get ready for
-              an adventure of a lifetime!
-            </p>
-          </div>
-        </div>
-      </div>
+      {/* {posts?.length > 0 ? (
+        <div className="voyages">
+          <h2>Voyages Organisés</h2>
+          {posts?.map((post, index) => (
+            <div className="card">
+              <Image
+                src={
+                  urlFor(post?.mainImage)?.width(300).height(200).url() ||
+                  "/maldive.jpg"
+                }
+                alt="destination-2"
+                layout="responsive"
+                width={400}
+                height={450}
+                objectFit="cover"
+              />
+              <div>
+                <h3>{post?.destination}</h3>
 
-      <div id="program" className="our_package">
-        <h2>Our Program</h2>
-        <div className="package-container">
-          <Image
-            src={postImageUrl || "/maldive.jpg"}
-            alt="destination-2"
-            layout="responsive"
-            width={500}
-            height={300}
-            objectFit="cover"
-          />
-
-          <div className="package-details">
-            <h3>
-              <i className="fa-solid fa-location-dot"></i>
-              <span> {post?.destination || "Marroc"} </span>
-            </h3>
-            <p>
-              <i className="fa-regular fa-clock"></i>{" "}
-              {post?.duration || "10 days"}
-            </p>
-            <p>
-              <i className="fa-regular fa-calendar"></i>
-              {post?.startDate || "2024-01-01"} -{" "}
-              {post?.endDate || "2024-01-01"}
-            </p>
-          </div>
-          <div className="price-container">
-            <h3>
-              {" "}
-              <strong>{post?.prix || "0"} DT </strong>
-            </h3>
-            <div className="stars">
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
+                <p>{post?.prix}</p>
+              </div>
+              <Link href="/program">
+                {" "}
+                <button>learn more </button>{" "}
+              </Link>
             </div>
-            <Link href="/program">
-              <button>Voir details</button>
-            </Link>
+          ))}
+        </div>
+      ) : null} */}
+      {posts?.length > 0 ? (
+        <>
+          <div className="voyages">
+            <h2>Voyages organisés</h2>
+            <Slider>
+              {posts?.map((post, index) => <Card post={post} key={index} />)}
+            </Slider>
           </div>
-        </div>
-      </div>
-
-      <div className="destinations">
-        <h2>Previous Destinations</h2>
-        <div className="destination-cards">
-          <Image
-            src={"/destination-2.jpg"}
-            alt="destination-2"
-            layout="responsive"
-            width={1920}
-            height={1080}
-            objectFit="cover"
-          />
-
-          <Image
-            src={"/destination-3.jpg"}
-            alt="destination-2"
-            layout="responsive"
-            width={300}
-            height={200}
-            objectFit="cover"
-          />
-
-          <Image
-            src={"/destination-5.jpg"}
-            alt="destination-2"
-            layout="responsive"
-            width={300}
-            height={200}
-            objectFit="cover"
-          />
-
-          <Image
-            src={"/destination-6.jpg"}
-            alt="destination-2"
-            layout="responsive"
-            width={300}
-            height={200}
-            objectFit="cover"
-          />
-        </div>
-      </div>
+        </>
+      ) : null}
+      {posts?.length > 0 ? (
+        <>
+          <div className="voyages">
+            <h2>Voyages a la carte</h2>
+            <Slider>
+              {posts?.map((post, index) => <Card post={post} key={index} />)}
+            </Slider>
+          </div>
+        </>
+      ) : null}
+      {hotels?.length > 0 ? (
+        <>
+          <div className="voyages">
+            <h2>Les Hotels</h2>
+            <Slider>
+              {hotels?.map((hotel, index) => (
+                <Card post={hotel} key={index} type="hotel" />
+              ))}
+            </Slider>
+          </div>
+        </>
+      ) : null}
 
       <div id="about" className="about">
         <h2>Why Choose Us ?</h2>
@@ -241,23 +168,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="bookNow">
-        <Image src={"/hero-2.jpg"} alt="hero" layout="fill" objectFit="cover" />
-
-        <div className="book-call">
-          <h1>
-            Ask for Your <span> Visa </span>
-          </h1>
-          <p>Demand visa for this Month program</p>
-        </div>
-        <Link className="check-prog" href="/program">
-          <button>
-            Check the Program <i className="fa-solid fa-caret-right"></i>
-          </button>
-        </Link>
-      </div>
-
-      {/* <div id="contact" className="contact">
+      <div id="contact" className="contact">
         <h2>Contact Us</h2>
         <form className="contact-form">
           <input type="text" placeholder="Name" />
@@ -265,7 +176,7 @@ export default async function Home() {
           <textarea placeholder="Message"></textarea>
           <button className="submit-btn">Submit</button>
         </form>
-      </div> */}
+      </div>
 
       <div className="location">
         <h2>Our Location</h2>

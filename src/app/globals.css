@@ -198,6 +198,7 @@ img {
   background-blend-mode: multiply;
   height: 100%;
   object-fit: cover;
+  transition: all 0.5s;
 }
 .carousel-content {
   display: flex;
@@ -269,114 +270,147 @@ img {
     border-radius: 7px;
   }
 }
-/* ================
-Services
- ==================*/
 
-.services {
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  margin: 0 auto;
-  align-items: center;
-  gap: 1em;
+/* ==================
+voyages
+=============*/
+.voyages {
+  width: 100%;
 
-  margin-bottom: 2em;
+  margin-bottom: 5em;
+  /* text-align: center; */
 }
-
-.service-cards {
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  /* width: 100%; */
-  gap: 2em;
-}
-
-.service-card {
-  display: flex;
-  flex-direction: column;
-
+.voyages h2 {
   text-align: center;
+}
+.voyage-container {
+  width: 95%;
   margin: 0 auto;
-  max-width: 450px;
-  box-shadow:
-    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  padding: 2em;
+  position: relative;
 }
-.icon {
-  font-size: 40px;
-
-  color: #434730;
-
-  background-color: white;
-  padding: 20px;
+.slide-button {
+  display: none !important;
+}
+.card-list {
+  /* border: 1px solid black; */
+  display: flex;
+  gap: 1em;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 1em;
+}
+.card-list::-webkit-scrollbar {
+  display: none;
+}
+.card {
+  /* max-width: 300px;
+  max-height: 300px; */
+  min-width: 280px;
+  position: relative;
+  overflow: hidden;
+}
+.price {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ff5a5f; /* Custom background color for the price */
+  color: white;
+  padding: 5px 10px;
   border-radius: 5px;
-
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-  display: inline-flex;
-  justify-content: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.card img {
+  min-height: 380px;
+  object-fit: cover;
+}
+.slider-scrollbar {
+  height: 24px;
+  width: 100%;
+  display: flex;
   align-items: center;
-  align-self: center;
 }
-
-.service-card p {
-  font-weight: 300;
-  color: #5f5f5f;
+.scrollbar-track {
+  height: 2px;
+  width: 100%;
+  background: #ccc;
+  position: relative;
+  border-radius: 5px;
 }
-.service-card a {
-  cursor: pointer;
-  /* color: rgb(128, 128, 128); */
-  color: black;
-  align-self: center;
-  text-decoration: none;
+.scrollbar-thumb {
+  position: absolute;
+  height: 2px;
+  width: 50%;
+  background: black;
+  cursor: grab;
+  border-radius: inherit;
+}
+.scrollbar-thumb:active {
+  cursor: grabbing;
+  height: 8px;
+  top: -2px;
+}
+.card-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0)
+  ); /* Linear gradient from bottom to top */
+  color: white;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
 }
 @media screen and (min-width: 768px) {
-  .services {
-    margin-bottom: 7em;
+  .card-list {
+    display: flex;
   }
-  .service-cards {
-    flex-direction: row;
+  .card {
+    /* max-width: 300px;
+    max-height: 300px; */
+    min-width: 400px;
+    width: 100%;
+  }
+  .card-hotel-info {
+    display: flex;
     justify-content: space-between;
   }
-}
-
-/* =================
-Destinations  
-====================*/
-.destinations {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1em;
-  margin-bottom: 5em;
-}
-.destinations h2 {
-  grid-column: 1 / -1;
-  justify-self: center;
-}
-.destination-cards {
-  width: 90%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1em;
-}
-
-.destination-card h3 span {
-  margin-left: 1em;
-}
-.fa-location-dot {
-  color: var(--light-color);
-}
-
-@media screen and (min-width: 768px) {
-  .destination-cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1em;
+  .card-hotel-info h3 {
+    margin-bottom: 0;
   }
+  /* .card-info {
+    opacity: 0;
+  }
+
+  .card:hover .card-info {
+    opacity: 1;
+  } */
+  .card img {
+    min-height: 400px;
+    object-fit: cover;
+
+    overflow: hidden;
+  }
+  /* .slide-button {
+    position: absolute;
+    font-size: 2rem;
+    cursor: pointer;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block !important;
+  }
+  .slide-button#prev-slide {
+    left: -25px;
+    display: none;
+  }
+
+  .slide-button#next-slide {
+    right: -25px;
+  } */
 }
 
 /* =================
@@ -407,7 +441,6 @@ About us
   justify-content: space-between;
   align-items: baseline;
   font-weight: 600;
-  background-color: #ebebeb;
   padding: 1em 0;
 }
 .about-numbers div {
@@ -566,92 +599,6 @@ Our Program
   }
 }
 @media screen and (min-width: 768px) {
-}
-/*==================
-Call To Action
-===================*/
-
-.bookNow {
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #003632;
-  position: relative;
-  border-radius: 7px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin-bottom: 5em;
-  border-radius: 5px;
-  overflow: hidden;
-}
-.bookNow::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
-  pointer-events: none;
-  z-index: 1;
-}
-.book-call {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  gap: 1em;
-  margin-bottom: 2em;
-}
-.book-call {
-  z-index: 1;
-}
-.book-call h1 {
-  margin-bottom: 0;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.book-call p {
-  color: white;
-  text-transform: uppercase;
-  font-weight: 500;
-  letter-spacing: 1px;
-}
-.check-prog {
-  z-index: 1;
-}
-.bookNow button {
-  padding: 1em 2.75em;
-  background-color: var(--green-color);
-  border: 0;
-  border-radius: 3px;
-  color: white;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 0.95em;
-  margin-bottom: 2em;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-.bookNow button:focus,
-.bookNow button:hover {
-  background-color: #434730;
-}
-
-@media screen and (min-width: 768px) {
-  .bookNow {
-    flex-direction: row;
-    justify-content: space-around;
-    width: 60%;
-  }
-  .book-call {
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
 }
 
 /* ============== 
