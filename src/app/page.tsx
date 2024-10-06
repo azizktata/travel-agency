@@ -3,7 +3,6 @@ import Image from "next/image";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Footer from "@/components/ui/footer";
-import Link from "next/link";
 import { client } from "@/sanity/client";
 import { defineQuery } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";

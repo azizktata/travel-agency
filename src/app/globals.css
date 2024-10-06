@@ -19,6 +19,9 @@ body {
   --green-color: #54794c;
   --darker-green-color: #54794c;
 }
+a {
+  text-decoration: none;
+}
 h2::after {
   content: "";
   display: block;
@@ -364,12 +367,16 @@ voyages
 @media screen and (min-width: 768px) {
   .card-list {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .card {
     min-width: 300px;
-    max-width: 400px;
+    /* max-width: 400px; */
     width: 100%;
+  }
+  .card a {
+    text-decoration: none;
+    color: #000;
   }
   .card-hotel-info {
     display: flex;
@@ -681,43 +688,50 @@ iframe {
 /* ==============
 Program Page
 ================*/
-.program-main h1 {
-  text-align: center;
-  margin-bottom: 2em;
-  font-size: 1.5rem;
+.header-program h1,
+.header-program p {
+  margin: 0;
 }
-.program-main h1::after {
-  content: "";
-  display: block;
-  width: 50px;
-  height: 3px;
-  background-color: var(--green-color);
-  margin: 0.5em auto;
+.header-program {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 1em;
+  gap: 1em;
+  margin-bottom: 5em;
+  background-color: #f4f4f4;
 }
-.program-container {
-  width: 80%;
-  margin: 0 auto;
-  margin-bottom: 2em;
-}
-.program-container h3 {
-  margin-bottom: 1em;
-}
-h5 {
-  font-size: 1.2rem;
-}
-.program-container img {
-  border-radius: 1rem;
-  overflow: hidden;
+.header-program img {
+  /* width: 100%; */
+  max-height: 400px;
+  min-width: 100%;
   object-fit: cover;
-  object-position: center;
-  margin-top: 1em;
 }
-.program-cards h4 {
-  text-align: center;
+.program-details {
+  padding: 0 1em;
 }
-.program-cards span {
-  color: black;
+.program-details h1 {
+  color: #2771aa;
 }
+.program-details p {
+  color: #61588b;
+}
+strong {
+  font-weight: 800;
+}
+
+.images {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+}
+.images img {
+  width: 100%;
+  object-fit: cover;
+  max-height: 350px;
+}
+
 .visa-form-container {
   display: flex;
   flex-direction: column;
@@ -738,9 +752,9 @@ h5 {
   margin-bottom: 1em;
 }
 .visa-order-container {
-  width: 90%;
-  margin: 0 auto;
-  padding: 1.5em 2em;
+  /* width: 95%;
+  margin: 0 auto; */
+  padding: 1.5em;
   display: flex;
   flex-direction: column;
   background-color: #f6f6f6;
@@ -757,88 +771,54 @@ h5 {
   font-weight: 700;
   color: white;
   margin-bottom: 2em;
-  background-color: #434730;
-  border: 0;
+  background-color: #242020;
   transition: background-color 250ms;
   letter-spacing: 2px;
-  cursor: pointer;
 }
 .order-visa-btn:hover,
 .order-visa-btn:focus {
-  background-color: var(--green-color);
+  background-color: #4f4f4f;
   transform: translate(1px, 1px);
 }
-.accordion {
-  text-decoration: none;
-  color: #868686;
-  cursor: pointer;
-  text-align: left;
-  border: none;
-  outline: none;
-  transition: background-color 0.3s ease-in-out;
-}
-.program-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0.5em;
-  font-size: 1.125rem;
-  font-weight: 500;
-  border-radius: 2px;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+.fa-check,
+.fa-exclamation,
+.fa-hotel,
+.fa-money-check-dollar {
+  margin-right: 0.5em;
 }
 .fa-check {
-  color: #54ecc4;
-  margin-right: 1em;
+  color: green;
+  margin-right: 0.5em;
+}
+.fa-exclamation {
+  color: red;
+}
+.visa-total {
+  margin-top: 7em;
+  margin-bottom: 4em;
 }
 @media screen and (min-width: 768px) {
-  .program-main h1 {
-    font-size: 2rem;
+  .program-details-main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1em;
+    padding: 0 7em;
+  }
+  .header-program {
+    padding: 2em 7em;
   }
   .visa-form-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+  }
+  .order-title {
+    grid-column: 1 / -1;
   }
   .order-visa-btn {
     grid-column: 1 / -1;
   }
 }
-@media screen and (min-width: 1100px) {
-  .program-main {
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    width: 100%;
-    height: 100vh;
-    border-top: 1px solid #ccc;
-  }
-  .visa-title {
-    margin-top: 0;
-    margin-top: 1em;
-  }
-  .program-container {
-    width: 50%;
-    margin-bottom: 4em;
-  }
-  .visa-form-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
 
-  .visa-total {
-    width: 40%;
-    height: 100%;
-    border-left: 1px solid #ccc;
-  }
-  .visa-order-container {
-    width: 100%;
-    padding-top: 4em;
-    padding-bottom: 2em;
-    padding-right: 3em;
-    padding-left: 3em;
-    height: 100%;
-  }
-}
 /* ==============
 FOOTER
 =================*/
@@ -871,12 +851,15 @@ List des Programmes
 }
 .list-container a {
   align-self: self-start;
-  text-decoration: none;
+
   color: #868686;
 }
-.accordion {
+.accordion,
+.accordion a {
   display: flex;
+  color: #868686;
 }
+
 .filter-container {
   display: flex;
   justify-content: space-between;
