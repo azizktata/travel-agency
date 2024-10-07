@@ -11,6 +11,7 @@ import VisaForm from "@/components/ui/VisaForm";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Footer from "@/components/ui/footer";
 import Header from "@/components/ui/header";
+import ContactForm from "@/components/ui/contactForm";
 
 const options = { next: { revalidate: 60 } };
 
@@ -47,14 +48,15 @@ export default async function ProgramPage({
     activites,
     sejours,
     hotels,
+    visa,
   } = post;
   return (
     <div className="main-program">
       <Header change={true} title={undefined} />
       <div className="header-program">
         <div className="accordion">
-          <Link href=".">Acceuil </Link>{" "}
-          <span> / Voyages / {destination} </span>
+          <Link href="..">Acceuil /</Link> <Link href=".">Voyages /</Link>
+          <span> {destination} </span>
         </div>
         <h1>{destination}</h1>
         <p>
@@ -62,7 +64,11 @@ export default async function ProgramPage({
           {description}, {duration}{" "}
         </p>
         <Image
-          src={urlFor(mainImage)?.url() || "/maldive.jpg"}
+          src={
+            mainImage
+              ? urlFor(mainImage)?.url() || "/maldive.jpg"
+              : "/maldive.jpg"
+          }
           alt="destination-2"
           layout="responsive"
           width={400}
@@ -76,7 +82,7 @@ export default async function ProgramPage({
           <div className="sejours">
             {sejours
               ? sejours.map((sejour) => (
-                  <div key={sejour} className="sejour-card">
+                  <div key={sejour._key} className="sejour-card">
                     <p>
                       <strong> {sejour?.jour} </strong>
                     </p>
@@ -130,18 +136,21 @@ export default async function ProgramPage({
                 ))
               : null}
           </div>
-          <div className="visa-total">
-            <div className="visa-order-container">
-              <h4 className="order-title">Visa form</h4>
-              <VisaForm />
+          {visa == "visa-required" ? (
+            <div className="form-main">
+              <h4 className="form-title">Visa form</h4> <VisaForm />
             </div>
-          </div>
+          ) : (
+            <div className="form-main">
+              <h4 className="form-title">Contact form</h4> <ContactForm />
+            </div>
+          )}
         </div>
         <div className="images">
           {listImage
             ? listImage.map((image) => (
                 <Image
-                  key={image}
+                  key={image._key}
                   src={urlFor(image)?.url() || "/maldive.jpg"}
                   alt="destination-2"
                   layout="responsive"

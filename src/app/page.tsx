@@ -10,17 +10,26 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Carousel from "@/components/carousel";
 import Slider from "@/components/slider";
 import Card from "@/components/card";
+import ContactForm from "@/components/ui/contactForm";
+import { POST_CART_QUERYResult, POST_QUERYResult } from "@/sanity/types";
 
 const options = { next: { revalidate: 60 } };
 
 const PAGE_QUERY = defineQuery(`*[
-_type=="page"][0]`);
+_type=="page"][0]{
+  ...,
+  carousel[]{
+    image,
+    duree,
+    destination
+  }
+}`);
 
 const POST_QUERY = defineQuery(`*[
-  _type == "post"
+  _type == "post" && type == "voyage-organise"
   ]`);
 const POST_CART_QUERY = defineQuery(`*[
-  _type == "post"
+  _type == "post" && type == "voyage-carte"
   ]`);
 const HOTEL_QUERY = defineQuery(`*[
   _type == "hotel"
@@ -37,7 +46,8 @@ const urlFor = (source: SanityImageSource) =>
 
 export default async function Home() {
   const page = await client.fetch(PAGE_QUERY, {}, options);
-  const posts = await client.fetch(POST_QUERY, {}, options);
+  const posts_org = await client.fetch(POST_QUERY, {}, options);
+  const posts_cart = await client.fetch(POST_CART_QUERY, {}, options);
   const hotels = await client.fetch(HOTEL_QUERY, {}, options);
   const contact = await client.fetch(CONTACT_QUERY, {}, options);
   // const postImageUrl = post?.mainImage
@@ -48,59 +58,37 @@ export default async function Home() {
   return (
     <main>
       <div className="carousel">
-        <Header title={page?.logoName} contact={contact?.telephone} />
+        <Header
+          title={page?.logoName}
+          contact={contact?.telephone?.toString()}
+        />
         <Carousel
-          carousel={page?.carousel}
+          carousel={page?.carousel || []}
           titre={page?.titre}
           description={page?.description}
         />
       </div>
 
-      {/* {posts?.length > 0 ? (
-        <div className="voyages">
-          <h2>Voyages Organisés</h2>
-          {posts?.map((post, index) => (
-            <div className="card">
-              <Image
-                src={
-                  urlFor(post?.mainImage)?.width(300).height(200).url() ||
-                  "/maldive.jpg"
-                }
-                alt="destination-2"
-                layout="responsive"
-                width={400}
-                height={450}
-                objectFit="cover"
-              />
-              <div>
-                <h3>{post?.destination}</h3>
-
-                <p>{post?.prix}</p>
-              </div>
-              <Link href="/program">
-                {" "}
-                <button>learn more </button>{" "}
-              </Link>
-            </div>
-          ))}
-        </div>
-      ) : null} */}
-      {posts?.length > 0 ? (
+      {posts_org?.length > 0 ? (
         <>
           <div className="voyages">
             <h2>Voyages organisés</h2>
             <Slider>
-              {posts?.map((post, index) => <Card post={post} key={index} />)}
+              {posts_org?.map((post: POST_QUERYResult, index: number) => (
+                <Card post={post} key={index} />
+              ))}
             </Slider>
           </div>
         </>
       ) : null}
-      {posts?.length > 0 ? (
+      {posts_cart?.length > 0 ? (
         <>
           <div className="voyages">
             <h2>Voyages a la carte</h2>
             <Slider>
-              {posts?.map((post, index) => <Card post={post} key={index} />)}
+              {posts_cart?.map((post: POST_CART_QUERYResult, index: number) => (
+                <Card post={post} key={index} />
+              ))}
             </Slider>
           </div>
         </>
@@ -170,14 +158,35 @@ export default async function Home() {
         </div>
       </div>
 
+      {page?.team ? (
+        <div className="about">
+          <h2>Team building</h2>
+          <Image
+            src={page?.team?.mainImage || "/hero-6.jpg"}
+            alt="aboutus"
+            layout="responsive"
+            width={300}
+            height={200}
+            objectFit="cover"
+          />
+          <div className="about-content">
+            {page?.team?.activites
+              ? page?.team?.activites.map((activite: string) => (
+                  <div key={activite} className="program-card">
+                    <p>
+                      <i className="fa-solid fa-check"></i>
+                      {activite}
+                    </p>
+                  </div>
+                ))
+              : null}{" "}
+          </div>
+        </div>
+      ) : null}
+
       <div id="contact" className="contact">
         <h2>Contact Us</h2>
-        <form className="contact-form">
-          <input type="text" placeholder="Name" />
-          <input type="email" placeholder="Email" />
-          <textarea placeholder="Message"></textarea>
-          <button className="submit-btn">Submit</button>
-        </form>
+        <ContactForm />
       </div>
 
       <div className="location">

@@ -3,7 +3,13 @@ import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
-export default function Select({ options }: { options: string[] }) {
+export default function Select({
+  options,
+  type = "voyage",
+}: {
+  options: string[];
+  type: string;
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -17,7 +23,9 @@ export default function Select({ options }: { options: string[] }) {
     },
     [searchParams]
   );
-  function handleChange(e) {
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function handleChange(e: any) {
     const name = e.target.name;
     const value = e.target.value;
     if (value !== 0) {
@@ -32,18 +40,33 @@ export default function Select({ options }: { options: string[] }) {
   const currentType = searchParams.get("Type") || false;
   return (
     <>
-      <select onChange={handleChange} name="Type" className="filter-select">
-        <option value={0}>tous les voyages</option>
-        <option
-          selected={currentType === "voyage-organise"}
-          value="voyage-organise"
-        >
-          Organisés
-        </option>
-        <option selected={currentType === "voyage-carte"} value="voyage-carte">
-          A la carte
-        </option>
-      </select>
+      {type === "voyage" ? (
+        <select onChange={handleChange} name="Type" className="filter-select">
+          <option value={0}>tous les voyages</option>
+          <option
+            selected={currentType === "voyage-organise"}
+            value="voyage-organise"
+          >
+            Organisés
+          </option>
+          <option
+            selected={currentType === "voyage-carte"}
+            value="voyage-carte"
+          >
+            A la carte
+          </option>
+        </select>
+      ) : (
+        <select onChange={handleChange} name="etoile" className="filter-select">
+          <option value={0}>tous les hotels</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      )}
+
       <select
         onChange={handleChange}
         name="destination"

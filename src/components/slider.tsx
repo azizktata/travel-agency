@@ -16,7 +16,9 @@ const urlFor = (source: SanityImageSource) =>
         .height(1080)
         .quality(50)
     : null;
-export default function Slider({ children }) {
+import { ReactNode } from "react";
+
+export default function Slider({ children }: { children: ReactNode }) {
   React.useEffect(() => {
     const cardList = document.querySelector(".card-list");
     const maxScrollLeft = cardList!.scrollWidth - cardList!.clientWidth;
@@ -29,16 +31,6 @@ export default function Slider({ children }) {
       prevButton!.style.display = cardList?.scrollLeft === 0 ? "none" : "block";
       nextButton!.style.display =
         cardList?.scrollLeft! >= maxScrollLeft ? "none" : "block";
-
-      //   const sliderSrollbar = document.querySelector(".slider-scrollbar");
-      //   const scrollbarThumb = document.querySelector(".scrollbar-thumb");
-      //   const scrollPosition = cardList?.scrollLeft!;
-
-      //   const thumbPosition =
-      //     (scrollPosition / maxScrollLeft) *
-      //     (sliderSrollbar?.clientWidth! -
-      //       (scrollbarThumb as HTMLElement)?.offsetWidth);
-      //   (scrollbarThumb as HTMLElement)!.style.left = `${thumbPosition}px`;
     };
 
     cardList?.addEventListener("scroll", handleScroll);

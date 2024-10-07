@@ -52,6 +52,28 @@ export default function Header({
                 Voyage à la carte
               </Link>
             </li>
+            <li>
+              <Link
+                style={blackStyle}
+                href="/hotels"
+                className={clsx({
+                  isActive: pathname === "/hotels",
+                })}
+              >
+                Hotels
+              </Link>
+            </li>
+            <li>
+              <Link
+                style={blackStyle}
+                href="/visa"
+                className={clsx({
+                  isActive: pathname === "/visa",
+                })}
+              >
+                Visa
+              </Link>
+            </li>
           </ul>
           <button className="callus-btn">
             <i className="fa-solid fa-phone"></i> <span>{contact}</span>

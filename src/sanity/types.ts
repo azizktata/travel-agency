@@ -68,12 +68,6 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
 export type Team = {
   _id: string;
   _type: "team";
@@ -103,9 +97,28 @@ export type Hotel = {
   _updatedAt: string;
   _rev: string;
   nom?: string;
+  slug?: Slug;
   adresse?: string;
   etoile?: string;
   prix?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
   mainImage?: {
     asset?: {
       _ref: string;
@@ -196,8 +209,10 @@ export type Post = {
   titre?: string;
   description?: string;
   destination?: string;
+  slug?: Slug;
   prix?: number;
   type?: "voyage-organise" | "voyage-carte";
+  visa?: "visa-required" | "visa-non-required";
   duration?: string;
   periodes?: Array<{
     periode?: string;
@@ -301,6 +316,12 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
 export type Contact = {
   _id: string;
   _type: "contact";
@@ -313,7 +334,7 @@ export type Contact = {
   instagram?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | Team | Hotel | PageVisa | Visa | Page | Post | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Contact;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Team | Hotel | PageVisa | Visa | Page | Post | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Slug | Contact;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../agence-voyage/src/app/page.tsx
 // Variable: PAGE_QUERY
@@ -347,8 +368,11 @@ export type PAGE_QUERYResult = {
   about?: string;
 } | null;
 // Variable: POST_QUERY
-// Query: *[  _type == "post"  ][0]
-export type POST_QUERYResult = {
+// Query: *[  _type == "post && type == voyage-organise"  ]
+export type POST_QUERYResult = Array<never>;
+// Variable: POST_CART_QUERY
+// Query: *[  _type == "post" && type == voyage-carte  ]
+export type POST_CART_QUERYResult = Array<{
   _id: string;
   _type: "post";
   _createdAt: string;
@@ -357,8 +381,10 @@ export type POST_QUERYResult = {
   titre?: string;
   description?: string;
   destination?: string;
+  slug?: Slug;
   prix?: number;
   type?: "voyage-carte" | "voyage-organise";
+  visa?: "visa-non-required" | "visa-required";
   duration?: string;
   periodes?: Array<{
     periode?: string;
@@ -403,7 +429,56 @@ export type POST_QUERYResult = {
     prix?: number;
     _key: string;
   }>;
-} | null;
+}>;
+// Variable: HOTEL_QUERY
+// Query: *[  _type == "hotel"  ]
+export type HOTEL_QUERYResult = Array<{
+  _id: string;
+  _type: "hotel";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  nom?: string;
+  slug?: Slug;
+  adresse?: string;
+  etoile?: string;
+  prix?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  periodes?: Array<{
+    periode?: string;
+    tarif?: number;
+    _key: string;
+  }>;
+}>;
 // Variable: CONTACT_QUERY
 // Query: *[  _type == "contact"  ][0]
 export type CONTACT_QUERYResult = {
@@ -418,10 +493,88 @@ export type CONTACT_QUERYResult = {
   instagram?: string;
 } | null;
 
-// Source: ../agence-voyage/src/app/program/page.tsx
-// Variable: POST_QUERY2
-// Query: *[  _type == "post"  ][0]
-export type POST_QUERY2Result = {
+// Source: ../agence-voyage/src/app/hotels/page.tsx
+// Variable: ADRS_QUERY
+// Query: *[  _type == "hotel"  ]{adresse}
+export type ADRS_QUERYResult = Array<{
+  adresse: string | null;
+}>;
+
+// Source: ../agence-voyage/src/app/programmes/page.tsx
+// Variable: DEST_QUERY
+// Query: *[  _type == "post"  ]{destination}
+export type DEST_QUERYResult = Array<{
+  destination: string | null;
+}>;
+
+// Source: ../agence-voyage/src/app/visa/page.tsx
+// Variable: VISAS_QUERY
+// Query: *[    _type == "pageVisa"    ]
+export type VISAS_QUERYResult = Array<{
+  _id: string;
+  _type: "pageVisa";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  type?: string;
+  description?: string;
+}>;
+
+// Source: ../agence-voyage/src/app/hotels/[slug]/page.tsx
+// Variable: HOTEL_SLUG_QUERY
+// Query: *[    _type == "hotel" && slug.current == $slug    ][0]
+export type HOTEL_SLUG_QUERYResult = {
+  _id: string;
+  _type: "hotel";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  nom?: string;
+  slug?: Slug;
+  adresse?: string;
+  etoile?: string;
+  prix?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  periodes?: Array<{
+    periode?: string;
+    tarif?: number;
+    _key: string;
+  }>;
+} | null;
+
+// Source: ../agence-voyage/src/app/programmes/[slug]/page.tsx
+// Variable: POST_SLUG_QUERY
+// Query: *[    _type == "post" && slug.current == $slug    ][0]
+export type POST_SLUG_QUERYResult = {
   _id: string;
   _type: "post";
   _createdAt: string;
@@ -430,8 +583,10 @@ export type POST_QUERY2Result = {
   titre?: string;
   description?: string;
   destination?: string;
+  slug?: Slug;
   prix?: number;
   type?: "voyage-carte" | "voyage-organise";
+  visa?: "visa-non-required" | "visa-required";
   duration?: string;
   periodes?: Array<{
     periode?: string;
@@ -483,7 +638,14 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[\n_type==\"page\"][0]": PAGE_QUERYResult;
-    "*[\n  _type == \"post\"\n  ][0]": POST_QUERYResult | POST_QUERY2Result;
+    "*[\n  _type == \"post && type == voyage-organise\"\n  ]": POST_QUERYResult;
+    "*[\n  _type == \"post\" && type == voyage-carte\n  ]": POST_CART_QUERYResult;
+    "*[\n  _type == \"hotel\"\n  ]": HOTEL_QUERYResult;
     "*[\n  _type == \"contact\"\n  ][0]": CONTACT_QUERYResult;
+    "*[\n  _type == \"hotel\"\n  ]{adresse}": ADRS_QUERYResult;
+    "*[\n  _type == \"post\"\n  ]{destination}": DEST_QUERYResult;
+    "*[\n    _type == \"pageVisa\"\n    ]": VISAS_QUERYResult;
+    "*[\n    _type == \"hotel\" && slug.current == $slug\n    ][0]": HOTEL_SLUG_QUERYResult;
+    "*[\n    _type == \"post\" && slug.current == $slug\n    ][0]": POST_SLUG_QUERYResult;
   }
 }

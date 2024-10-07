@@ -18,15 +18,8 @@ const urlFor = (source: SanityImageSource) =>
         .quality(100)
     : null;
 
-export interface CarouselItem {
-  image: SanityImageSource;
-  duree?: string;
-  destination?: string;
-  prix?: string;
-}
-
 interface CarouselProps {
-  carousel: CarouselItem[];
+  carousel: any[];
   titre?: string;
   description?: string;
 }
@@ -37,6 +30,7 @@ export default function Carousel({
   description = "",
 }: CarouselProps) {
   const [counter, setCounter] = React.useState(0);
+
   React.useEffect(() => {
     const intervalId = setInterval(() => {
       setCounter((counter) =>
@@ -54,7 +48,7 @@ export default function Carousel({
       <Image
         src={pageImg || "/hero-6.jpg"}
         alt="hero"
-        layout="fill"
+        fill
         objectFit="cover"
         quality={100}
       />
@@ -71,10 +65,13 @@ export default function Carousel({
             <p className="description">{description}</p>
           </>
         )}
-
-        <Link href="/program">
+        {carousel[counter]?.slug?.current ? (
+          <Link href={`/programmes/${carousel[counter]?.slug}`}>
+            <button className="learn_more-btn"> learn more</button>
+          </Link>
+        ) : (
           <button className="learn_more-btn"> learn more</button>
-        </Link>
+        )}
       </div>
     </>
   );
