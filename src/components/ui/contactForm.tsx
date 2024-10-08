@@ -5,8 +5,9 @@ import { useFormStatus } from "react-dom";
 export default function ContactForm() {
   const [formData, setFormData] = React.useState({
     nom: "",
+    prenom: "",
     email: "",
-    phone: "",
+    telephone: "",
     subject: "",
     message: "",
   });
@@ -18,25 +19,36 @@ export default function ContactForm() {
     const name = e.target.name;
     setFormData({ ...formData, [name]: value });
   }
-  const { pending } = useFormStatus();
+  const [laoding, setLoading] = React.useState(false);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async function handleSubmit(e: any) {
     e.preventDefault();
-
-    const res = await fetch("/api/sendEmail", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-    const result = await res.json();
-    if (res.ok) {
-      setStatus("Email sent successfully!");
-      setFormData({ nom: "", email: "", phone: "", subject: "", message: "" });
-    } else {
+    try {
+      setLoading(true);
+      const res = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const result = await res.json();
+      if (res.ok) {
+        setStatus("Email sent successfully!");
+        setFormData({
+          nom: "",
+          prenom: "",
+          email: "",
+          telephone: "",
+          subject: "",
+          message: "",
+        });
+      }
+    } catch (err) {
       setStatus("Failed to send email.");
+    } finally {
+      setLoading(false);
     }
   }
   return (
@@ -51,6 +63,14 @@ export default function ContactForm() {
       />
       <input
         onChange={handleChange}
+        value={formData.prenom}
+        name="prenom"
+        type="text"
+        placeholder="Prénom"
+        required
+      />
+      <input
+        onChange={handleChange}
         value={formData.email}
         name="email"
         type="email"
@@ -59,8 +79,8 @@ export default function ContactForm() {
       />
       <input
         onChange={handleChange}
-        value={formData.phone}
-        name="phone"
+        value={formData.telephone}
+        name="telephone"
         type="text"
         placeholder="Télephone"
         required
@@ -80,8 +100,8 @@ export default function ContactForm() {
         placeholder="Message"
         required
       ></textarea>
-      <button disabled={pending} type="submit" className="submit-btn">
-        {pending ? <span>loading..</span> : <span>Send</span>}
+      <button disabled={laoding} type="submit" className="submit-btn">
+        {laoding ? <span>loading..</span> : <span>Send</span>}
       </button>
       <p>{status}</p>
     </form>

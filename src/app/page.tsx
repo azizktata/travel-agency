@@ -71,7 +71,7 @@ export default async function Home() {
 
       {posts_org?.length > 0 ? (
         <>
-          <div className="voyages">
+          <div className="voyages organise">
             <h2>Voyages organisés</h2>
             <Slider>
               {posts_org?.map((post: POST_QUERYResult, index: number) => (

@@ -138,7 +138,8 @@ export default async function ProgramPage({
           </div>
           {visa == "visa-required" ? (
             <div className="form-main">
-              <h4 className="form-title">Visa form</h4> <VisaForm />
+              <h4 className="form-title">Visa form</h4>{" "}
+              <VisaForm destination={destination || ""} />
             </div>
           ) : (
             <div className="form-main">

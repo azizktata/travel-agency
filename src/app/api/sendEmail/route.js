@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 
 // Handle POST requests to send email
 export async function POST(req) {
-  const { nom, email, phone, subject, message } = await req.json();
+  const { nom, email, telephone, subject, message, prenom } = await req.json();
 
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -16,8 +16,8 @@ export async function POST(req) {
     await transporter.sendMail({
       from: email,
       to: process.env.EMAIL_USER,
-      subject: `${subject} ${nom}`,
-      text: `${message}\n\nPhone: ${phone}`,
+      subject: `${subject} `,
+      text: `email: ${email}\nnom:${nom}${prenom}\n${message || ""}\ntelephone: ${telephone}`,
     });
 
     return new Response(JSON.stringify({ message: 'Email sent successfully' }), { status: 200 });

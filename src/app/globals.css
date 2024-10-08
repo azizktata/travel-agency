@@ -11,10 +11,13 @@ body {
 }
 
 :root {
-  --primary-color: #ffffff;
-  --secondary-color: #d6f4ff;
-  --dark-color: #333;
-  --light-color: #81f3ff;
+  --primary-color: #dfeaf3;
+  --secondary-color: #00a0f4;
+  --third-color: #eefbff;
+  --fourth-color: #b1d0e8;
+  --grey-color: #f6f6f6;
+  --dark-color: #131313;
+  /* --light-color: #81f3ff; */
   /* --green-color: #54ecc4; */
   --green-color: #54794c;
   --darker-green-color: #54794c;
@@ -27,7 +30,7 @@ h2::after {
   display: block;
   width: 50px;
   height: 3px;
-  background-color: #cba837;
+  background-color: var(--secondary-color);
   margin: 0.5em auto;
 }
 h2 {
@@ -171,7 +174,7 @@ start Carousel
   grid-auto-rows: 100px;
   overflow: hidden;
   position: relative;
-  margin-bottom: 5em;
+  /* margin-bottom: 5em; */
 }
 .carousel-title {
   font-size: 2.5rem;
@@ -229,22 +232,22 @@ img {
   z-index: 1;
 }
 .learn_more-btn {
-  padding: 0.5em 2.75em;
+  padding: 0.75em 2.75em;
   border-radius: 3px;
   border: 0;
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 1.2px;
   cursor: pointer;
-  background-color: var(--green-color);
-  color: white;
+  background-color: white;
+  color: var(--dark-color);
 
   transition:
     background-color 0.3s ease-in-out,
     translate 0.3s ease-in;
 }
 .learn_more-btn:hover {
-  background-color: var(--darker-green-color);
+  background-color: rgb(210, 210, 210);
   transform: translate(1px, 1px);
 }
 
@@ -269,7 +272,7 @@ img {
   .carousel {
     width: 100%;
     margin: 0 auto;
-    margin-bottom: 4em;
+    /* margin-bottom: 4em; */
     border-radius: 7px;
   }
 }
@@ -283,9 +286,14 @@ voyages
   margin-bottom: 5em;
   /* text-align: center; */
 }
-
+.organise {
+  background-color: var(--primary-color);
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
 .voyages h2 {
   text-align: center;
+  margin: 0;
 }
 .voyage-container {
   width: 80%;
@@ -366,7 +374,7 @@ voyages
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
 }
-.hotel {
+.card-hotel {
   border-radius: 5px;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -374,8 +382,14 @@ voyages
   box-shadow:
     rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  min-width: 280px;
+  position: relative;
+  overflow: hidden;
 }
-
+.hotel-image {
+  min-height: 200px;
+  object-fit: cover;
+}
 .card-hotel-info {
   display: flex;
   flex-direction: column;
@@ -395,6 +409,7 @@ voyages
 .prix-hotel {
   color: #d96239;
   font-size: 1.125rem;
+  margin: 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -417,6 +432,9 @@ voyages
     object-fit: cover;
 
     overflow: hidden;
+  }
+  .card-hotel {
+    max-width: 450px;
   }
   .card-header-info {
     display: flex;
@@ -634,8 +652,9 @@ Our Program
 Contact us
 ================= */
 .contact {
-  padding: 0 7em;
+  padding: 2em 7em;
   margin-bottom: 5em;
+  background-color: var(--grey-color);
 }
 .contact h2 {
   text-align: center;
@@ -660,7 +679,7 @@ Contact us
   font-weight: 700;
   color: white;
   margin-bottom: 2em;
-  background-color: var(--green-color);
+  background-color: var(--secondary-color);
   border: 0;
   transition: background-color 250ms;
   letter-spacing: 2px;
@@ -672,14 +691,14 @@ Contact us
   text-align: inherit;
 }
 .contact-form button:hover {
-  background-color: var(--darker-green-color);
+  background-color: var(--fourth-color);
   transform: translate(1px, 1px);
 }
 
 @media screen and (min-width: 768px) {
   .contact {
-    margin-bottom: 7em;
-    padding: 0 20rem;
+    margin-bottom: 5em;
+    padding: 2em 20rem;
   }
   .contact-form {
     display: grid;
@@ -726,7 +745,7 @@ Program Page
   padding: 1em;
   gap: 1em;
   margin-bottom: 5em;
-  background-color: #f4f4f4;
+  background-color: var(--grey-color);
 }
 .header-program img {
   /* width: 100%; */
@@ -789,7 +808,9 @@ strong {
   border-radius: 3px;
   box-shadow: 10px 10px 5px 0 rgba(0, 0, 0, 0.1);
 }
-
+.form-main p {
+  margin: 0;
+}
 .order-visa-btn {
   display: inline-block;
   padding: 1.75em 2em;
@@ -866,7 +887,8 @@ List des Programmes
 ===================*/
 .list-main {
   width: 100%;
-  background-color: #ccc;
+  background-color: var(--primary-color);
+  padding: 1em;
 }
 .list-container {
   width: 90%;

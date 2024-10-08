@@ -3,7 +3,7 @@
 import React from "react";
 import { client } from "@/sanity/client";
 
-export default function VisaForm() {
+export default function VisaForm({ destination }: { destination: string }) {
   const [formData, setFormData] = React.useState({
     nom: "",
     prenom: "",
@@ -11,6 +11,9 @@ export default function VisaForm() {
     telephone: "",
     passport: null,
   });
+  const [status, setStatus] = React.useState("");
+  const [laoding, setLoading] = React.useState(false);
+  // const { pending } = useFormStatus();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (e: any) => {
@@ -25,6 +28,7 @@ export default function VisaForm() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
     let imageAsset;
     if (formData.passport) {
       imageAsset = await client.assets.upload("image", formData.passport);
@@ -44,7 +48,21 @@ export default function VisaForm() {
           },
         },
       });
-      alert("Form submitted successfully!");
+      const res = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          subject: `Demande Visa: ${destination}`,
+        }),
+      });
+      const result = await res.json();
+      if (res.ok) {
+        setStatus("Email sent successfully!");
+      }
+
       setFormData({
         nom: "",
         prenom: "",
@@ -53,10 +71,13 @@ export default function VisaForm() {
         passport: null,
       }); // Reset form
     } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("Failed to submit the form. Please try again.");
+      // console.error("Error submitting form:", error);
+      setStatus("Failed to send email.");
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
     <form className="visa-form-container" onSubmit={handleSubmit}>
       <input
@@ -95,13 +116,14 @@ export default function VisaForm() {
         onChange={handleChange}
         placeholder="Passport"
         type="file"
-        name="passport" // Changed from 'address' to 'passport'
-        accept="application/pdf,image/*" // Optional: Restrict file types
+        name="passport"
+        accept="application/pdf,image/*"
         required
       />
-      <button type="submit" className="order-visa-btn">
-        Submit
+      <button disabled={laoding} type="submit" className="order-visa-btn">
+        {laoding ? <span>loading...</span> : <span>Submit</span>}
       </button>
+      <p> {status} </p>
     </form>
   );
 }

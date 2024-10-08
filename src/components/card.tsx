@@ -62,9 +62,10 @@ export default function Card({ type = "voyage", post }: CardProps) {
   }
   if (type == "hotel") {
     return (
-      <div className="card hotel">
+      <div className="card-hotel">
         <Link href={`/hotels/${post?.slug?.current}`}>
           <Image
+            className="hotel-image"
             src={
               post?.mainImage
                 ? urlFor(post.mainImage)?.url() || "/maldive.jpg"
@@ -72,8 +73,8 @@ export default function Card({ type = "voyage", post }: CardProps) {
             }
             alt="destination-2"
             layout="responsive"
-            width={400}
-            height={450}
+            width={300}
+            height={250}
           />
           {post?.nom && (
             <div className="card-hotel-info">
