@@ -4,6 +4,7 @@ import { client } from "@/sanity/client";
 import { defineQuery } from "next-sanity";
 import Link from "next/link";
 import React from "react";
+import { usePageContext } from "../context/PageContext";
 
 const options = { next: { revalidate: 60 } };
 
@@ -12,16 +13,19 @@ const VISAS_QUERY = defineQuery(`*[
     ]`);
 export default async function Visas() {
   const visas = await client.fetch(VISAS_QUERY, {}, options);
+  // const { contact, page } = usePageContext();
   return (
     <>
-      <Header change={true} title={undefined} />
+      <Header change={true} />
       <div className="visa-page">
-        <div className="visa-header">
-          <div className="accordion">
-            <Link href="..">Acceuil / </Link>
-            <span> Visa </span>
+        <div className="visa-header-main">
+          <div className="visa-header">
+            <div className="accordion">
+              <Link href="..">Acceuil / </Link>
+              <span> Visa </span>
+            </div>
+            <h3>Les different Types de Visas</h3>
           </div>
-          <h3>Les different Types de Visas</h3>
         </div>
         <div className="visa-content">
           {visas?.map((visa, index) => (

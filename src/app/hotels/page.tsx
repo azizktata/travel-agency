@@ -51,16 +51,16 @@ export default function Hotels() {
 
   return (
     <>
-      <Header change={true} title={undefined} />
+      <Header change={true} />
       <div className="list-main">
         <div className="list-container">
           <div className="accordion">
-            <Link href={"."}>Accueil </Link> <span> / Voyages</span>
+            <Link href={"."}>Accueil </Link> <span> / Hotels</span>
           </div>
           <div className="filter-options">
             <Select type={"hotel"} options={adresses} />
             <p>
-              <strong> {posts?.length} Programmes</strong>
+              <strong> {posts?.length} Hotels</strong>
             </p>
           </div>
           <div className="elements-list">

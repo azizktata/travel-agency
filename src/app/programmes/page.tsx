@@ -51,7 +51,7 @@ export default function Programmes() {
 
   return (
     <>
-      <Header change={true} title={undefined} />
+      <Header change={true} />
       <div className="list-main">
         <div className="list-container">
           <div className="accordion">

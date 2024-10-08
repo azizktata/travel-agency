@@ -17,6 +17,9 @@ body {
   --fourth-color: #b1d0e8;
   --grey-color: #f6f6f6;
   --dark-color: #131313;
+
+  --blue-color: #0e61a9;
+  --red-color: #0e61a9;
   /* --light-color: #81f3ff; */
   /* --green-color: #54ecc4; */
   --green-color: #54794c;
@@ -35,6 +38,7 @@ h2::after {
 }
 h2 {
   font-size: 2rem;
+  color: #082e50;
 }
 header {
   width: 100%;
@@ -59,7 +63,7 @@ header h1 {
   height: 80px;
   display: flex;
   align-items: center;
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
   justify-content: space-between;
   padding: 3em 0;
@@ -80,25 +84,25 @@ nav a {
   margin: 0;
   /* color: #171717; */
   font-size: 1rem;
-  margin: 0 1.5em;
+  margin: 0 1em;
 }
 nav a:hover {
   color: #c2c2c2;
 }
 .callus-btn {
   display: inline-block;
-  padding: 0.75em 2em;
+  padding: 0.75em 1.75em;
   border: 0;
-  background-color: #434730;
+  background-color: var(--blue-color);
   color: white;
-  font-size: 1rem;
+  font-size: 0.75rem;
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
   align-self: center;
 }
 .callus-btn:hover {
-  background-color: var(--darker-green-color);
+  background-color: var(--secondary-color);
 }
 .callus-btn span {
   margin-left: 0.5em;
@@ -115,7 +119,7 @@ nav a:hover {
 .show-menu {
   transform: translateX(-100%);
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 950px) {
   .hide-menu {
     transform: translateX(100%);
   }
@@ -129,10 +133,10 @@ nav a:hover {
     margin: 0;
     height: 100vh;
     right: 0;
-    background-color: #151515;
+    background-color: #0a0a0a;
     color: white;
     transform: translateX(0);
-    width: 50%;
+    width: 55%;
     padding: 1em;
     transition: transform 0.3s ease-in-out;
   }
@@ -147,8 +151,9 @@ nav a:hover {
 
   nav a {
     font-size: 1.25rem;
-    color: white;
+    color: white !important;
   }
+
   .close-btn {
     display: block;
     align-self: flex-end;
@@ -214,7 +219,7 @@ img {
   margin: auto;
   color: white;
   height: 60vh;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   margin-right: auto;
   padding-right: 2em;
@@ -232,23 +237,52 @@ img {
   z-index: 1;
 }
 .learn_more-btn {
-  padding: 0.75em 2.75em;
+  padding: 0.75em 1.75em;
   border-radius: 3px;
   border: 0;
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 0.75rem;
+  font-weight: 500;
   letter-spacing: 1.2px;
   cursor: pointer;
-  background-color: white;
-  color: var(--dark-color);
-
+  background-color: var(--blue-color);
+  color: white;
   transition:
     background-color 0.3s ease-in-out,
     translate 0.3s ease-in;
+  align-self: flex-start;
+  text-transform: uppercase;
 }
 .learn_more-btn:hover {
-  background-color: rgb(210, 210, 210);
+  background-color: var(--secondary-color);
   transform: translate(1px, 1px);
+}
+.carousel-duree {
+  font-size: 1rem;
+  padding: 0.25em 4em;
+  background-color: white;
+  color: var(--blue-color);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+  font-weight: 700;
+}
+.carousel-price {
+  padding: 0.25em 1em;
+  background-color: transparent;
+  color: white;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.carousel-price span {
+  color: white;
+}
+.a_partir {
+  font-size: 1.25rem;
+}
+.prix-offre {
+  font-size: 1.75rem;
+  color: white;
 }
 
 @media screen and (min-width: 768px) {
@@ -272,8 +306,6 @@ img {
   .carousel {
     width: 100%;
     margin: 0 auto;
-    /* margin-bottom: 4em; */
-    border-radius: 7px;
   }
 }
 
@@ -287,6 +319,11 @@ voyages
   /* text-align: center; */
 }
 .organise {
+  background-color: var(--primary-color);
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
+.hotels {
   background-color: var(--primary-color);
   padding-top: 5em;
   padding-bottom: 5em;
@@ -321,23 +358,59 @@ voyages
   position: relative;
   overflow: hidden;
 }
+.card-voyage-a_partir {
+  font-size: 1rem;
+}
 
 .price {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #ff5a5f;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 1.2em;
+  /* border-radius: 5px; */
+  font-size: 1.75rem;
   font-weight: bold;
 }
 .card img {
   min-height: 380px;
   object-fit: cover;
 }
-.slider-scrollbar {
+.DT {
+  font-weight: 300;
+}
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2em;
+}
+.prix-hotel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card-a_partir {
+  color: #4f4f4f;
+  font-size: 1rem;
+}
+
+.voir-offre-btn {
+  padding: 1em 1.75em;
+  border-radius: 3px;
+  border: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+  background-color: var(--blue-color);
+  color: white;
+  transition:
+    background-color 0.3s ease-in-out,
+    translate 0.3s ease-in;
+  align-self: flex-start;
+  text-transform: uppercase;
+}
+.voir-offre-btn:focus,
+.voir-offre-btn:hover {
+  background-color: var(--secondary-color);
+  transform: translate(1px, 1px);
+}
+/* .slider-scrollbar {
   height: 24px;
   width: 100%;
   display: flex;
@@ -362,7 +435,7 @@ voyages
   cursor: grabbing;
   height: 8px;
   top: -2px;
-}
+} */
 .card-info {
   position: absolute;
   bottom: 0;
@@ -373,6 +446,15 @@ voyages
   text-align: center;
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
+  padding: 1em;
+}
+.card-info h3 {
+  font-size: 1.75rem;
+}
+.card-prix-voyage {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
 }
 .card-hotel {
   border-radius: 5px;
@@ -407,7 +489,7 @@ voyages
   color: #2771aa;
 }
 .prix-hotel {
-  color: #d96239;
+  color: var(--red-color);
   font-size: 1.125rem;
   margin: 0;
 }
@@ -441,22 +523,23 @@ voyages
     justify-content: space-between;
     /* padding: 0.5em; */
   }
-  /* .slide-button {
+  .slide-button {
     position: absolute;
     font-size: 2rem;
     cursor: pointer;
+    color: #c9c9c9;
     top: 50%;
     transform: translateY(-50%);
     display: block !important;
   }
   .slide-button#prev-slide {
-    left: -25px;
+    left: -50px;
     display: none;
   }
 
   .slide-button#next-slide {
-    right: -25px;
-  } */
+    right: -50px;
+  }
 }
 
 /* ===============
@@ -584,8 +667,8 @@ Our Program
 .fa-clock,
 .fa-calendar,
 .fa-location-dot {
-  font-size: 1.5rem;
-  color: var(--green-color);
+  font-size: 1rem;
+  color: var(--blue-color);
   margin-right: 0.5em;
 }
 
@@ -600,25 +683,6 @@ Our Program
   font-size: 2rem;
   font-weight: 900;
   margin: 0;
-}
-
-.price-container button {
-  padding: 1em 2.75em;
-  background-color: var(--green-color);
-  border: 0;
-  border-radius: 3px;
-  color: white;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 0.95em;
-  margin-bottom: 2em;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-.price-container button:focus,
-.price-container button:hover {
-  background-color: var(--darker-green-color);
 }
 
 @media screen and (min-width: 950px) {
@@ -770,7 +834,6 @@ strong {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  padding: 1em;
 }
 .images img {
   width: 100%;
@@ -845,7 +908,7 @@ strong {
   margin-top: 7em;
   margin-bottom: 4em;
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 850px) {
   .program-details-main {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -871,17 +934,77 @@ strong {
 FOOTER
 =================*/
 
-footer {
+/* footer {
   background-color: #333;
   color: white;
   padding: 1em;
   text-align: center;
 }
-.socials i {
-  padding: 2em;
+*/
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  margin: 10px;
+}
+
+.footer-section h3 {
+  border-bottom: 2px solid #fff;
+  padding-bottom: 10px;
+}
+
+.footer-section p,
+.footer-section ul {
+  margin: 10px 0;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin: 5px 0;
+}
+
+.footer-section ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0 0.25em;
+  transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+  color: #ff9800;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+}
+.social-icons i {
   color: white;
 }
 
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
 /* ================
 List des Programmes
 ===================*/
@@ -930,7 +1053,7 @@ List des Programmes
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   min-height: 100vh;
-  gap: 1em;
+  gap: 1.5em;
   align-items: start;
 }
 .fa-star {
@@ -953,6 +1076,11 @@ Visa Page
   flex-direction: column;
   gap: 1em;
   padding: 2em 7em;
+}
+.visa-header-main {
+  background-color: var(--grey-color);
+
+  padding: 1.5em 0;
 }
 .visa-header {
   margin: 2em 7em;

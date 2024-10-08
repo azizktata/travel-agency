@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import imageUrlBuilder from "@sanity/image-url";
 
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
@@ -47,7 +47,7 @@ export default async function HotelPage({
   } = hotel;
   return (
     <div className="main-program">
-      <Header change={true} title={undefined} />
+      <Header change={true} />
       <div className="header-program">
         <div className="accordion">
           <Link href="..">Acceuil /</Link> <Link href=".">Hotels /</Link>
@@ -55,8 +55,14 @@ export default async function HotelPage({
         </div>
         <h1>{nom}</h1>
         <p>
-          {" "}
-          {adresse}, {prix}
+          {description && `${description},`}
+          {adresse && `${adresse},`}
+
+          {prix && (
+            <Fragment>
+              <span> {prix}dt </span>
+            </Fragment>
+          )}
         </p>
         {mainImage && (
           <Image
@@ -88,20 +94,6 @@ export default async function HotelPage({
             <h4 className="form-title">Contact form</h4> <ContactForm />
           </div>
         </div>
-        {/* <div className="images">
-          {listImage
-            ? listImage.map((image: SanityImageSource) => (
-                <Image
-                  key={image}
-                  src={urlFor(image)?.url() || "/maldive.jpg"}
-                  alt="destination-2"
-                  layout="responsive"
-                  width={400}
-                  height={450}
-                />
-              ))
-            : null}
-        </div> */}
       </div>
 
       <Footer />

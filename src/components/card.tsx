@@ -47,13 +47,21 @@ export default function Card({ type = "voyage", post }: CardProps) {
             layout="responsive"
             width={400}
             height={450}
+            style={{ objectFit: "cover" }}
           />
           {post?.destination && (
             <>
               <div className="card-info">
                 <h3>{post?.destination}</h3>
+                <p className="card-prix-voyage">
+                  <span className="card-voyage-a_partir">à partir de</span>
+                  <span>
+                    <span className="price"> {post?.prix}</span>{" "}
+                    <span className="DT"> DT</span>{" "}
+                  </span>
+                </p>
+                <button className="voir-offre-btn">j'en profite</button>
               </div>
-              <p className="price">{post?.prix}dt</p>
             </>
           )}
         </Link>
@@ -81,12 +89,28 @@ export default function Card({ type = "voyage", post }: CardProps) {
               <div className="card-header-info">
                 <h3>{post?.nom}</h3>
                 <p>
-                  {post?.etoile}
-                  <i className="fa-solid fa-star"></i>
+                  {post?.etoile &&
+                    // post?.etoile?.array.forEach(() => {
+                    //   <i className="fa-solid fa-star"></i>;
+                    // })
+                    "⭐".repeat(post?.etoile)}
                 </p>
               </div>
-              <p className="adress">{post?.adresse}</p>
-              <p className="prix-hotel">{post?.prix}dt</p>
+              <p className="adress">
+                <i className="fa-solid fa-location-dot"></i>
+                {post?.adresse}
+              </p>
+
+              <div className="card-footer">
+                <p className="prix-hotel">
+                  <span className="card-a_partir">à partir de</span>
+                  <span className="card-prix-hotel">
+                    <span className="price"> {post?.prix} </span>{" "}
+                    <span className="DT"> DT</span>{" "}
+                  </span>
+                </p>
+                <button className="voir-offre-btn">voir l'offre</button>
+              </div>
             </div>
           )}
         </Link>

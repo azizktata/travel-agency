@@ -40,8 +40,8 @@ export default function Carousel({
     return () => clearInterval(intervalId);
   }, [counter]);
 
-  const pageImg = carousel[counter]?.image
-    ? urlFor(carousel[counter]?.image)?.url()
+  const pageImg = carousel[counter]?.mainImage
+    ? urlFor(carousel[counter]?.mainImage)?.url()
     : null;
   return (
     <>
@@ -49,28 +49,35 @@ export default function Carousel({
         src={pageImg || "/hero-6.jpg"}
         alt="hero"
         fill
-        objectFit="cover"
+        style={{ objectFit: "cover" }}
         quality={100}
       />
       <div className="carousel-content">
-        {carousel[counter]?.duree ? (
+        {carousel[counter]?.destination ? (
           <>
-            <div className="duree"> {carousel[counter]?.duree} </div>
+            <div className="carousel-duree">
+              {" "}
+              {carousel[counter]?.duration}{" "}
+            </div>
             <h1 className="carousel-title">{carousel[counter]?.destination}</h1>
-            <p className="description">{carousel[counter]?.prix}</p>
+            <p className="carousel-price">
+              <span className="a_partir">à partir de</span>
+              <span className="prix-offre">
+                <span className="price">{carousel[counter]?.prix}</span>
+                <span className="DT"> DT</span>
+              </span>
+            </p>
           </>
         ) : (
           <>
             <h1 className="carousel-title">{titre}</h1>
-            <p className="description">{description}</p>
+            {/* <p className="description">{description}</p> */}
           </>
         )}
-        {carousel[counter]?.slug?.current ? (
-          <Link href={`/programmes/${carousel[counter]?.slug}`}>
-            <button className="learn_more-btn"> learn more</button>
+        {carousel[counter]?.slug?.current && (
+          <Link href={`/programmes/${carousel[counter]?.slug?.current}`}>
+            <button className="learn_more-btn"> J'en profite</button>
           </Link>
-        ) : (
-          <button className="learn_more-btn"> learn more</button>
         )}
       </div>
     </>

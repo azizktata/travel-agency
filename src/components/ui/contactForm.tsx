@@ -90,7 +90,7 @@ export default function ContactForm() {
         value={formData.subject}
         name="subject"
         type="text"
-        placeholder="Subject"
+        placeholder="Sujet"
         required
       />
       <textarea

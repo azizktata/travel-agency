@@ -14,10 +14,10 @@ export async function POST(req) {
 
   try {
     await transporter.sendMail({
-      from: email,
+      from: `${email} `,
       to: process.env.EMAIL_USER,
       subject: `${subject} `,
-      text: `email: ${email}\nnom:${nom}${prenom}\n${message || ""}\ntelephone: ${telephone}`,
+      text: `${message || ""}\n\nemail: ${email}\nnom:${nom}${prenom}\ntelephone: ${telephone}`,
     });
 
     return new Response(JSON.stringify({ message: 'Email sent successfully' }), { status: 200 });

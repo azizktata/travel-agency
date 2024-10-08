@@ -3,20 +3,19 @@ import clsx from "clsx";
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
+import { usePageContext } from "@/app/context/PageContext";
 
-export default function Header({
-  change = false,
-  title = "Caprice",
-  contact = "58 344 400",
-}) {
+export default function Header({ change = false }) {
   const pathname = usePathname();
   const blackStyle = change ? { color: "black" } : { color: "white" };
+  const { contact, page } = usePageContext();
+
   return (
     <header>
       <div className="header-container">
         <h1>
           <Link style={blackStyle} className="logo" href="/">
-            {title}{" "}
+            {page?.logoName}{" "}
           </Link>{" "}
         </h1>
 
@@ -76,7 +75,8 @@ export default function Header({
             </li>
           </ul>
           <button className="callus-btn">
-            <i className="fa-solid fa-phone"></i> <span>{contact}</span>
+            <i className="fa-solid fa-phone"></i>{" "}
+            <span>{contact?.telephone}</span>
           </button>
         </nav>
         <div
@@ -84,6 +84,7 @@ export default function Header({
             document.querySelector("nav")?.classList.remove("hide-menu");
             document.querySelector("nav")?.classList.add("show-menu");
           }}
+          style={blackStyle}
           className="menu-btn"
         >
           &#9776;
