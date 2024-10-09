@@ -359,9 +359,9 @@ export type Contact = {
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | TeamBuilding | Hotel | PageVisa | Visa | Page | Post | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Slug | Contact;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../agence-voyage/src/app/layout.tsx
-// Variable: PAGE__QUERY
+// Variable: PAGE_DEFAULT_QUERY
 // Query: *[ _type=="page"][0]
-export type PAGE__QUERYResult = {
+export type PAGE_DEFAULT_QUERYResult = {
   _id: string;
   _type: "page";
   _createdAt: string;
@@ -397,8 +397,28 @@ export type PAGE__QUERYResult = {
 
 // Source: ../agence-voyage/src/app/page.tsx
 // Variable: PAGE_QUERY
-// Query: *[_type=="page"][0]{}
-
+// Query: *[_type=="page"][0]{  titre,  description,  team,  about}
+export type PAGE_QUERYResult = {
+  titre: string | null;
+  description: null;
+  team: {
+    mainImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    activites?: Array<string>;
+    _type: "teamBuilding";
+  } | null;
+  about: string | null;
+} | null;
 // Variable: POST_QUERY
 // Query: *[  _type == "post" && type == "voyage-organise"  ]
 export type POST_QUERYResult = Array<{
@@ -809,8 +829,8 @@ export type POST_SLUG_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[ _type==\"page\"][0]": PAGE__QUERYResult;
-    "*[\n_type==\"page\"][0]{\n\n}": PAGE_QUERYResult;
+    "*[ _type==\"page\"][0]": PAGE_DEFAULT_QUERYResult;
+    "*[\n_type==\"page\"][0]{\n  titre,\n  description,\n  team,\n  about\n}": PAGE_QUERYResult;
     "*[\n  _type == \"post\" && type == \"voyage-organise\"\n  ]": POST_QUERYResult;
     "*[\n  _type == \"post\" && type == \"voyage-carte\"\n  ]": POST_CART_QUERYResult;
     "*[\n    _type == \"post\"\n  ] | order(_createdAt desc)[0...3]": POST_3_QUERYResult;
