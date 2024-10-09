@@ -57,13 +57,6 @@ export default async function Home() {
   const teamImg = page?.team?.mainImage
     ? urlFor(page?.team?.mainImage)?.url()
     : null;
-  // const contact = await client.fetch(CONTACT_QUERY, {}, options);
-  // const postImageUrl = post?.mainImage
-  //   ? urlFor(post?.mainImage)?.width(300).height(200).url()
-  //   : null;
-  // const pageImg = page?.team?.mainImage
-  //   ? urlFor(page?.team?.mainImage)?.width(300).height(200).url()
-  //   : null;
 
   return (
     <main>
@@ -71,8 +64,8 @@ export default async function Home() {
         <Header />
         <Carousel
           carousel={posts || []}
-          titre={page?.titre}
-          description={page?.description}
+          titre={page?.titre ?? undefined}
+          description={page?.description ?? undefined}
         />
       </div>
 
@@ -113,7 +106,7 @@ export default async function Home() {
         </>
       ) : null}
 
-      {page.team && (
+      {page?.team && (
         <div className="about">
           <h2>Team building</h2>
           <Image
