@@ -44,7 +44,7 @@ const urlFor = (source: SanityImageSource) =>
         .image(source)
         .width(1920)
         .height(1080)
-        .quality(100)
+        .quality(80)
     : null;
 
 export default async function Home() {
@@ -110,7 +110,7 @@ export default async function Home() {
         <div className="about">
           <h2>Team building</h2>
           <Image
-            src={teamImg || "/photo-grp.webp"}
+            src={teamImg || "/photo-grp.jpg"}
             alt="aboutus"
             width={300}
             height={200}

@@ -26,7 +26,7 @@ const urlFor = (source: SanityImageSource) =>
         .image(source)
         .width(1920)
         .height(1080)
-        .quality(50)
+        .quality(80)
     : null;
 export default async function HotelPage({
   params,

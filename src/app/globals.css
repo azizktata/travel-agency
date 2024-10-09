@@ -648,7 +648,8 @@ About us
   .about-content p {
     margin: 0;
     letter-spacing: 1px;
-    font-size: 1.25em;
+    font-size: 1.5em;
+    line-height: 1.6;
   }
   .about-numbers {
     margin-bottom: 2em;

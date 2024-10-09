@@ -50,6 +50,7 @@ export default function Carousel({
         alt="hero"
         fill
         style={{ objectFit: "cover" }}
+        loading="eager"
         quality={100}
       />
       <div className="carousel-content">
