@@ -6,7 +6,7 @@ import { client } from "@/sanity/client";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { defineQuery, PortableText } from "next-sanity";
+import { defineQuery } from "next-sanity";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Footer from "@/components/ui/footer";
 import Header from "@/components/ui/header";
