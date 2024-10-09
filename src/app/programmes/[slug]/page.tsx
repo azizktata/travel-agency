@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import imageUrlBuilder from "@sanity/image-url";
 
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
@@ -7,11 +7,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { defineQuery } from "next-sanity";
-import VisaForm from "@/components/ui/VisaForm";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Footer from "@/components/ui/footer";
 import Header from "@/components/ui/header";
-import ContactForm from "@/components/ui/contactForm";
+import TarifVoyage from "@/components/tarifVoyage";
 
 const options = { next: { revalidate: 60 } };
 
@@ -22,7 +21,11 @@ const POST_SLUG_QUERY = defineQuery(`*[
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
   projectId && dataset
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
+    ? imageUrlBuilder({ projectId, dataset })
+        .image(source)
+        .width(1920)
+        .height(1080)
+        .quality(50)
     : null;
 export default async function ProgramPage({
   params,
@@ -38,7 +41,7 @@ export default async function ProgramPage({
     description,
     destination,
     prix,
-    type,
+
     duration,
     periodes,
     serviceInclus,
@@ -58,25 +61,24 @@ export default async function ProgramPage({
           <Link href="..">Acceuil /</Link> <Link href=".">Voyages /</Link>
           <span> {destination} </span>
         </div>
-        <h1>{destination}</h1>
-        <p>
-          {description && `${description},`}
-          {duration && `${duration},`}
+        <div className="header-program-title">
+          <h1>{destination}</h1>
+          <p className="price">
+            <span className="card-voyage-a_partir">à partir de </span>
+            {prix}
+            <span className="DT"> TND</span>
+          </p>
+        </div>
+        <p>{titre}</p>
 
-          {prix && (
-            <Fragment>
-              <span> {prix}dt </span>
-            </Fragment>
-          )}
-        </p>
         <Image
           src={
             mainImage
-              ? urlFor(mainImage)?.url() || "/maldive.jpg"
-              : "/maldive.jpg"
+              ? urlFor(mainImage)?.url() || "/maldive.webp"
+              : "/maldive.webp"
           }
           alt="destination-2"
-          layout="responsive"
+          style={{ width: "100%", height: "auto", objectFit: "cover" }}
           width={400}
           height={450}
         />
@@ -87,6 +89,7 @@ export default async function ProgramPage({
           {sejours && (
             <div className="sejours">
               <h1>Programme du séjour</h1>
+              <p>{duration && `durée : ${duration}`}</p>
               {sejours.map((sejour) => (
                 <div key={sejour._key} className="sejour-card">
                   <p>
@@ -101,7 +104,7 @@ export default async function ProgramPage({
             <div className="Activités">
               <h1>Activités</h1>
               {activites.map((service) => (
-                <p>
+                <p key={service}>
                   <i className="fa-solid fa-check"></i>
                   {service}
                 </p>
@@ -113,7 +116,7 @@ export default async function ProgramPage({
             <div className="services-inclus">
               <h1>Service Inclus</h1>
               {serviceInclus.map((service) => (
-                <p>
+                <p key={service}>
                   <i className="fa-solid fa-check"></i>
                   {service}
                 </p>
@@ -136,35 +139,18 @@ export default async function ProgramPage({
               <h1>Hotels</h1>
 
               {hotels.map((hotel) => (
-                <p>
+                <p key={hotel._key}>
                   <i className="fa-solid fa-hotel"></i>
                   {hotel.hotel} : {hotel.prix}dt (adulte par nuit)
                 </p>
               ))}
             </div>
           )}
-          {periodes && (
-            <div className="tarifs">
-              <h1>Tarifs</h1>
-
-              {periodes.map((periode) => (
-                <p>
-                  <i className="fa-solid fa-money-check-dollar"></i>
-                  {periode.periode} : {periode.tarif}dt
-                </p>
-              ))}
-            </div>
-          )}
-          {visa == "visa-required" ? (
-            <div className="form-main">
-              <h4 className="form-title">Visa form</h4>{" "}
-              <VisaForm destination={destination || ""} />
-            </div>
-          ) : (
-            <div className="form-main">
-              <h4 className="form-title">Contact form</h4> <ContactForm />
-            </div>
-          )}
+          <TarifVoyage
+            periodes={periodes}
+            visa={visa}
+            destination={destination}
+          />
         </div>
         <div className="images">
           {listImage
@@ -173,7 +159,7 @@ export default async function ProgramPage({
                   key={image._key}
                   src={urlFor(image)?.url() || "/maldive.jpg"}
                   alt="destination-2"
-                  layout="responsive"
+                  style={{ width: "100%", height: "auto", objectFit: "cover" }}
                   width={400}
                   height={450}
                 />
@@ -184,26 +170,4 @@ export default async function ProgramPage({
       <Footer />
     </div>
   );
-}
-{
-  /* {post?.activites
-    ? post?.activites.map((activite: string) => (
-        <div key={activite} className="program-card">
-          <p>
-            <i className="fa-solid fa-check"></i>
-            {activite}
-          </p>
-        </div>
-      ))
-    : null} */
-}
-
-{
-  /* 
-          <div className="visa-total">
-            <div className="visa-order-container">
-              <h4 className="order-title">Visa form</h4>
-              <VisaForm />
-            </div>
-          </div> */
 }

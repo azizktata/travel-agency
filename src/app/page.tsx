@@ -11,14 +11,15 @@ import Carousel from "@/components/carousel";
 import Slider from "@/components/slider";
 import Card from "@/components/card";
 import ContactForm from "@/components/ui/contactForm";
-import { POST_CART_QUERYResult, POST_QUERYResult } from "@/sanity/types";
-import { usePageContext } from "./context/PageContext";
 
 const options = { next: { revalidate: 60 } };
 
 const PAGE_QUERY = defineQuery(`*[
 _type=="page"][0]{
-
+  titre,
+  description,
+  team,
+  about
 }`);
 
 const POST_QUERY = defineQuery(`*[
@@ -35,36 +36,39 @@ const POST_3_QUERY = defineQuery(`*[
 const HOTEL_QUERY = defineQuery(`*[
   _type == "hotel"
   ]`);
-// const CONTACT_QUERY = defineQuery(`*[
-//   _type == "contact"
-//   ][0]`);
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
   projectId && dataset
-    ? imageUrlBuilder({ projectId, dataset }).image(source).quality(100).url()
+    ? imageUrlBuilder({ projectId, dataset })
+        .image(source)
+        .width(1920)
+        .height(1080)
+        .quality(100)
     : null;
 
 export default async function Home() {
   const page = await client.fetch(PAGE_QUERY, {}, options);
-  const contact = page?.contact;
+
   const posts_org = await client.fetch(POST_QUERY, {}, options);
   const posts_cart = await client.fetch(POST_CART_QUERY, {}, options);
   const posts = await client.fetch(POST_3_QUERY, {}, options);
   const hotels = await client.fetch(HOTEL_QUERY, {}, options);
+  const teamImg = page?.team?.mainImage
+    ? urlFor(page?.team?.mainImage)?.url()
+    : null;
   // const contact = await client.fetch(CONTACT_QUERY, {}, options);
   // const postImageUrl = post?.mainImage
   //   ? urlFor(post?.mainImage)?.width(300).height(200).url()
   //   : null;
-  // const pageImg = page?.image ? urlFor(page?.image)?.url() : null;
+  // const pageImg = page?.team?.mainImage
+  //   ? urlFor(page?.team?.mainImage)?.width(300).height(200).url()
+  //   : null;
 
   return (
     <main>
       <div className="carousel">
-        <Header
-        // title={page?.logoName}
-        // contact={contact?.telephone?.toString()}
-        />
+        <Header />
         <Carousel
           carousel={posts || []}
           titre={page?.titre}
@@ -76,8 +80,8 @@ export default async function Home() {
         <>
           <div className="voyages organise">
             <h2>Voyages organisés</h2>
-            <Slider>
-              {posts_org?.map((post: POST_QUERYResult, index: number) => (
+            <Slider sliderClass="card-list">
+              {posts_org?.map((post: any, index: number) => (
                 <Card post={post} key={index} />
               ))}
             </Slider>
@@ -88,8 +92,8 @@ export default async function Home() {
         <>
           <div className="voyages">
             <h2>Voyages a la carte</h2>
-            <Slider>
-              {posts_cart?.map((post: POST_CART_QUERYResult, index: number) => (
+            <Slider sliderClass="card-list2">
+              {posts_cart?.map((post: any, index: number) => (
                 <Card post={post} key={index} />
               ))}
             </Slider>
@@ -100,8 +104,8 @@ export default async function Home() {
         <>
           <div className="voyages hotels">
             <h2>Les Hotels</h2>
-            <Slider>
-              {hotels?.map((hotel, index) => (
+            <Slider sliderClass="card-list3">
+              {hotels?.map((hotel: any, index: number) => (
                 <Card post={hotel} key={index} type="hotel" />
               ))}
             </Slider>
@@ -109,16 +113,15 @@ export default async function Home() {
         </>
       ) : null}
 
-      {page?.team ? (
+      {page.team && (
         <div className="about">
           <h2>Team building</h2>
           <Image
-            src={urlFor(page?.team?.mainImage) ?? "/hero-6.jpg"}
+            src={teamImg || "/photo-grp.webp"}
             alt="aboutus"
-            layout="responsive"
             width={300}
             height={200}
-            style={{ objectFit: "cover" }}
+            style={{ width: "100%", height: "auto", objectFit: "cover" }}
           />
           <div className="about-content">
             {page?.team?.activites
@@ -133,30 +136,31 @@ export default async function Home() {
               : null}{" "}
           </div>
         </div>
-      ) : null}
+      )}
       <div id="about" className="about">
         <h2>Pourquoi nous choisir?</h2>
         <Image
           src={"/photo-grp.jpg"}
           alt="aboutus"
-          layout="responsive"
           width={300}
           height={200}
-          style={{ objectFit: "cover" }}
+          style={{ width: "100%", height: "auto", objectFit: "cover" }}
         />
         <div className="about-content">
           {page?.about ? (
             page.about
           ) : (
             <p>
-              Welcome to Caprice Travel, your dedicated travel companion since
-              2019. Our mission is to craft exceptional travel experiences that
-              connect you with the world in ways that inspire, rejuvenate, and
-              enrich your life. Whether you’re seeking a beach escape, a
-              cultural tour through Europe, or a thrilling adventure in the
-              wild, we have you covered. Our experienced team of travel experts
-              is passionate about delivering personalized service, curating
-              trips that reflect your unique tastes and interests.
+              Bienvenue chez Caprice Travel, votre compagnon de voyage dévoué
+              depuis 2019. Notre mission est de créer des expériences de voyage
+              exceptionnelles qui vous connecter au monde de manière à inspirer,
+              rajeunir et Enrichissez votre vie. Que vous soyez à la recherche
+              d&apos;une escapade à la plage, d&apos;un voyage culturel à
+              travers l&apos;Europe, ou une aventure palpitante dans le Sauvage,
+              nous avons ce qu&apos;il vous faut. Notre équipe expérimentée
+              d&apos;experts en voyages est passionné par la prestation
+              d&apos;un service personnalisé, la conservation des voyages qui
+              reflètent vos goûts et vos intérêts uniques.
             </p>
           )}
 

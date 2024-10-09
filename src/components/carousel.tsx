@@ -19,6 +19,7 @@ const urlFor = (source: SanityImageSource) =>
     : null;
 
 interface CarouselProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   carousel: any[];
   titre?: string;
   description?: string;
@@ -27,7 +28,6 @@ interface CarouselProps {
 export default function Carousel({
   carousel = [],
   titre = "Caprise",
-  description = "",
 }: CarouselProps) {
   const [counter, setCounter] = React.useState(0);
 
@@ -36,9 +36,9 @@ export default function Carousel({
       setCounter((counter) =>
         counter + 1 >= carousel.length ? 0 : counter + 1
       );
-    }, 5000);
+    }, 3000);
     return () => clearInterval(intervalId);
-  }, [counter]);
+  }, [carousel.length]);
 
   const pageImg = carousel[counter]?.mainImage
     ? urlFor(carousel[counter]?.mainImage)?.url()
@@ -71,12 +71,11 @@ export default function Carousel({
         ) : (
           <>
             <h1 className="carousel-title">{titre}</h1>
-            {/* <p className="description">{description}</p> */}
           </>
         )}
         {carousel[counter]?.slug?.current && (
           <Link href={`/programmes/${carousel[counter]?.slug?.current}`}>
-            <button className="learn_more-btn"> J'en profite</button>
+            <button className="learn_more-btn"> J&apos;en profite</button>
           </Link>
         )}
       </div>

@@ -11,14 +11,14 @@ export const metadata: Metadata = {
     "Caprise est une agence de voyages basée en Tunisie, spécialisée dans l'organisation de séjours sur mesure et de voyages organisés",
 };
 const options = { next: { revalidate: 60 } };
-const PAGE_QUERY = defineQuery(`*[ _type=="page"][0]`);
+const PAGE__QUERY = defineQuery(`*[ _type=="page"][0]`);
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const page = await client.fetch(PAGE_QUERY, {}, options);
+  const page = await client.fetch(PAGE__QUERY, {}, options);
   const contact = page?.contact || {
     name: "Unknown",
     email: "N/A",

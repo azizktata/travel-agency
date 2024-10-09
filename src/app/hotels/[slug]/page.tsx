@@ -7,12 +7,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { defineQuery } from "next-sanity";
-import VisaForm from "@/components/ui/VisaForm";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { PortableText } from "@portabletext/react";
 import Footer from "@/components/ui/footer";
 import Header from "@/components/ui/header";
-import ContactForm from "@/components/ui/contactForm";
+import Tarifs from "@/components/tarifs";
 
 const options = { next: { revalidate: 60 } };
 
@@ -23,7 +22,11 @@ const HOTEL_SLUG_QUERY = defineQuery(`*[
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
   projectId && dataset
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
+    ? imageUrlBuilder({ projectId, dataset })
+        .image(source)
+        .width(1920)
+        .height(1080)
+        .quality(50)
     : null;
 export default async function HotelPage({
   params,
@@ -40,10 +43,11 @@ export default async function HotelPage({
     etoile,
     prix,
     description,
-
-    periodes,
+    chambres,
+    services,
 
     mainImage,
+    listImage,
   } = hotel;
   return (
     <div className="main-program">
@@ -53,22 +57,30 @@ export default async function HotelPage({
           <Link href="..">Acceuil /</Link> <Link href=".">Hotels /</Link>
           <span> {nom} </span>
         </div>
-        <h1>{nom}</h1>
-        <p>
-          {description && `${description},`}
-          {adresse && `${adresse},`}
+        <div className="header-program-title">
+          <h1>
+            {nom} {etoile && "⭐".repeat(etoile)}
+          </h1>
+          <p className="card-prix-voyage">
+            <span className="card-voyage-a_partir">à partir de</span>
+            <span>
+              <span className="price"> {prix}</span>{" "}
+              <span className="DT"> DT</span>{" "}
+            </span>
+          </p>
+        </div>
+        {adresse && (
+          <p className="program-description">
+            <i className="fa-solid fa-map-marker-alt"></i>
+            {adresse}
+          </p>
+        )}
 
-          {prix && (
-            <Fragment>
-              <span> {prix}dt </span>
-            </Fragment>
-          )}
-        </p>
         {mainImage && (
           <Image
             src={urlFor(mainImage)?.url() || "/maldive.jpg"}
             alt="destination-2"
-            layout="responsive"
+            style={{ width: "100%", height: "auto", objectFit: "cover" }}
             width={400}
             height={450}
           />
@@ -77,22 +89,38 @@ export default async function HotelPage({
 
       <div className="program-details-main">
         <div className="program-details">
-          {description && <PortableText value={description} />}
-
-          <div className="tarifs">
+          {description && (
+            <>
+              <h1>Description</h1>
+              <PortableText value={description} />
+            </>
+          )}
+          <div>
             <h1>Tarifs</h1>
-            {periodes
-              ? periodes.map((periode) => (
-                  <p>
-                    <i className="fa-solid fa-money-check-dollar"></i>
-                    {periode.periode} : {periode.tarif}dt
-                  </p>
-                ))
-              : null}
+
+            {nom && (
+              <Tarifs
+                hotel={nom}
+                chambres={chambres}
+                services={services}
+                prix={prix || 0}
+              />
+            )}
           </div>
-          <div className="form-main">
-            <h4 className="form-title">Contact form</h4> <ContactForm />
-          </div>
+        </div>
+        <div className="images">
+          {listImage
+            ? listImage.map((image) => (
+                <Image
+                  key={image._key}
+                  src={urlFor(image)?.url() || "/maldive.jpg"}
+                  alt="destination-2"
+                  style={{ width: "100%", height: "auto", objectFit: "cover" }}
+                  width={400}
+                  height={450}
+                />
+              ))
+            : null}
         </div>
       </div>
 

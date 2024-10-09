@@ -4,7 +4,6 @@ import { client } from "@/sanity/client";
 import { defineQuery } from "next-sanity";
 import Link from "next/link";
 import React from "react";
-import { usePageContext } from "../context/PageContext";
 
 const options = { next: { revalidate: 60 } };
 
@@ -13,7 +12,7 @@ const VISAS_QUERY = defineQuery(`*[
     ]`);
 export default async function Visas() {
   const visas = await client.fetch(VISAS_QUERY, {}, options);
-  // const { contact, page } = usePageContext();
+
   return (
     <>
       <Header change={true} />

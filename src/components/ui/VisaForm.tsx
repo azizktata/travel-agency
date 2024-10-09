@@ -3,7 +3,13 @@
 import React from "react";
 import { client } from "@/sanity/client";
 
-export default function VisaForm({ destination }: { destination: string }) {
+export default function VisaForm({
+  destination = "",
+  offre = {},
+}: {
+  destination: string;
+  offre: any;
+}) {
   const [formData, setFormData] = React.useState({
     nom: "",
     prenom: "",
@@ -13,7 +19,6 @@ export default function VisaForm({ destination }: { destination: string }) {
   });
   const [status, setStatus] = React.useState("");
   const [laoding, setLoading] = React.useState(false);
-  // const { pending } = useFormStatus();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (e: any) => {
@@ -35,6 +40,9 @@ export default function VisaForm({ destination }: { destination: string }) {
     } else {
       throw new Error("Passport file is required.");
     }
+    let demande = offre
+      ? `Demande Visa: ${destination}, ${offre?.periode}`
+      : `Demande Visa: ${destination}`;
 
     try {
       await client.create({
@@ -55,10 +63,10 @@ export default function VisaForm({ destination }: { destination: string }) {
         },
         body: JSON.stringify({
           ...formData,
-          subject: `Demande Visa: ${destination}`,
+          subject: `${demande}, `,
         }),
       });
-      const result = await res.json();
+
       if (res.ok) {
         setStatus("Email sent successfully!");
       }
@@ -70,7 +78,7 @@ export default function VisaForm({ destination }: { destination: string }) {
         telephone: "",
         passport: null,
       }); // Reset form
-    } catch (error) {
+    } catch {
       // console.error("Error submitting form:", error);
       setStatus("Failed to send email.");
     } finally {
@@ -112,16 +120,19 @@ export default function VisaForm({ destination }: { destination: string }) {
         name="email"
         required
       />
-      <input
-        onChange={handleChange}
-        placeholder="Passport"
-        type="file"
-        name="passport"
-        accept="application/pdf,image/*"
-        required
-      />
+      <div className="input-grp">
+        <label htmlFor="passport">photo de votre passport</label>
+        <input
+          onChange={handleChange}
+          placeholder="Passport"
+          type="file"
+          name="passport"
+          accept="application/pdf,image/*"
+          required
+        />
+      </div>
       <button disabled={laoding} type="submit" className="order-visa-btn">
-        {laoding ? <span>loading...</span> : <span>Submit</span>}
+        {laoding ? <span>loading...</span> : <span>Envoyer</span>}
       </button>
       <p> {status} </p>
     </form>

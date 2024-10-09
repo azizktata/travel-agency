@@ -17,16 +17,6 @@ const urlFor = (source: SanityImageSource) =>
         .quality(50)
     : null;
 
-interface Post {
-  slug?: { current: string };
-  mainImage?: SanityImageSource;
-  destination?: string;
-  prix?: number;
-  nom?: string;
-  etoile?: number;
-  adresse?: string;
-}
-
 interface CardProps {
   type?: "voyage" | "hotel";
   post: any;
@@ -44,10 +34,9 @@ export default function Card({ type = "voyage", post }: CardProps) {
                 : "/maldive.jpg"
             }
             alt="destination-2"
-            layout="responsive"
             width={400}
             height={450}
-            style={{ objectFit: "cover" }}
+            style={{ width: "100%", height: "auto", objectFit: "cover" }}
           />
           {post?.destination && (
             <>
@@ -60,7 +49,7 @@ export default function Card({ type = "voyage", post }: CardProps) {
                     <span className="DT"> DT</span>{" "}
                   </span>
                 </p>
-                <button className="voir-offre-btn">j'en profite</button>
+                <button className="voir-offre-btn">j&apos;en profite</button>
               </div>
             </>
           )}
@@ -80,7 +69,7 @@ export default function Card({ type = "voyage", post }: CardProps) {
                 : "/maldive.jpg"
             }
             alt="destination-2"
-            layout="responsive"
+            style={{ width: "100%", height: "auto", objectFit: "cover" }}
             width={300}
             height={250}
           />
@@ -88,13 +77,7 @@ export default function Card({ type = "voyage", post }: CardProps) {
             <div className="card-hotel-info">
               <div className="card-header-info">
                 <h3>{post?.nom}</h3>
-                <p>
-                  {post?.etoile &&
-                    // post?.etoile?.array.forEach(() => {
-                    //   <i className="fa-solid fa-star"></i>;
-                    // })
-                    "⭐".repeat(post?.etoile)}
-                </p>
+                <p>{post?.etoile && "⭐".repeat(post?.etoile)}</p>
               </div>
               <p className="adress">
                 <i className="fa-solid fa-location-dot"></i>
@@ -109,7 +92,7 @@ export default function Card({ type = "voyage", post }: CardProps) {
                     <span className="DT"> DT</span>{" "}
                   </span>
                 </p>
-                <button className="voir-offre-btn">voir l'offre</button>
+                <button className="voir-offre-btn">voir l&apos;offre</button>
               </div>
             </div>
           )}

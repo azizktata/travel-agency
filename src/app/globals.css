@@ -240,7 +240,7 @@ img {
   padding: 0.75em 1.75em;
   border-radius: 3px;
   border: 0;
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: 1.2px;
   cursor: pointer;
@@ -300,9 +300,9 @@ img {
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
     margin-bottom: 0.5em;
   }
-  .carousel-content button {
+  /* .carousel-content button {
     font-size: 1.25rem;
-  }
+  } */
   .carousel {
     width: 100%;
     margin: 0 auto;
@@ -327,6 +327,7 @@ voyages
   background-color: var(--primary-color);
   padding-top: 5em;
   padding-bottom: 5em;
+  width: 100%;
 }
 .voyages h2 {
   text-align: center;
@@ -351,6 +352,28 @@ voyages
 .card-list::-webkit-scrollbar {
   display: none;
 }
+.card-list2 {
+  /* border: 1px solid black; */
+  display: flex;
+  gap: 1em;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 1em;
+}
+.card-list2::-webkit-scrollbar {
+  display: none;
+}
+.card-list3 {
+  /* border: 1px solid black; */
+  display: flex;
+  gap: 1em;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 1em;
+}
+.card-list3::-webkit-scrollbar {
+  display: none;
+}
 .card {
   /* max-width: 300px;
   max-height: 300px; */
@@ -360,6 +383,7 @@ voyages
 }
 .card-voyage-a_partir {
   font-size: 1rem;
+  font-weight: 400;
 }
 
 .price {
@@ -495,14 +519,17 @@ voyages
 }
 
 @media screen and (min-width: 768px) {
-  .card-list {
+  .card-list,
+  .card-list2,
+  .card-list3 {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
   }
   .card {
     min-width: 300px;
     /* max-width: 400px; */
-    width: 100%;
+    /* width: 100%; */
+    max-width: 500px;
   }
   .card a {
     text-decoration: none;
@@ -516,7 +543,8 @@ voyages
     overflow: hidden;
   }
   .card-hotel {
-    max-width: 450px;
+    max-width: 500px;
+    width: 100%;
   }
   .card-header-info {
     display: flex;
@@ -750,9 +778,9 @@ Contact us
   cursor: pointer;
 }
 .contact-form textarea {
-  padding: 1.75em;
+  padding: 1em 1.75em;
   border: 1px solid #e0e0e0;
-  text-align: inherit;
+  /* text-align: inherit; */
 }
 .contact-form button:hover {
   background-color: var(--fourth-color);
@@ -775,9 +803,12 @@ Contact us
   }
   .contact-form textarea {
     grid-column: 1 / -1;
-    padding: 3.75em 1em;
+    padding: 0.75em 1em;
   }
   .contact-form button {
+    grid-column: 1 / -1;
+  }
+  .subject {
     grid-column: 1 / -1;
   }
 }
@@ -817,6 +848,15 @@ Program Page
   min-width: 100%;
   object-fit: cover;
 }
+.header-program-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  width: 100%;
+}
+.fa-map-marker-alt {
+  margin-right: 1em;
+}
 .program-details {
   padding: 0 1em;
 }
@@ -829,6 +869,10 @@ Program Page
 strong {
   font-weight: 800;
 }
+.periode {
+  font-size: 1.25rem;
+  color: #082e50;
+}
 
 .images {
   display: flex;
@@ -839,6 +883,76 @@ strong {
   width: 100%;
   object-fit: cover;
   max-height: 350px;
+}
+.tarifs {
+  margin-bottom: 2em;
+}
+.tarifs-services select {
+  padding: 0.5em 1.5em;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+}
+
+.tarifs-dates {
+  display: flex;
+  gap: 1.5em;
+  padding: 1em;
+  border: 1px solid #ccc;
+  align-items: flex-end;
+  border-bottom: 0;
+}
+.tarifs-dates input {
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.tarifs-services {
+  display: flex;
+
+  gap: 1em;
+  padding: 1em;
+  border: 1px solid #ccc;
+
+  flex-wrap: wrap;
+  align-items: flex-end;
+
+  border-top: 0;
+}
+.tarifs-services-voyage {
+  display: flex;
+
+  gap: 1em;
+  flex-direction: column;
+  align-items: start;
+
+  align-items: flex-start;
+}
+.tarifs-reserver {
+  display: flex;
+  margin-top: 1em;
+}
+.tarifs-reserver button {
+  padding: 1em 2em;
+  background-color: var(--blue-color);
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: auto;
+}
+.input-grp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.tarifs-price {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: auto;
 }
 
 .visa-form-container {
@@ -945,7 +1059,7 @@ FOOTER
 .footer {
   background-color: #333;
   color: #fff;
-  padding: 20px 0;
+  padding: 20px 2em;
 }
 
 .container {
