@@ -9,6 +9,7 @@ import Select from "@/components/ui/select";
 import { useSearchParams } from "next/navigation";
 import React from "react";
 import Footer from "@/components/ui/footer";
+import { Suspense } from "react";
 
 const options = { next: { revalidate: 60 } };
 
@@ -23,7 +24,7 @@ const POST_QUERY3 = (typeFilter: string, destinationFilter: string) =>
   ${destinationFilter ? `&& destination == "${destinationFilter}"` : ""}
   ]
 `);
-export default function Programmes() {
+function ProgramContent() {
   const searchParams = useSearchParams();
   const typeFilter = searchParams.get("Type") || "";
   const destinationFilter = searchParams.get("destination") || "";
@@ -69,6 +70,17 @@ export default function Programmes() {
           </div>
         </div>
       </div>
+      <Footer />
+    </>
+  );
+}
+export default function Programmes() {
+  return (
+    <>
+      <Header change={true} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ProgramContent />
+      </Suspense>
       <Footer />
     </>
   );

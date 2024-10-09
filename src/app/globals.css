@@ -269,7 +269,6 @@ img {
   padding: 0.25em 1em;
   background-color: transparent;
   color: white;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
