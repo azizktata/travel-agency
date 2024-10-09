@@ -1,20 +1,6 @@
 "use client";
 import React from "react";
 
-import { client } from "@/sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-
-const { projectId, dataset } = client.config();
-const urlFor = (source: SanityImageSource) =>
-  projectId && dataset
-    ? imageUrlBuilder({ projectId, dataset })
-        .image(source)
-        .width(1920)
-        .height(1080)
-        .quality(50)
-    : null;
 import { ReactNode } from "react";
 
 export default function Slider({
@@ -29,7 +15,7 @@ export default function Slider({
     const maxScrollLeft = cardList
       ? cardList.scrollWidth - cardList.clientWidth
       : 0;
-    // Add scroll event listener
+
     const handleScroll = () => {
       const prevButton = document.getElementById("prev-slide");
       const nextButton = document.getElementById("next-slide");
@@ -46,14 +32,14 @@ export default function Slider({
     return () => {
       cardList?.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [sliderClass]);
 
   return (
     <div className="voyage-container">
       <i
         id="prev-slide"
         className="fa-solid slide-button fa-lg fa-chevron-left"
-        onClick={(e) => {
+        onClick={() => {
           const cardList = document.querySelector(`.${sliderClass}`);
           cardList?.scrollBy({
             left: cardList.clientWidth * -1,

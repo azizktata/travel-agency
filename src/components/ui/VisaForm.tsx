@@ -40,7 +40,7 @@ export default function VisaForm({
     } else {
       throw new Error("Passport file is required.");
     }
-    let demande = offre
+    const demande = offre
       ? `Demande Visa: ${destination}, ${offre?.periode}`
       : `Demande Visa: ${destination}`;
 

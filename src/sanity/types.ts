@@ -398,7 +398,7 @@ export type PAGE__QUERYResult = {
 // Source: ../agence-voyage/src/app/page.tsx
 // Variable: PAGE_QUERY
 // Query: *[_type=="page"][0]{}
-export type PAGE_QUERYResult = {} | null;
+
 // Variable: POST_QUERY
 // Query: *[  _type == "post" && type == "voyage-organise"  ]
 export type POST_QUERYResult = Array<{
