@@ -1173,7 +1173,16 @@ List des Programmes
   color: rgba(250, 195, 44, 0.8);
   font-size: 1.5rem;
 }
+.select-container {
+  display: flex;
+  gap: 1em;
+}
+.select-container select {
+  padding: 0.5em 1em;
 
+  border-radius: 5px;
+  font-size: 1em;
+}
 /* ==================
 Visa Page
 =================*/

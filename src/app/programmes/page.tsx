@@ -52,7 +52,6 @@ function ProgramContent() {
 
   return (
     <>
-      <Header change={true} />
       <div className="list-main">
         <div className="list-container">
           <div className="accordion">
@@ -70,7 +69,6 @@ function ProgramContent() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

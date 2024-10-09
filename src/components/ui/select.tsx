@@ -39,7 +39,7 @@ export default function Select({
   }
   const currentType = searchParams.get("Type") || false;
   return (
-    <>
+    <div className="select-container">
       {type === "voyage" ? (
         <select onChange={handleChange} name="Type" className="filter-select">
           <option value={0}>tous les voyages</option>
@@ -79,6 +79,6 @@ export default function Select({
           </option>
         ))}
       </select>
-    </>
+    </div>
   );
 }

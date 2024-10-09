@@ -7,7 +7,7 @@ import Link from "next/link";
 import Card from "@/components/card";
 import Select from "@/components/ui/select";
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import Footer from "@/components/ui/footer";
 
 const options = { next: { revalidate: 60 } };
@@ -23,7 +23,7 @@ const POST_QUERY4 = (etoile: string, adresse: string) =>
   ${adresse ? `&& adresse == "${adresse}"` : ""}
   ]
 `);
-export default function Hotels() {
+function HotelsContent() {
   const searchParams = useSearchParams();
   const etoileFilter = searchParams.get("etoile") || "";
   const adresseFilter = searchParams.get("destination") || "";
@@ -51,7 +51,6 @@ export default function Hotels() {
 
   return (
     <>
-      <Header change={true} />
       <div className="list-main">
         <div className="list-container">
           <div className="accordion">
@@ -71,6 +70,17 @@ export default function Hotels() {
           </div>
         </div>
       </div>
+    </>
+  );
+}
+
+export default function Hotels() {
+  return (
+    <>
+      <Header change={true} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <HotelsContent />
+      </Suspense>
       <Footer />
     </>
   );
