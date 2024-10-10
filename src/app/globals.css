@@ -19,7 +19,7 @@ body {
   --dark-color: #131313;
 
   --blue-color: #0e61a9;
-  --red-color: #0e61a9;
+  --darker-blue-color: #0e61a9;
   /* --light-color: #81f3ff; */
   /* --green-color: #54ecc4; */
   --green-color: #54794c;
@@ -512,7 +512,7 @@ voyages
   color: #2771aa;
 }
 .prix-hotel {
-  color: var(--red-color);
+  color: var(--darker-blue-color);
   font-size: 1.125rem;
   margin: 0;
 }
@@ -648,8 +648,11 @@ About us
   .about-content p {
     margin: 0;
     letter-spacing: 1px;
-    font-size: 1.5em;
+    font-size: 1.25em;
     line-height: 1.6;
+  }
+  .about-content-txt {
+    font-size: 1.75em;
   }
   .about-numbers {
     margin-bottom: 2em;
@@ -844,7 +847,7 @@ Program Page
 }
 .header-program img {
   /* width: 100%; */
-  max-height: 400px;
+  max-height: 500px;
   min-width: 100%;
   object-fit: cover;
 }
@@ -853,6 +856,10 @@ Program Page
   justify-content: space-between;
   align-items: end;
   width: 100%;
+}
+.header-program-title h1 {
+  color: #184a70;
+  text-transform: uppercase;
 }
 .fa-map-marker-alt {
   margin-right: 1em;
@@ -870,8 +877,8 @@ strong {
   font-weight: 800;
 }
 .periode {
-  font-size: 1.25rem;
-  color: #082e50;
+  font-size: 1rem;
+  color: #1a4c72;
 }
 
 .images {
@@ -1048,14 +1055,6 @@ strong {
 FOOTER
 =================*/
 
-/* footer {
-  background-color: #333;
-  color: white;
-  padding: 1em;
-  text-align: center;
-}
-*/
-
 .footer {
   background-color: #333;
   color: #fff;
@@ -1112,6 +1111,7 @@ FOOTER
 }
 .social-icons i {
   color: white;
+  cursor: pointer;
 }
 
 .footer-bottom {

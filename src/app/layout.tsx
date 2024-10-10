@@ -4,6 +4,7 @@ import { rubik } from "@/components/ui/fonts";
 import { defineQuery } from "next-sanity";
 import { client } from "@/sanity/client";
 import { PageProvider } from "./context/PageContext";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Caprise",
@@ -28,6 +29,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${rubik.className}  antialiased`}>
+        <Toaster />
         <PageProvider page={page} contact={contact}>
           {children}
         </PageProvider>

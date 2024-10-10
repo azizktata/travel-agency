@@ -20,7 +20,7 @@ export default function TarifVoyage({
   });
 
   const handlePeriodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedValue = JSON.parse(e.target.value); // Parse the string back to an object
+    const selectedValue = JSON.parse(e.target.value);
 
     setSelectedPeriode({
       ...selectedPeriode,
@@ -41,12 +41,12 @@ export default function TarifVoyage({
                 <input
                   type="radio"
                   id={periode._key}
-                  name="periode" // Group the radio buttons
+                  name="periode"
                   value={JSON.stringify(periode)}
-                  onChange={handlePeriodeChange} // Handle change
+                  onChange={handlePeriodeChange}
                 />
                 <label htmlFor={periode._key}>
-                  <i className="fa-solid fa-money-check-dollar"></i>
+                  {/* <i className="fa-solid fa-money-check-dollar"></i> */}
                   <span className="periode"> {periode.periode} </span>{" "}
                 </label>
               </div>
@@ -67,12 +67,12 @@ export default function TarifVoyage({
       )}
       {visa == "visa-required" ? (
         <div style={isDisplayed} className="form-main">
-          <h4 className="form-title">Réservation</h4>
+          <h4 className="form-title">Formulaire de réservation</h4>
           <VisaForm destination={destination} offre={selectedPeriode} />
         </div>
       ) : (
         <div style={isDisplayed} className="form-main">
-          <h4 className="form-title">Réservation</h4>{" "}
+          <h4 className="form-title">Formulaire de réservation</h4>{" "}
           <ContactForm
             type="reservation_voyage"
             reservation_voyage={selectedPeriode}

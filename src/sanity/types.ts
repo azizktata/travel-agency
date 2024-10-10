@@ -220,6 +220,18 @@ export type Page = {
     _type: "teamBuilding";
   };
   about?: string;
+  aboutImg?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  emplacement?: string;
 };
 
 export type Post = {
@@ -393,6 +405,18 @@ export type PAGE_DEFAULT_QUERYResult = {
     _type: "teamBuilding";
   };
   about?: string;
+  aboutImg?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  emplacement?: string;
 } | null;
 
 // Source: ../agence-voyage/src/app/page.tsx

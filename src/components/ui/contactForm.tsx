@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import toast from "react-hot-toast";
 
 export default function ContactForm({
   type = "contact",
@@ -87,7 +88,9 @@ export default function ContactForm({
       });
       // const result = await res.json();
       if (res.ok) {
-        setStatus("Email sent successfully!");
+        toast.success("Email envoyé avec succès !", {
+          duration: 4000,
+        });
         setFormData({
           nom: "",
           prenom: "",
@@ -98,7 +101,7 @@ export default function ContactForm({
         });
       }
     } catch {
-      setStatus("Failed to send email.");
+      toast.error("Échec de l'envoi de l'e-mail.");
     } finally {
       setLoading(false);
     }
@@ -160,7 +163,7 @@ export default function ContactForm({
       <button disabled={laoding} type="submit" className="submit-btn">
         {laoding ? <span>loading..</span> : <span>Envoyer</span>}
       </button>
-      <p>{status}</p>
+      {/* <p>{status}</p> */}
     </form>
   );
 }

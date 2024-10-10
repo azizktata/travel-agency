@@ -58,7 +58,7 @@ export default async function ProgramPage({
       <Header change={true} />
       <div className="header-program">
         <div className="accordion">
-          <Link href="..">Acceuil /</Link> <Link href=".">Voyages /</Link>
+          <Link href="..">Accueil / </Link> <Link href=".">Voyages /</Link>
           <span> {destination} </span>
         </div>
         <div className="header-program-title">

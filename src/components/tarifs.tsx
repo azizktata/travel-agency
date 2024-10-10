@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import ContactForm from "./ui/contactForm";
+import { toast } from "react-hot-toast";
 
 export default function Tarifs({
   chambres,
@@ -37,6 +38,13 @@ export default function Tarifs({
     const arriveDate = new Date(reserve.arrive);
     const departDate = new Date(reserve.depart);
     const differenceInTime = departDate.getTime() - arriveDate.getTime();
+    if (differenceInTime < 0) {
+      toast.error(
+        "Choisissez une date de départ antérieure à la date d'arrivée."
+      );
+      return;
+    }
+
     const numberOfNights = differenceInTime / (1000 * 3600 * 24);
     const calculatedTotal =
       reserve.nombreChambres *
@@ -64,9 +72,8 @@ export default function Tarifs({
       }));
     }
 
-    // Handle typeChambre selection
     if (name === "typeChambre" && selectedOptions.length > 0) {
-      const selectedKey = selectedOptions[0].getAttribute("data-key"); // Change to selectedOptions[0]
+      const selectedKey = selectedOptions[0].getAttribute("data-key");
       setReserve((prevReserve) => ({
         ...prevReserve,
         chambre: selectedKey,
@@ -78,7 +85,7 @@ export default function Tarifs({
       <div className="tarifs">
         <div className="tarifs-dates">
           <div className="input-grp">
-            <label htmlFor="arrive">Arrivée</label>
+            <label htmlFor="arrive">Début</label>
             <input
               onChange={handleDateChange}
               type="date"
@@ -89,7 +96,7 @@ export default function Tarifs({
           </div>
 
           <div className="input-grp">
-            <label htmlFor="depart">Départ</label>
+            <label htmlFor="depart">Fin</label>
             <input
               onChange={handleDateChange}
               type="date"
@@ -141,11 +148,11 @@ export default function Tarifs({
           </p>
         </div>
         <div className="tarifs-reserver">
-          <button onClick={() => setShow((prev) => !prev)}>reserver</button>
+          <button onClick={() => setShow((prev) => !prev)}>réserver</button>
         </div>
       </div>
       <div style={isDisplayed} className="form-main">
-        <h4 className="form-title">Forme de réservation</h4>{" "}
+        <h4 className="form-title">Formulaire de réservation</h4>{" "}
         <ContactForm type="reservation_hotel" reservation={reserve} />
       </div>
     </>

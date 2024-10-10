@@ -55,7 +55,7 @@ function ProgramContent() {
       <div className="list-main">
         <div className="list-container">
           <div className="accordion">
-            <Link href={"."}>Accueil </Link> <span> / Voyages</span>
+            <Link href={"."}>Accueil /</Link> <span> Voyages</span>
           </div>
           <div className="filter-options">
             <Select type="voyage" options={destinations} />

@@ -20,7 +20,7 @@ export default async function Visas() {
         <div className="visa-header-main">
           <div className="visa-header">
             <div className="accordion">
-              <Link href="..">Acceuil / </Link>
+              <Link href="..">Accueil / </Link>
               <span> Visa </span>
             </div>
             <h3>Les different Types de Visas</h3>

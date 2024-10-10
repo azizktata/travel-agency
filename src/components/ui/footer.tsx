@@ -9,14 +9,17 @@ export default function Footer() {
     <footer className="footer">
       <div className="container">
         <div className="footer-section">
-          <h3>About Us</h3>
-          <p>Your travel partner in exploring the best destinations.</p>
+          <h3>Qui sommes-nous</h3>
+          <p>
+            Votre partenaire de voyage dans l'exploration des meilleures
+            destinations.
+          </p>
         </div>
         <div className="footer-section">
-          <h3>Quick Links</h3>
+          <h3>Liens</h3>
           <ul>
             <li>
-              <Link href=".">Home</Link>
+              <Link href=".">Accueil</Link>
             </li>
             <li>
               <a href="#about">About</a>
@@ -32,14 +35,14 @@ export default function Footer() {
         <div className="footer-section">
           {contact && (
             <>
-              <h3>Contact Us</h3>
-              <p>Email: {contact.email}</p>
-              <p>Phone: {contact.telephone}</p>
+              <h3>Contactez-nous</h3>
+              <p>mail: {contact.email}</p>
+              <p>télephone: {contact.telephone}</p>
             </>
           )}
         </div>
         <div className="footer-section">
-          <h3>Follow Us</h3>
+          <h3>Suivez-nous</h3>
           <div className="social-icons">
             <a target="_blank" href={contact.fb}>
               <i className="fa-brands fa-facebook"></i>

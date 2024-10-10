@@ -19,7 +19,9 @@ _type=="page"][0]{
   titre,
   description,
   team,
-  about
+  about,
+  aboutImg,
+  emplacement
 }`);
 
 const POST_QUERY = defineQuery(`*[
@@ -57,6 +59,7 @@ export default async function Home() {
   const teamImg = page?.team?.mainImage
     ? urlFor(page?.team?.mainImage)?.url()
     : null;
+  const aboutImg = page?.aboutImg ? urlFor(page?.aboutImg)?.url() : null;
 
   return (
     <main>
@@ -110,7 +113,8 @@ export default async function Home() {
         <div className="about">
           <h2>Team building</h2>
           <Image
-            src={teamImg || "/photo-grp.jpg"}
+            src={teamImg || "/team1.jpg"}
+            // src={"/team1.jpg"}
             alt="aboutus"
             width={300}
             height={200}
@@ -121,7 +125,7 @@ export default async function Home() {
               ? page?.team?.activites.map((activite: string) => (
                   <div key={activite} className="program-card">
                     <p>
-                      <i className="fa-solid fa-check"></i>
+                      {/* <i className="fa-solid fa-check"></i> */}
                       {activite}
                     </p>
                   </div>
@@ -133,7 +137,7 @@ export default async function Home() {
       <div id="about" className="about">
         <h2>Pourquoi nous choisir?</h2>
         <Image
-          src={"/photo-grp.jpg"}
+          src={aboutImg || "/photo-grp.jpg"}
           alt="aboutus"
           width={300}
           height={200}
@@ -141,7 +145,7 @@ export default async function Home() {
         />
         <div className="about-content">
           {page?.about ? (
-            page.about
+            <p className="about-content-txt">{page.about}</p>
           ) : (
             <p>
               Bienvenue chez Caprice Travel, votre compagnon de voyage dévoué
@@ -187,19 +191,20 @@ export default async function Home() {
         <h2>Contactez-nous</h2>
         <ContactForm />
       </div>
-
-      <div className="location">
-        <h2>Notre emplacement</h2>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3192.6780880772712!2d10.25781777568998!3d36.85018497223294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd4aaa7de67f05%3A0x2107db4dcf53251c!2s1%20Rue%20du%20lac%2C%20Tunis!5e0!3m2!1sfr!2stn!4v1728110669533!5m2!1sfr!2stn"
-          width="600"
-          height="450"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
+      {page?.emplacement && (
+        <div className="location">
+          <h2>Notre emplacement</h2>
+          <iframe
+            src={page?.emplacement}
+            width="600"
+            height="450"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      )}
 
       <Footer />
       {/* <Carousel */}

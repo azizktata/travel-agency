@@ -2,6 +2,7 @@
 
 import React from "react";
 import { client } from "@/sanity/client";
+import toast from "react-hot-toast";
 
 export default function VisaForm({
   destination = "",
@@ -68,19 +69,18 @@ export default function VisaForm({
       });
 
       if (res.ok) {
-        setStatus("Email sent successfully!");
-      }
+        toast.success("Email envoyé avec succès !");
 
-      setFormData({
-        nom: "",
-        prenom: "",
-        email: "",
-        telephone: "",
-        passport: null,
-      }); // Reset form
+        setFormData({
+          nom: "",
+          prenom: "",
+          email: "",
+          telephone: "",
+          passport: null,
+        }); // Reset form
+      }
     } catch {
-      // console.error("Error submitting form:", error);
-      setStatus("Failed to send email.");
+      toast.error("Échec de l'envoi de l'e-mail.");
     } finally {
       setLoading(false);
     }
@@ -134,7 +134,6 @@ export default function VisaForm({
       <button disabled={laoding} type="submit" className="order-visa-btn">
         {laoding ? <span>loading...</span> : <span>Envoyer</span>}
       </button>
-      <p> {status} </p>
     </form>
   );
 }
