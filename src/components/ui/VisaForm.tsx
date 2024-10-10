@@ -18,7 +18,6 @@ export default function VisaForm({
     telephone: "",
     passport: null,
   });
-  const [status, setStatus] = React.useState("");
   const [laoding, setLoading] = React.useState(false);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -28,26 +28,6 @@ export default function ContactForm({
     subject: "",
     message: "",
   });
-  const [status, setStatus] = React.useState("");
-
-  // React.useEffect(() => {
-  //   if (type === "reservation_hotel") {
-  //     const reservationMessage = `J'aime bien réserver ${reservation?.nombreChambres} chambre(s) du ${reservation?.arrive} au ${reservation?.depart} dans ${reservation.hotel}, comprenant une chambre de type ${reservation?.chambre} avec le service ${reservation?.serviceName}. `;
-  //     setFormData({
-  //       ...formData,
-  //       subject: `Demande Réservation ${reservation.hotel}`,
-  //       message: reservationMessage,
-  //     });
-  //   }
-  //   if (type === "reservation_voyage") {
-  //     const reservationMessage = `J'aime bien réserver au voyage ${reservation_voyage?.destination}, avec l'offre ${reservation_voyage?.periode} `;
-  //     setFormData({
-  //       ...formData,
-  //       subject: `Demande Réservation au voyage "${reservation_voyage.destination}"`,
-  //       message: reservationMessage,
-  //     });
-  //   }
-  // }, [reservation, reservation_voyage]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function handleChange(e: any) {
@@ -163,7 +143,6 @@ export default function ContactForm({
       <button disabled={laoding} type="submit" className="submit-btn">
         {laoding ? <span>loading..</span> : <span>Envoyer</span>}
       </button>
-      {/* <p>{status}</p> */}
     </form>
   );
 }

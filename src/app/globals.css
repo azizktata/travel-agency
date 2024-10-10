@@ -136,7 +136,7 @@ nav a:hover {
     background-color: #0a0a0a;
     color: white;
     transform: translateX(0);
-    width: 55%;
+    width: 80%;
     padding: 1em;
     transition: transform 0.3s ease-in-out;
   }
@@ -747,7 +747,7 @@ Our Program
 Contact us
 ================= */
 .contact {
-  padding: 2em 7em;
+  padding: 2em 4em;
   margin-bottom: 5em;
   background-color: var(--grey-color);
 }

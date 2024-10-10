@@ -63,10 +63,12 @@ export default async function ProgramPage({
         </div>
         <div className="header-program-title">
           <h1>{destination}</h1>
-          <p className="price">
-            <span className="card-voyage-a_partir">à partir de </span>
-            {prix}
-            <span className="DT"> TND</span>
+          <p className="card-prix-voyage">
+            <span className="card-voyage-a_partir">à partir de</span>
+            <span>
+              <span className="price"> {prix}</span>{" "}
+              <span className="DT"> DT</span>{" "}
+            </span>
           </p>
         </div>
         <p>{titre}</p>
