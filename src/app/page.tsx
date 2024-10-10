@@ -33,7 +33,7 @@ const POST_CART_QUERY = defineQuery(`*[
 
 const POST_3_QUERY = defineQuery(`*[
     _type == "post"
-  ] | order(_createdAt desc)[0...3]`);
+  ] | order(_updatedAt desc)[0...3]`);
 
 const HOTEL_QUERY = defineQuery(`*[
   _type == "hotel"
