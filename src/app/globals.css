@@ -912,6 +912,7 @@ strong {
 
 .tarifs-dates {
   display: flex;
+  flex-wrap: wrap;
   gap: 1em;
   padding: 1em;
   border: 1px solid #ccc;
@@ -1060,6 +1061,8 @@ strong {
     grid-column: 1 / -1;
   }
 }
+@media screen and (min-width: 850px) {
+}
 
 /* ==============
 FOOTER
@@ -1139,7 +1142,7 @@ List des Programmes
   min-height: 100vh;
 }
 .list-container {
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -1173,7 +1176,7 @@ List des Programmes
 .elements-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  min-height: 100%;
+  /* height: 100%; */
   gap: 1.5em;
   align-items: start;
 }
@@ -1183,15 +1186,18 @@ List des Programmes
 }
 .select-container {
   display: flex;
-  gap: 1em;
+  gap: 0.5em;
 }
 .select-container select {
-  padding: 0.5em 1em;
+  padding: 0.5em 0.75em;
 
   border-radius: 5px;
-  /* font-size: 0.75rem; */
+  font-size: 0.75rem;
 }
 @media screen and (min-width: 768px) {
+  .list-container {
+    width: 90%;
+  }
   .select-container select {
     font-size: 0.9rem;
     /* padding: 0 1; */
@@ -1216,7 +1222,7 @@ Visa Page
   display: flex;
   flex-direction: column;
   gap: 1em;
-  padding: 2em 7em;
+  padding: 2em 3em;
 }
 .visa-header-main {
   background-color: var(--grey-color);
@@ -1224,7 +1230,7 @@ Visa Page
   padding: 1.5em 0;
 }
 .visa-header {
-  margin: 2em 7em;
+  margin: 2em 3em;
   border-bottom: 1px solid #ccc;
 }
 
@@ -1237,4 +1243,12 @@ Visa Page
 }
 .visa-content p {
   color: #333333;
+}
+@media screen and (min-width: 768px) {
+  .visa-content {
+    padding: 2em 7em;
+  }
+  .visa-header {
+    margin: 2em 7em;
+  }
 }
