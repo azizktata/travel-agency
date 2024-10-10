@@ -381,7 +381,7 @@ voyages
   overflow: hidden;
 }
 .card-voyage-a_partir {
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-weight: 400;
 }
 
@@ -477,7 +477,13 @@ voyages
 .card-prix-voyage {
   display: flex;
   flex-direction: column;
+  align-items: center;
   font-size: 1.5rem;
+}
+.card-prix-voyage span {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
 }
 .card-hotel {
   border-radius: 5px;
@@ -566,6 +572,9 @@ voyages
 
   .slide-button#next-slide {
     right: -50px;
+  }
+  .card-voyage-a_partir {
+    font-size: 1rem;
   }
 }
 
@@ -885,6 +894,7 @@ strong {
   display: flex;
   flex-direction: column;
   gap: 1em;
+  margin-bottom: 1em;
 }
 .images img {
   width: 100%;
@@ -895,14 +905,14 @@ strong {
   margin-bottom: 2em;
 }
 .tarifs-services select {
-  padding: 0.5em 1.5em;
+  padding: 0.5em 1em;
   font-size: 1rem;
   border: 1px solid #ccc;
 }
 
 .tarifs-dates {
   display: flex;
-  gap: 1.5em;
+  gap: 1em;
   padding: 1em;
   border: 1px solid #ccc;
   align-items: flex-end;
@@ -1126,6 +1136,7 @@ List des Programmes
   width: 100%;
   background-color: var(--primary-color);
   padding: 1em;
+  min-height: 100vh;
 }
 .list-container {
   width: 90%;
@@ -1148,25 +1159,21 @@ List des Programmes
 .accordion {
   display: flex;
 }
-.filter-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 .filter-options {
   display: flex;
-  align-items: center;
+
+  flex-direction: column;
   gap: 1em;
+  align-items: start;
 }
-.filter-options select {
-  padding: 0.5em 1em;
-  font-family: "Ubuntu", sans-serif;
-  font-size: 0.75em;
-}
+/* .filter-options {
+  display: flex;
+  align-items: center;
+} */
 .elements-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  min-height: 100vh;
+  min-height: 100%;
   gap: 1.5em;
   align-items: start;
 }
@@ -1182,7 +1189,18 @@ List des Programmes
   padding: 0.5em 1em;
 
   border-radius: 5px;
-  font-size: 1em;
+  /* font-size: 0.75rem; */
+}
+@media screen and (min-width: 768px) {
+  .select-container select {
+    font-size: 0.9rem;
+    /* padding: 0 1; */
+  }
+  .filter-options {
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: space-between; */
+  }
 }
 /* ==================
 Visa Page

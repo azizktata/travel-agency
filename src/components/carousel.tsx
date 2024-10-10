@@ -9,13 +9,15 @@ import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 const { projectId, dataset } = client.config();
-const urlFor = (source: SanityImageSource) =>
+const urlFor = (source: SanityImageSource, width = 1920, height = 1080) =>
   projectId && dataset
     ? imageUrlBuilder({ projectId, dataset })
         .image(source)
-        .width(1920)
-        .height(1080)
-        .quality(100)
+        .width(width)
+        .height(height)
+        .quality(80)
+        .format("webp")
+        .auto("format")
     : null;
 
 interface CarouselProps {
@@ -43,6 +45,7 @@ export default function Carousel({
   const pageImg = carousel[counter]?.mainImage
     ? urlFor(carousel[counter]?.mainImage)?.url()
     : null;
+
   return (
     <>
       <Image

@@ -47,6 +47,8 @@ const urlFor = (source: SanityImageSource) =>
         .width(1920)
         .height(1080)
         .quality(80)
+        .format("webp")
+        .auto("format")
     : null;
 
 export default async function Home() {
@@ -137,7 +139,7 @@ export default async function Home() {
       <div id="about" className="about">
         <h2>Pourquoi nous choisir?</h2>
         <Image
-          src={aboutImg || "/photo-grp.jpg"}
+          src={aboutImg || "/photo-grp.webp"}
           alt="aboutus"
           width={300}
           height={200}
