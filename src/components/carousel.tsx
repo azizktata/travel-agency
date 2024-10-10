@@ -36,7 +36,7 @@ export default function Carousel({
       setCounter((counter) =>
         counter + 1 >= carousel.length ? 0 : counter + 1
       );
-    }, 3000);
+    }, 4000);
     return () => clearInterval(intervalId);
   }, [carousel.length]);
 

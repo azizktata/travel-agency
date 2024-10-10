@@ -112,10 +112,7 @@ export default async function ProgramPage({
             <div className="Activités">
               <h1>Activités</h1>
               {activites.map((service) => (
-                <p key={service}>
-                  <i className="fa-solid fa-check"></i>
-                  {service}
-                </p>
+                <p key={service}>{service}</p>
               ))}
             </div>
           )}
