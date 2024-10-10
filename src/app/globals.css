@@ -966,6 +966,9 @@ strong {
   flex-direction: column;
   gap: 0.5em;
 }
+.input-grp select {
+  color: #000;
+}
 .tarifs-price {
   margin: 0;
   font-size: 1.5rem;
@@ -1190,16 +1193,16 @@ List des Programmes
 }
 .select-container select {
   padding: 0.5em 0.75em;
-
+  color: #000;
   border-radius: 5px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
 }
 @media screen and (min-width: 768px) {
   .list-container {
     width: 90%;
   }
   .select-container select {
-    font-size: 0.9rem;
+    font-size: 1rem;
     /* padding: 0 1; */
   }
   .filter-options {
