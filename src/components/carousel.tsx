@@ -53,8 +53,8 @@ export default function Carousel({
         alt="hero"
         fill
         style={{ objectFit: "cover" }}
+        priority
         loading="eager"
-        quality={100}
       />
       <div className="carousel-content">
         {carousel[counter]?.destination ? (
