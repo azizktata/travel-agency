@@ -7,10 +7,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { defineQuery } from "next-sanity";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+
 import Footer from "@/components/ui/footer";
 import Header from "@/components/ui/header";
 import TarifVoyage from "@/components/tarifVoyage";
+import {
+  CheckIcon,
+  ExclamationTriangleIcon,
+  HomeIcon,
+} from "@radix-ui/react-icons";
 
 const options = { next: { revalidate: 60 } };
 
@@ -26,6 +31,8 @@ const urlFor = (source: SanityImageSource) =>
         .width(1920)
         .height(1080)
         .quality(80)
+        .format("webp")
+        .auto("format")
     : null;
 export default async function ProgramPage({
   params,
@@ -121,8 +128,10 @@ export default async function ProgramPage({
             <div className="services-inclus">
               <h1>Service Inclus</h1>
               {serviceInclus.map((service) => (
-                <p key={service}>
-                  <i className="fa-solid fa-check"></i>
+                <p className="icon-text" key={service}>
+                  <CheckIcon
+                    style={{ color: "green", width: "20px", height: "20px" }}
+                  />
                   {service}
                 </p>
               ))}
@@ -132,8 +141,11 @@ export default async function ProgramPage({
             <div className="services-noninclus">
               <h1>Service Non Inclus</h1>
               {serviceNonInclus.map((service) => (
-                <p key={service}>
-                  <i className="fa-solid fa-exclamation"></i> {service}
+                <p className="icon-text" key={service}>
+                  <ExclamationTriangleIcon
+                    style={{ color: "orange", width: "16px", height: "16px" }}
+                  />{" "}
+                  {service}
                 </p>
               ))}
             </div>
@@ -144,8 +156,8 @@ export default async function ProgramPage({
               <h1>Hotels</h1>
 
               {hotels.map((hotel) => (
-                <p key={hotel._key}>
-                  <i className="fa-solid fa-hotel"></i>
+                <p className="icon-text" key={hotel._key}>
+                  <HomeIcon style={{ width: "18px", height: "18px" }} />
                   {hotel.hotel} : {hotel.prix}dt (adulte par nuit)
                 </p>
               ))}

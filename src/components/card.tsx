@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
-
+import { SewingPinIcon } from "@radix-ui/react-icons";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 const { projectId, dataset } = client.config();
@@ -17,12 +17,18 @@ const urlFor = (source: SanityImageSource) =>
         .quality(50)
     : null;
 
-interface CardProps {
-  type?: "voyage" | "hotel";
-  post: any;
-}
+// interface CardProps {
+//   type?: "voyage" | "hotel";
+//   post: any;
+// }
 
-export default function Card({ type = "voyage", post }: CardProps) {
+export default function Card({
+  type = "voyage",
+  post,
+}: {
+  type: string;
+  post: any;
+}) {
   if (type == "voyage") {
     return (
       <div className="card ">
@@ -80,7 +86,10 @@ export default function Card({ type = "voyage", post }: CardProps) {
                 <p>{post?.etoile && "⭐".repeat(post?.etoile)}</p>
               </div>
               <p className="adress">
-                <i className="fa-solid fa-location-dot"></i>
+                {/* <i className="fa-solid fa-location-dot"></i> */}
+                <SewingPinIcon
+                  style={{ color: "#0e61a9", width: "16px", height: "16px" }}
+                />
                 {post?.adresse}
               </p>
 

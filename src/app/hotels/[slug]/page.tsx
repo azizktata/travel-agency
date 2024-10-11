@@ -7,11 +7,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { defineQuery } from "next-sanity";
-import "@fortawesome/fontawesome-free/css/all.min.css";
 import { PortableText } from "@portabletext/react";
 import Footer from "@/components/ui/footer";
 import Header from "@/components/ui/header";
 import Tarifs from "@/components/tarifs";
+import { SewingPinIcon } from "@radix-ui/react-icons";
 
 const options = { next: { revalidate: 60 } };
 
@@ -27,6 +27,8 @@ const urlFor = (source: SanityImageSource) =>
         .width(1920)
         .height(1080)
         .quality(80)
+        .format("webp")
+        .auto("format")
     : null;
 export default async function HotelPage({
   params,
@@ -71,7 +73,9 @@ export default async function HotelPage({
         </div>
         {adresse && (
           <p className="program-description">
-            <i className="fa-solid fa-map-marker-alt"></i>
+            <SewingPinIcon
+              style={{ color: "#0e61a9", width: "20px", height: "20px" }}
+            />
             {adresse}
           </p>
         )}

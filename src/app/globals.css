@@ -90,17 +90,18 @@ nav a:hover {
   color: #c2c2c2;
 }
 .callus-btn {
-  display: inline-block;
+  display: flex;
   padding: 0.75em 1.75em;
   border: 0;
   background-color: var(--blue-color);
   color: white;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
   align-self: center;
 }
+
 .callus-btn:hover {
   background-color: var(--secondary-color);
 }
@@ -889,7 +890,11 @@ strong {
   font-size: 1rem;
   color: #1a4c72;
 }
-
+.icon-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
 .images {
   display: flex;
   flex-direction: column;
@@ -1193,6 +1198,13 @@ List des Programmes
 .select-container {
   display: flex;
   gap: 0.5em;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.select-container div {
+  display: flex;
+  gap: 0.5em;
+  /* align-items: center; */
 }
 .select-container select {
   padding: 0.5em 0.75em;
@@ -1257,5 +1269,31 @@ Visa Page
   }
   .visa-header {
     margin: 2em 7em;
+  }
+}
+
+.loading {
+  text-align: center;
+}
+.program-description {
+  display: flex;
+}
+.loading {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3; /* Light gray background */
+  border-top: 5px solid #3498db; /* Light blue color */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: auto;
+  margin-top: 14em;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

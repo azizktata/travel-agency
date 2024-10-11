@@ -15,7 +15,7 @@ const urlFor = (source: SanityImageSource, width = 1920, height = 1080) =>
         .image(source)
         .width(width)
         .height(height)
-        .quality(50)
+        .quality(55)
         .format("webp")
         .auto("format")
     : null;

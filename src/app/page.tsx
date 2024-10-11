@@ -1,7 +1,6 @@
 import Header from "@/components/ui/header";
 import Image from "next/image";
 
-import "@fortawesome/fontawesome-free/css/all.min.css";
 import Footer from "@/components/ui/footer";
 import { client } from "@/sanity/client";
 import { defineQuery } from "next-sanity";
@@ -80,7 +79,7 @@ export default async function Home() {
             <h2>Voyages organisés</h2>
             <Slider sliderClass="card-list">
               {posts_org?.map((post: any, index: number) => (
-                <Card post={post} key={index} />
+                <Card type="voyage" post={post} key={index} />
               ))}
             </Slider>
           </div>
@@ -92,7 +91,7 @@ export default async function Home() {
             <h2>Voyages a la carte</h2>
             <Slider sliderClass="card-list2">
               {posts_cart?.map((post: any, index: number) => (
-                <Card post={post} key={index} />
+                <Card type="voyage" post={post} key={index} />
               ))}
             </Slider>
           </div>
@@ -126,10 +125,7 @@ export default async function Home() {
             {page?.team?.activites
               ? page?.team?.activites.map((activite: string) => (
                   <div key={activite} className="program-card">
-                    <p>
-                      {/* <i className="fa-solid fa-check"></i> */}
-                      {activite}
-                    </p>
+                    <p>{activite}</p>
                   </div>
                 ))
               : null}{" "}
