@@ -2,10 +2,11 @@ import Header from "@/components/ui/header";
 import { client } from "@/sanity/client";
 import Link from "next/link";
 import Select from "@/components/ui/select";
-import React from "react";
+import React, { Suspense } from "react";
 import Footer from "@/components/ui/footer";
 import { defineQuery } from "next-sanity";
 import Elements from "@/components/elements";
+import Loading from "@/components/loading";
 
 const DEST_QUERY = defineQuery(`*[
   _type == "post"
@@ -28,10 +29,14 @@ export default async function Programmes() {
             <Link href={"."}>Accueil /</Link> <span> Voyages</span>
           </div>
           <div className="filter-options">
-            <Select type="voyage" options={destinations} />
+            <Suspense>
+              <Select type="voyage" options={destinations} />
+            </Suspense>
           </div>
           <div className="elements-list">
-            <Elements />
+            <Suspense fallback={<Loading />}>
+              <Elements />
+            </Suspense>
           </div>
         </div>
       </div>

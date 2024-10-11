@@ -2,10 +2,11 @@ import Header from "@/components/ui/header";
 import { client } from "@/sanity/client";
 import Link from "next/link";
 import Select from "@/components/ui/select";
-import React from "react";
+import React, { Suspense } from "react";
 import Footer from "@/components/ui/footer";
 import { defineQuery } from "next-sanity";
 import Elements from "@/components/elements";
+import Loading from "@/components/loading";
 
 const DEST_QUERY = defineQuery(`*[
   _type == "hotel"
@@ -27,10 +28,14 @@ export default async function Hotels() {
             <Link href={"."}>Accueil /</Link> <span> Hotels</span>
           </div>
           <div className="filter-options">
-            <Select type="hotel" options={destinations} />
+            <Suspense>
+              <Select type="hotel" options={destinations} />
+            </Suspense>
           </div>
           <div className="elements-list">
-            <Elements type="hotel" />
+            <Suspense fallback={<Loading />}>
+              <Elements type="hotel" />
+            </Suspense>
           </div>
         </div>
       </div>
