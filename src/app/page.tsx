@@ -119,6 +119,7 @@ export default async function Home() {
             alt="aboutus"
             width={300}
             height={200}
+            loading="lazy"
             style={{ width: "100%", height: "auto", objectFit: "cover" }}
           />
           <div className="about-content">
@@ -139,6 +140,7 @@ export default async function Home() {
           alt="aboutus"
           width={300}
           height={200}
+          loading="lazy"
           style={{ width: "100%", height: "auto", objectFit: "cover" }}
         />
         <div className="about-content">
@@ -205,7 +207,6 @@ export default async function Home() {
       )}
 
       <Footer />
-      {/* <Carousel */}
     </main>
   );
 }

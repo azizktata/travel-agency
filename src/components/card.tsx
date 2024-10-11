@@ -42,6 +42,7 @@ export default function Card({
             alt="destination-2"
             width={400}
             height={450}
+            loading="lazy"
             style={{ width: "100%", height: "auto", objectFit: "cover" }}
           />
           {post?.destination && (
@@ -78,6 +79,7 @@ export default function Card({
             style={{ width: "100%", height: "auto", objectFit: "cover" }}
             width={300}
             height={250}
+            loading="lazy"
           />
           {post?.nom && (
             <div className="card-hotel-info">
@@ -110,13 +112,3 @@ export default function Card({
     );
   }
 }
-// {post?.periodes
-//   ? post?.periodes?.map((p) => {
-//       const { periode, tarif } = p;
-//       return (
-//         <p className="tarif">
-//           {periode} : {tarif}dt
-//         </p>
-//       );
-//     })
-//   : null}
