@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import imageUrlBuilder from "@sanity/image-url";
 
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
@@ -16,6 +16,7 @@ import {
   ExclamationTriangleIcon,
   HomeIcon,
 } from "@radix-ui/react-icons";
+import Loading from "@/components/loading";
 
 const options = { next: { revalidate: 60 } };
 
@@ -79,18 +80,19 @@ export default async function ProgramPage({
           </p>
         </div>
         <p>{titre}</p>
-
-        <Image
-          src={
-            mainImage
-              ? urlFor(mainImage)?.url() || "/maldive.webp"
-              : "/maldive.webp"
-          }
-          alt="destination-2"
-          style={{ width: "100%", height: "auto", objectFit: "cover" }}
-          width={400}
-          height={450}
-        />
+        <Suspense fallback={<Loading />}>
+          <Image
+            src={
+              mainImage
+                ? urlFor(mainImage)?.url() || "/maldive.webp"
+                : "/maldive.webp"
+            }
+            alt="destination-2"
+            style={{ width: "100%", height: "auto", objectFit: "cover" }}
+            width={400}
+            height={450}
+          />
+        </Suspense>
       </div>
 
       <div className="program-details-main">
@@ -170,18 +172,24 @@ export default async function ProgramPage({
           />
         </div>
         <div className="images">
-          {listImage
-            ? listImage.map((image) => (
-                <Image
-                  key={image._key}
-                  src={urlFor(image)?.url() || "/maldive.jpg"}
-                  alt="destination-2"
-                  style={{ width: "100%", height: "auto", objectFit: "cover" }}
-                  width={400}
-                  height={450}
-                />
-              ))
-            : null}
+          <Suspense fallback={<Loading />}>
+            {listImage
+              ? listImage.map((image) => (
+                  <Image
+                    key={image._key}
+                    src={urlFor(image)?.url() || "/maldive.jpg"}
+                    alt="destination-2"
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      objectFit: "cover",
+                    }}
+                    width={400}
+                    height={450}
+                  />
+                ))
+              : null}
+          </Suspense>
         </div>
       </div>
       <Footer />
