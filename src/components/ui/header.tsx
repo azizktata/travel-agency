@@ -1,5 +1,5 @@
 "use client";
-import clsx from "clsx";
+
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
@@ -34,9 +34,7 @@ export default function Header({ change = false }) {
               <Link
                 style={blackStyle}
                 href="/programmes"
-                className={clsx({
-                  isActive: pathname === "/programmes",
-                })}
+                className={pathname === "/programmes" ? "isActive" : ""}
               >
                 Programmes
               </Link>
@@ -55,9 +53,7 @@ export default function Header({ change = false }) {
               <Link
                 style={blackStyle}
                 href="/hotels"
-                className={clsx({
-                  isActive: pathname === "/hotels",
-                })}
+                className={pathname === "/hotels" ? "isActive" : ""}
               >
                 Hotels
               </Link>
@@ -66,9 +62,7 @@ export default function Header({ change = false }) {
               <Link
                 style={blackStyle}
                 href="/visa"
-                className={clsx({
-                  isActive: pathname === "/visa",
-                })}
+                className={pathname === "/visa" ? "isActive" : ""}
               >
                 Visa
               </Link>

@@ -58,7 +58,7 @@ export default function Elements({ type = "voyage" }) {
       }
     }
     fetchData();
-  }, [typeFilter, destinationFilter]);
+  }, [typeFilter, destinationFilter, type]);
 
   if (loading) {
     return <Loading />;

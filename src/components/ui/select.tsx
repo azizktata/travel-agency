@@ -85,7 +85,7 @@ export default function Select({
       setLength(postsLength);
     }
     fetchData();
-  }, [typeFilter, destinationFilter]);
+  }, [typeFilter, destinationFilter, type]);
 
   return (
     <div className="select-container">
