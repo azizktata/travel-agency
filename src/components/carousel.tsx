@@ -7,6 +7,7 @@ import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { Post } from "@/sanity/types";
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource, width = 1920, height = 1080) =>
@@ -21,10 +22,8 @@ const urlFor = (source: SanityImageSource, width = 1920, height = 1080) =>
     : null;
 
 interface CarouselProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  carousel: any[];
+  carousel: Post[];
   titre?: string;
-  description?: string;
 }
 
 export default function Carousel({

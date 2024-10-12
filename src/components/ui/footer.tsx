@@ -36,7 +36,7 @@ export default function Footer() {
           {contact && (
             <>
               <h3>Contactez-nous</h3>
-              <p>mail: {contact.email}</p>
+              <p>E-mail: {contact.email}</p>
               <p>télephone: {contact.telephone}</p>
             </>
           )}
@@ -57,20 +57,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
-
-{
-  /* // <footer>
-    //   <div className="socials">
-    //     {contact?.fb && (
-    //       <a target="_blank" href={contact.fb}>
-    //         <i className="fa-brands fa-facebook"></i>
-    //       </a>
-    //     )}
-    //     {contact?.instagram && <i className="fa-brands fa-instagram"></i>}
-    //   </div>
-    //   <p>
-    //     {page?.logoName} | {contact?.email}
-    //   </p>
-    // </footer> */
 }

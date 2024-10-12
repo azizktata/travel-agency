@@ -10,6 +10,7 @@ import Carousel from "@/components/carousel";
 import Slider from "@/components/slider";
 import Card from "@/components/card";
 import ContactForm from "@/components/ui/contactForm";
+import { Hotel, Post } from "@/sanity/types";
 
 const options = { next: { revalidate: 60 } };
 
@@ -66,11 +67,7 @@ export default async function Home() {
     <main>
       <div className="carousel">
         <Header />
-        <Carousel
-          carousel={posts || []}
-          titre={page?.titre ?? undefined}
-          description={page?.description ?? undefined}
-        />
+        <Carousel carousel={posts || []} titre={page?.titre ?? undefined} />
       </div>
 
       {posts_org?.length > 0 ? (
@@ -78,7 +75,7 @@ export default async function Home() {
           <div className="voyages organise">
             <h2>Voyages organisés</h2>
             <Slider sliderClass="card-list">
-              {posts_org?.map((post: any, index: number) => (
+              {posts_org?.map((post: Post, index: number) => (
                 <Card type="voyage" post={post} key={index} />
               ))}
             </Slider>
@@ -90,7 +87,7 @@ export default async function Home() {
           <div className="voyages">
             <h2>Voyages a la carte</h2>
             <Slider sliderClass="card-list2">
-              {posts_cart?.map((post: any, index: number) => (
+              {posts_cart?.map((post: Post, index: number) => (
                 <Card type="voyage" post={post} key={index} />
               ))}
             </Slider>
@@ -102,7 +99,7 @@ export default async function Home() {
           <div className="voyages hotels">
             <h2>Les Hotels</h2>
             <Slider sliderClass="card-list3">
-              {hotels?.map((hotel: any, index: number) => (
+              {hotels?.map((hotel: Hotel, index: number) => (
                 <Card post={hotel} key={index} type="hotel" />
               ))}
             </Slider>
@@ -116,13 +113,13 @@ export default async function Home() {
           <Image
             src={teamImg || "/team1.jpg"}
             // src={"/team1.jpg"}
-            alt="aboutus"
+            alt="team building"
             width={300}
             height={200}
             loading="lazy"
             style={{ width: "100%", height: "auto", objectFit: "cover" }}
           />
-          <div className="about-content">
+          <div className="about-content-activities">
             {page?.team?.activites
               ? page?.team?.activites.map((activite: string) => (
                   <div key={activite} className="program-card">

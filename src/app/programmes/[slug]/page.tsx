@@ -165,11 +165,13 @@ export default async function ProgramPage({
               ))}
             </div>
           )}
-          <TarifVoyage
-            periodes={periodes}
-            visa={visa}
-            destination={destination}
-          />
+          {periodes && (
+            <TarifVoyage
+              periodes={periodes}
+              visa={visa || "visa-non-required"}
+              destination={destination || ""}
+            />
+          )}
         </div>
         <div className="images">
           <Suspense fallback={<Loading />}>

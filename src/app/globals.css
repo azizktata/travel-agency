@@ -558,7 +558,7 @@ voyages
     position: absolute;
     font-size: 2rem;
     cursor: pointer;
-    color: #c9c9c9;
+    color: #a0a0a0;
     top: 50%;
     transform: translateY(-50%);
     display: block !important;
@@ -651,6 +651,14 @@ About us
     justify-content: space-around;
     align-self: stretch;
     margin-left: 2em;
+  }
+  .about-content-activities {
+    grid-column: 2 / -1;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.25em;
+    align-self: center;
+    line-height: 1.6;
   }
   .about-content p {
     margin: 0;
@@ -1094,6 +1102,7 @@ FOOTER
   flex: 1;
   min-width: 200px;
   margin: 10px;
+  font-size: 0.75rem;
 }
 
 .footer-section h3 {
@@ -1138,7 +1147,7 @@ FOOTER
 .footer-bottom {
   text-align: center;
   margin-top: 20px;
-  font-size: 14px;
+  font-size: 0.75rem;
 }
 /* ================
 List des Programmes

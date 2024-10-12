@@ -4,12 +4,18 @@ import React from "react";
 import { client } from "@/sanity/client";
 import toast from "react-hot-toast";
 
+interface Offre {
+  periode: string;
+  prix: string;
+  destination: string;
+}
+
 export default function VisaForm({
   destination = "",
-  offre = {},
+  offre,
 }: {
   destination: string;
-  offre: any;
+  offre: Offre;
 }) {
   const [formData, setFormData] = React.useState({
     nom: "",

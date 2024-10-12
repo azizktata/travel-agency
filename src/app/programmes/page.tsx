@@ -35,7 +35,7 @@ export default async function Programmes() {
           </div>
           <div className="elements-list">
             <Suspense fallback={<Loading />}>
-              <Elements />
+              <Elements type="voyage" />
             </Suspense>
           </div>
         </div>

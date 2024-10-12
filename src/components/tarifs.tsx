@@ -3,14 +3,24 @@ import React from "react";
 import ContactForm from "./ui/contactForm";
 import { toast } from "react-hot-toast";
 
+interface Chambre {
+  chambre?: string;
+  prix?: number;
+  _key: string;
+}
+interface Service {
+  service?: string;
+  prix?: number;
+  _key: string;
+}
 export default function Tarifs({
   chambres,
   services,
   hotel = "",
   prix,
 }: {
-  chambres: any;
-  services: any;
+  chambres: Chambre[];
+  services: Service[];
   hotel: string;
   prix: number;
 }) {
@@ -23,9 +33,9 @@ export default function Tarifs({
     arrive: today.toISOString().split("T")[0],
     depart: tomorrow.toISOString().split("T")[0],
     nombreChambres: 1,
-    typeChambre: chambres?.[0]?.prix || prix,
+    typeChambre: +(chambres?.[0]?.prix ?? 0) || prix,
     chambre: chambres?.[0]?.chambre || "",
-    service: +services?.[0]?.prix || 0,
+    service: +(services?.[0]?.prix ?? 0),
     serviceName: services?.[0]?.service || "",
     total: 0,
   });
@@ -33,7 +43,7 @@ export default function Tarifs({
   const [total, setTotal] = React.useState(0);
   const [show, setShow] = React.useState(false);
   const isDisplayed = show ? { display: "none" } : { display: "block" };
-  // Update total when reserve state changes
+
   React.useEffect(() => {
     const arriveDate = new Date(reserve.arrive);
     const departDate = new Date(reserve.depart);

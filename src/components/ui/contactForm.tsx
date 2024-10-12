@@ -9,7 +9,7 @@ export default function ContactForm({
     arrive: "",
     depart: "",
     nombreChambres: 0,
-    typeChambre: "",
+    typeChambre: 0,
     chambre: "",
     service: 0,
     serviceName: "",

@@ -17,16 +17,11 @@ const urlFor = (source: SanityImageSource) =>
         .quality(50)
     : null;
 
-// interface CardProps {
-//   type?: "voyage" | "hotel";
-//   post: any;
-// }
-
 export default function Card({
   type = "voyage",
   post,
 }: {
-  type: string;
+  type?: string;
   post: any;
 }) {
   if (type == "voyage") {

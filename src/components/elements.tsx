@@ -23,7 +23,7 @@ const POST_QUERY4 = (typeFilter: string, destinationFilter: string) =>
     ${destinationFilter ? `&& adresse == "${destinationFilter}"` : ""}
     ]
   `);
-export default function Elements({ type = "voyage" }) {
+export default function Elements({ type = "voyage" }: { type?: string }) {
   const searchParams = useSearchParams();
   const [posts, setPosts] = React.useState([]);
   const typeFilter =

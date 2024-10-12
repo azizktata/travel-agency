@@ -2,6 +2,7 @@
 import React from "react";
 
 import { ReactNode } from "react";
+import { ChevronRightIcon, ChevronLeftIcon } from "@radix-ui/react-icons";
 
 export default function Slider({
   children,
@@ -36,7 +37,8 @@ export default function Slider({
 
   return (
     <div className="voyage-container">
-      <i
+      <ChevronLeftIcon
+        // style={{ color: "#0e61a9", width: "16px", height: "16px" }}
         id="prev-slide"
         className="fa-solid slide-button fa-lg fa-chevron-left"
         onClick={() => {
@@ -46,9 +48,9 @@ export default function Slider({
             behavior: "smooth",
           });
         }}
-      ></i>
+      />
       <div className={`${sliderClass}`}>{children}</div>
-      <i
+      <ChevronRightIcon
         id="next-slide"
         className="fa-solid slide-button fa-lg fa-chevron-right"
         onClick={() => {
@@ -59,7 +61,7 @@ export default function Slider({
             behavior: "smooth",
           });
         }}
-      ></i>
+      />{" "}
       {/* <div className="slider-scrollbar">
           <div className="scrollbar-track">
             <div className="scrollbar-thumb"></div>

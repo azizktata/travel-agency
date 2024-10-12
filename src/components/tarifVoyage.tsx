@@ -4,14 +4,20 @@ import React from "react";
 import VisaForm from "./ui/VisaForm";
 import ContactForm from "./ui/contactForm";
 
+interface Periode {
+  periode?: string;
+  tarif?: number;
+  _key: string;
+}
+
 export default function TarifVoyage({
   periodes,
   visa,
   destination,
 }: {
-  periodes: any;
-  visa: any;
-  destination: any;
+  periodes: Periode[];
+  visa: "visa-required" | "visa-non-required";
+  destination: string;
 }) {
   const [selectedPeriode, setSelectedPeriode] = React.useState({
     periode: "",
