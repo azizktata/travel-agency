@@ -32,26 +32,11 @@ export default function Carousel({
 }: CarouselProps) {
   const [counter, setCounter] = React.useState(0);
 
-  // const [loaded, setLoaded] = React.useState(false);
-  React.useEffect(() => {
-    const nextCounter = (counter + 1) % carousel.length;
-    const nextImage = carousel[nextCounter]?.mainImage
-      ? urlFor(carousel[nextCounter].mainImage)?.url()
-      : null;
-
-    if (nextImage) {
-      const img = new window.Image();
-      img.src = nextImage;
-    }
-  }, [counter, carousel]);
-
   React.useEffect(() => {
     const intervalId = setInterval(() => {
-      setTimeout(() => {
-        setCounter((counter) =>
-          counter + 1 >= carousel.length ? 0 : counter + 1
-        );
-      }, 100); // Small delay
+      setCounter((counter) =>
+        counter + 1 >= carousel.length ? 0 : counter + 1
+      );
     }, 4000);
     return () => clearInterval(intervalId);
   }, [carousel.length]);
