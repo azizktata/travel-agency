@@ -38,7 +38,7 @@ export default function Carousel({
         setCounter((counter) =>
           counter + 1 >= carousel.length ? 0 : counter + 1
         );
-      }, 200); // Small delay
+      }, 500); // Small delay
     }, 4000);
     return () => clearInterval(intervalId);
   }, [carousel.length]);
