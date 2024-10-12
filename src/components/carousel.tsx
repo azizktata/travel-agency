@@ -31,18 +31,7 @@ export default function Carousel({
   titre = "Caprise",
 }: CarouselProps) {
   const [counter, setCounter] = React.useState(0);
-  // React.useEffect(() => {
-  //   const preloadImages = () => {
-  //     carousel.forEach((post) => {
-  //       const imgSrc = post.mainImage ? urlFor(post.mainImage)?.url() : null;
-  //       if (imgSrc) {
-  //         const img = new window.Image();
-  //         img.src = imgSrc;
-  //       }
-  //     });
-  //   };
-  //   preloadImages();
-  // }, [carousel]);
+
   React.useEffect(() => {
     const intervalId = setInterval(() => {
       setTimeout(() => {
