@@ -108,8 +108,8 @@ export default async function HotelPage({
             {nom && (
               <Tarifs
                 hotel={nom}
-                chambres={chambres}
-                services={services}
+                chambres={chambres || []}
+                services={services || []}
                 prix={prix || 0}
               />
             )}
