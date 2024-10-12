@@ -31,25 +31,25 @@ export default function Carousel({
   titre = "Caprise",
 }: CarouselProps) {
   const [counter, setCounter] = React.useState(0);
-  React.useEffect(() => {
-    const preloadImages = () => {
-      carousel.forEach((post) => {
-        const imgSrc = post.mainImage ? urlFor(post.mainImage)?.url() : null;
-        if (imgSrc) {
-          const img = new window.Image();
-          img.src = imgSrc;
-        }
-      });
-    };
-    preloadImages();
-  }, [carousel]);
+  // React.useEffect(() => {
+  //   const preloadImages = () => {
+  //     carousel.forEach((post) => {
+  //       const imgSrc = post.mainImage ? urlFor(post.mainImage)?.url() : null;
+  //       if (imgSrc) {
+  //         const img = new window.Image();
+  //         img.src = imgSrc;
+  //       }
+  //     });
+  //   };
+  //   preloadImages();
+  // }, [carousel]);
   React.useEffect(() => {
     const intervalId = setInterval(() => {
       setTimeout(() => {
         setCounter((counter) =>
           counter + 1 >= carousel.length ? 0 : counter + 1
         );
-      }, 100); // Small delay
+      }, 200); // Small delay
     }, 4000);
     return () => clearInterval(intervalId);
   }, [carousel.length]);
