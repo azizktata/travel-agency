@@ -31,7 +31,20 @@ export default function Carousel({
   titre = "Caprise",
 }: CarouselProps) {
   const [counter, setCounter] = React.useState(0);
-  const [loaded, setLoaded] = React.useState(false);
+
+  // const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(() => {
+    const nextCounter = (counter + 1) % carousel.length;
+    const nextImage = carousel[nextCounter]?.mainImage
+      ? urlFor(carousel[nextCounter].mainImage)?.url()
+      : null;
+
+    if (nextImage) {
+      const img = new window.Image();
+      img.src = nextImage;
+    }
+  }, [counter, carousel]);
+
   React.useEffect(() => {
     const intervalId = setInterval(() => {
       setTimeout(() => {
@@ -42,7 +55,6 @@ export default function Carousel({
     }, 4000);
     return () => clearInterval(intervalId);
   }, [carousel.length]);
-
   const pageImg = carousel[counter]?.mainImage
     ? urlFor(carousel[counter]?.mainImage)?.url()
     : null;
@@ -56,40 +68,36 @@ export default function Carousel({
         style={{ objectFit: "cover" }}
         priority={counter === 0}
         loading={counter === 0 ? "eager" : "lazy"}
-        onLoad={() => setLoaded(true)}
       />
-      {loaded && (
-        <div className="carousel-content">
-          {carousel[counter]?.destination ? (
-            <>
-              <div className="carousel-duree">
-                {" "}
-                {carousel[counter]?.duration}{" "}
-              </div>
-              <h1 className="carousel-title">
-                {carousel[counter]?.destination}
-              </h1>
-              <p className="carousel-price">
-                <span className="a_partir">à partir de</span>
-                <span className="prix-offre">
-                  <span className="price">{carousel[counter]?.prix}</span>
-                  <span className="DT"> DT</span>
-                </span>
-              </p>
-            </>
-          ) : (
-            <>
-              <h1 className="carousel-title">{titre}</h1>
-            </>
-          )}
 
-          {carousel[counter]?.slug?.current && (
-            <Link href={`/programmes/${carousel[counter]?.slug?.current}`}>
-              <button className="learn_more-btn"> J&apos;en profite</button>
-            </Link>
-          )}
-        </div>
-      )}
+      <div className="carousel-content">
+        {carousel[counter]?.destination ? (
+          <>
+            <div className="carousel-duree">
+              {" "}
+              {carousel[counter]?.duration}{" "}
+            </div>
+            <h1 className="carousel-title">{carousel[counter]?.destination}</h1>
+            <p className="carousel-price">
+              <span className="a_partir">à partir de</span>
+              <span className="prix-offre">
+                <span className="price">{carousel[counter]?.prix}</span>
+                <span className="DT"> DT</span>
+              </span>
+            </p>
+          </>
+        ) : (
+          <>
+            <h1 className="carousel-title">{titre}</h1>
+          </>
+        )}
+
+        {carousel[counter]?.slug?.current && (
+          <Link href={`/programmes/${carousel[counter]?.slug?.current}`}>
+            <button className="learn_more-btn"> J&apos;en profite</button>
+          </Link>
+        )}
+      </div>
     </>
   );
 }
