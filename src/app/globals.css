@@ -495,6 +495,7 @@ voyages
   min-width: 280px;
   position: relative;
   overflow: hidden;
+  /* min-height: 400px; */
 }
 .hotel-image {
   min-height: 200px;
@@ -548,7 +549,6 @@ voyages
   .card-hotel {
     max-width: 500px;
     width: 100%;
-    min-width: 350px;
   }
   .card-header-info {
     display: flex;
@@ -1192,10 +1192,10 @@ List des Programmes
 } */
 .elements-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   /* height: 100%; */
   gap: 1.5em;
-  align-items: flex-start;
+  /* align-items: flex-start; */
 }
 .fa-star {
   color: rgba(250, 195, 44, 0.8);

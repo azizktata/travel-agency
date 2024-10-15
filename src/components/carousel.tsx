@@ -50,14 +50,6 @@ export default function Carousel({
 
   return (
     <>
-      {/* <Image
-        src={pageImages[counter] || "/hero-6.jpg"}
-        alt={`Carousel Image ${counter + 1}`}
-        fill
-        style={{ objectFit: "cover" }}
-        priority
-      /> */}
-
       {pageImages.map((src, index) => (
         <Image
           key={index}
@@ -66,11 +58,21 @@ export default function Carousel({
           fill
           style={{
             objectFit: "cover",
-            display: index === counter ? "block" : "none",
+
+            transition: "opacity 1s ease-in-out",
+            opacity: index === counter ? 1 : 0,
           }}
-          priority={index === counter}
+          priority={counter === 0}
         />
       ))}
+
+      {/* <Image
+              src={pageImages[counter] || "/hero-6.jpg"}
+              alt={`Carousel Image ${counter + 1}`}
+              fill
+              style={{ objectFit: "cover" }}
+              priority
+            /> */}
 
       <div className="carousel-content">
         {carousel[counter]?.destination ? (
