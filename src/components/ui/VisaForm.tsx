@@ -4,19 +4,22 @@ import React from "react";
 import { client } from "@/sanity/client";
 import toast from "react-hot-toast";
 
-interface Offre {
-  periode: string;
-  prix: string;
-  destination: string;
+interface VisaFormProps {
+  destination?: string;
+  version?: number;
+  offre?: Offre;
 }
 
+interface Offre {
+  periode?: string;
+  prix?: string;
+  destination?: string;
+}
 export default function VisaForm({
   destination = "",
+  version = 1,
   offre,
-}: {
-  destination: string;
-  offre: Offre;
-}) {
+}: VisaFormProps) {
   const [formData, setFormData] = React.useState({
     nom: "",
     prenom: "",
@@ -25,12 +28,19 @@ export default function VisaForm({
     passport: null,
   });
   const [laoding, setLoading] = React.useState(false);
+  const [visaType, setVisaType] = React.useState({
+    type: "Visa de transit",
+    destination: "USA",
+  });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (e: any) => {
     const { name, value, type, files } = e.target;
+    if (name === "type" || name === "destination") {
+      setVisaType((prevData) => ({ ...prevData, [name]: value }));
+    }
     if (type === "file") {
-      setFormData((prevData) => ({ ...prevData, [name]: files[0] })); // Save the file object
+      setFormData((prevData) => ({ ...prevData, [name]: files[0] }));
     } else {
       setFormData((prevData) => ({ ...prevData, [name]: value }));
     }
@@ -48,17 +58,21 @@ export default function VisaForm({
     }
     const demande = offre
       ? `Demande Visa: ${destination}, ${offre?.periode}`
-      : `Demande Visa: ${destination}`;
+      : destination === ""
+        ? `Demande ${visaType.type}: ${visaType.destination}`
+        : `Demande Visa: pour le programme  ${destination}`;
 
     try {
       await client.create({
         _type: "visa",
         ...formData,
+        destination: destination !== "" ? destination : visaType.destination,
+        type: destination !== "" ? "Visa touristique" : visaType.type,
         passport: {
           _type: "image",
           asset: {
             _type: "reference",
-            _ref: imageAsset._id, // Reference the uploaded image
+            _ref: imageAsset._id,
           },
         },
       });
@@ -75,14 +89,13 @@ export default function VisaForm({
 
       if (res.ok) {
         toast.success("Email envoyé avec succès !");
-
         setFormData({
           nom: "",
           prenom: "",
           email: "",
           telephone: "",
           passport: null,
-        }); // Reset form
+        });
       }
     } catch {
       toast.error("Échec de l'envoi de l'e-mail.");
@@ -125,6 +138,25 @@ export default function VisaForm({
         name="email"
         required
       />
+      {version === 2 && (
+        <>
+          <select
+            onChange={handleChange}
+            name="destination"
+            className="filter-select"
+          >
+            <option value="USA">USA</option>
+            <option value="France">France</option>
+            <option value="Allmagne">Allmagne</option>
+            <option value="Portugal">Portugal</option>
+          </select>
+          <select onChange={handleChange} name="type" className="filter-select">
+            <option value="Visa de transit">Visa de transit</option>
+            <option value="Visa de travail">Visa de travail</option>
+            <option value="Visa touristique">Visa touristique</option>
+          </select>
+        </>
+      )}
       <div className="input-grp">
         <label htmlFor="passport">photo de votre passport</label>
         <input

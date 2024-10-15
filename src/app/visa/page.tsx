@@ -1,5 +1,6 @@
 import Footer from "@/components/ui/footer";
 import Header from "@/components/ui/header";
+import VisaForm from "@/components/ui/VisaForm";
 import { client } from "@/sanity/client";
 import { defineQuery } from "next-sanity";
 import Link from "next/link";
@@ -33,6 +34,10 @@ export default async function Visas() {
               <p>{visa.description}</p>
             </div>
           ))}
+          <div className="form-main">
+            <h4 className="form-title">Formulaire de demande de visa</h4>{" "}
+            <VisaForm version={2} />
+          </div>
         </div>
       </div>
       <Footer />

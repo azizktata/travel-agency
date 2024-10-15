@@ -32,6 +32,13 @@ export default function Carousel({
 }: CarouselProps) {
   const [counter, setCounter] = React.useState(0);
 
+  const pageImages = React.useMemo(
+    () =>
+      carousel.map((item) =>
+        item.mainImage ? urlFor(item.mainImage)?.url() : "/hero-6.jpg"
+      ),
+    [carousel]
+  );
   React.useEffect(() => {
     const intervalId = setInterval(() => {
       setCounter((counter) =>
@@ -40,20 +47,30 @@ export default function Carousel({
     }, 4000);
     return () => clearInterval(intervalId);
   }, [carousel.length]);
-  const pageImg = carousel[counter]?.mainImage
-    ? urlFor(carousel[counter]?.mainImage)?.url()
-    : null;
 
   return (
     <>
-      <Image
-        src={pageImg || "/hero-6.jpg"}
-        alt="hero"
+      {/* <Image
+        src={pageImages[counter] || "/hero-6.jpg"}
+        alt={`Carousel Image ${counter + 1}`}
         fill
         style={{ objectFit: "cover" }}
-        priority={counter === 0}
-        loading={counter === 0 ? "eager" : "lazy"}
-      />
+        priority
+      /> */}
+
+      {pageImages.map((src, index) => (
+        <Image
+          key={index}
+          src={src || "/hero-6.jpg"}
+          alt={`Carousel Image ${index + 1}`}
+          fill
+          style={{
+            objectFit: "cover",
+            display: index === counter ? "block" : "none",
+          }}
+          priority={index === counter}
+        />
+      ))}
 
       <div className="carousel-content">
         {carousel[counter]?.destination ? (

@@ -531,8 +531,7 @@ voyages
   }
   .card {
     min-width: 300px;
-    /* max-width: 400px; */
-    /* width: 100%; */
+
     max-width: 500px;
   }
   .card a {
@@ -549,11 +548,11 @@ voyages
   .card-hotel {
     max-width: 500px;
     width: 100%;
+    min-width: 350px;
   }
   .card-header-info {
     display: flex;
     justify-content: space-between;
-    /* padding: 0.5em; */
   }
   .slide-button {
     position: absolute;
@@ -1213,7 +1212,7 @@ List des Programmes
   gap: 0.5em;
   /* align-items: center; */
 }
-.select-container select {
+.filter-select {
   padding: 0.5em 0.75em;
   color: #000;
   background-color: white;
