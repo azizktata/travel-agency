@@ -114,6 +114,10 @@ nav a:hover {
   display: none;
   cursor: pointer;
 }
+.facebook,
+.instagram {
+  display: none;
+}
 .show-menu {
   transform: translateX(-100%);
 }
@@ -160,6 +164,10 @@ nav a:hover {
 
   .callus-btn {
     display: none;
+  }
+  .facebook,
+  .instagram {
+    display: block;
   }
   .menu-btn {
     display: block;
@@ -1193,7 +1201,7 @@ List des Programmes
 .elements-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  /* height: 100%; */
+
   gap: 1.5em;
   /* align-items: flex-start; */
 }

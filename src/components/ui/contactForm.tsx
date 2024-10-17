@@ -9,8 +9,14 @@ export default function ContactForm({
     arrive: "",
     depart: "",
     nombreChambres: 0,
-    typeChambre: 0,
-    chambre: "",
+    typeChambre0: 0,
+    typeChambre1: 0,
+    typeChambre2: 0,
+    typeChambre3: 0,
+    chambre0: "",
+    chambre1: "",
+    chambre2: "",
+    chambre3: "",
     service: 0,
     serviceName: "",
   },
@@ -42,7 +48,12 @@ export default function ContactForm({
   async function handleSubmit(e: any) {
     e.preventDefault();
     if (type === "reservation_hotel") {
-      const reservationMessage = `J'aime bien réserver ${reservation?.nombreChambres} chambre(s) du ${reservation?.arrive} au ${reservation?.depart} dans ${reservation.hotel}, comprenant une chambre de type ${reservation?.chambre} avec le service ${reservation?.serviceName}. `;
+      const chambreMessage = `comprenant ${Array.from(
+        { length: reservation?.nombreChambres },
+        (_, i) =>
+          `une chambre de type ${reservation[`chambre${i}` as keyof typeof reservation]}`
+      ).join(" et ")}`;
+      const reservationMessage = `J'aime bien réserver ${reservation?.nombreChambres} chambre(s) du ${reservation?.arrive} au ${reservation?.depart} dans ${reservation.hotel}, ${chambreMessage} avec le service ${reservation?.serviceName}. `;
       copyFormData = {
         ...formData,
         subject: `Demande Réservation ${reservation.hotel}`,

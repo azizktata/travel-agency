@@ -67,6 +67,24 @@ export default function Header({ change = false }) {
                 Visa
               </Link>
             </li>
+            {contact.facebook && (
+              <li>
+                <a target="_blank" className="facebook" href={contact.facebook}>
+                  Facebook
+                </a>
+              </li>
+            )}
+            {contact.instagram && (
+              <li>
+                <a
+                  target="_blank"
+                  className="instagram"
+                  href={contact.instagram}
+                >
+                  instagram
+                </a>
+              </li>
+            )}
           </ul>
           <button className="callus-btn">
             <svg

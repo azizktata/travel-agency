@@ -33,8 +33,14 @@ export default function Tarifs({
     arrive: today.toISOString().split("T")[0],
     depart: tomorrow.toISOString().split("T")[0],
     nombreChambres: 1,
-    typeChambre: +(chambres?.[0]?.prix ?? 0) || prix,
-    chambre: chambres?.[0]?.chambre || "",
+    typeChambre0: +(chambres?.[0]?.prix ?? 0) || prix,
+    typeChambre1: +(chambres?.[0]?.prix ?? 0) || prix,
+    typeChambre2: +(chambres?.[0]?.prix ?? 0) || prix,
+    typeChambre3: +(chambres?.[0]?.prix ?? 0) || prix,
+    chambre0: chambres?.[0]?.chambre || "",
+    chambre1: chambres?.[0]?.chambre || "",
+    chambre2: chambres?.[0]?.chambre || "",
+    chambre3: chambres?.[0]?.chambre || "",
     service: +(services?.[0]?.prix ?? 0),
     serviceName: services?.[0]?.service || "",
     total: 0,
@@ -56,10 +62,18 @@ export default function Tarifs({
     }
 
     const numberOfNights = differenceInTime / (1000 * 3600 * 24);
-    const calculatedTotal =
-      reserve.nombreChambres *
-      (+reserve.typeChambre + +reserve.service) *
-      numberOfNights;
+    const roomTypes = [
+      reserve.typeChambre0,
+      reserve.typeChambre1,
+      reserve.typeChambre2,
+      reserve.typeChambre3,
+    ];
+
+    const totalRoomCost = roomTypes
+      .slice(0, reserve.nombreChambres)
+      .reduce((sum, price) => sum + +price, 0);
+
+    const calculatedTotal = (totalRoomCost + +reserve.service) * numberOfNights;
 
     setTotal(calculatedTotal);
 
@@ -82,11 +96,12 @@ export default function Tarifs({
       }));
     }
 
-    if (name === "typeChambre" && selectedOptions.length > 0) {
+    const chambreIndex = name.match(/\d+/)?.[0];
+    if (chambreIndex && selectedOptions.length > 0) {
       const selectedKey = selectedOptions[0].getAttribute("data-key");
       setReserve((prevReserve) => ({
         ...prevReserve,
-        chambre: selectedKey,
+        [`chambre${chambreIndex}`]: selectedKey,
       }));
     }
   };
@@ -129,18 +144,25 @@ export default function Tarifs({
               <option value={4}>4 chambres</option>
             </select>
           </div>
-          {chambres && (
-            <div className="input-grp">
-              <label htmlFor="chambre">Chambre</label>
-              <select onChange={handleChange} name="typeChambre" id="chambre">
-                {chambres?.map((c: any) => (
-                  <option key={c.chamber} value={c.prix} data-key={c.chambre}>
-                    {c.chambre}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
+          {chambres &&
+            Array.from({ length: reserve.nombreChambres }).map((_, index) => (
+              <div key={index} className="input-grp">
+                <label
+                  htmlFor={`chambre-${index}`}
+                >{`chambre-${index + 1}`}</label>
+                <select
+                  onChange={handleChange}
+                  name={`typeChambre${index}`}
+                  id={`chambre-${index}`}
+                >
+                  {chambres?.map((c: any) => (
+                    <option key={c.chambre} value={c.prix} data-key={c.chambre}>
+                      {c.chambre}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ))}
           {services && (
             <div className="input-grp">
               <label htmlFor="service">Service</label>
