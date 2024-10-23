@@ -109,7 +109,7 @@ export default function VisaForm({
       <input
         onChange={handleChange}
         value={formData.nom}
-        placeholder="Your nom"
+        placeholder=" nom"
         type="text"
         name="nom"
         required
@@ -117,7 +117,7 @@ export default function VisaForm({
       <input
         onChange={handleChange}
         value={formData.prenom}
-        placeholder="Your prenom"
+        placeholder=" prenom"
         type="text"
         name="prenom"
         required
@@ -125,7 +125,7 @@ export default function VisaForm({
       <input
         onChange={handleChange}
         value={formData.telephone}
-        placeholder="telephone number"
+        placeholder="télephone "
         type="number"
         name="telephone"
         required

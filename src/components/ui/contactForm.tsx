@@ -74,10 +74,11 @@ export default function ContactForm({
       ).join(" et ")}`;
       const ageEnfants = `les enfants avec les ages: ${Array.from(
         { length: reservation?.nombreEnfants },
-        (_, i) => `${reservation[`ageEnfant${i}` as keyof typeof reservation]}`
+        (_, i) =>
+          `${reservation[`ageEnfant${i}` as keyof typeof reservation]} ans`
       ).join(" et ")}`;
 
-      const lesMembresMessage = `Les membres sont: ${reservation.nombreAdultes} Adultes et ${reservation.nombreEnfants} Enfants, ${ageEnfants}`;
+      const lesMembresMessage = `Les membres sont: ${reservation.nombreAdultes} Adulte(s) et ${reservation.nombreEnfants} Enfant(s), ${ageEnfants}`;
       const reservationMessage = `J'aime bien réserver ${reservation?.nombreChambres} chambre(s) du ${reservation?.arrive} au ${reservation?.depart} dans ${reservation.hotel}, ${chambreMessage} avec le service ${reservation?.serviceName}. ${lesMembresMessage}`;
       copyFormData = {
         ...formData,
@@ -130,7 +131,7 @@ export default function ContactForm({
             value={formData.noms[i]?.nom || ""}
             name="nom"
             type="text"
-            placeholder={`Nom Adulte ${i + 1}`}
+            placeholder={type === "contact" ? "Nom" : `Nom Adulte ${i + 1}`}
             required
             key={i}
           />
@@ -139,8 +140,11 @@ export default function ContactForm({
             value={formData.noms[i]?.prenom || ""}
             name="prenom"
             type="text"
-            placeholder={`Prénom Adulte ${i + 1}`}
+            placeholder={
+              type === "contact" ? "Prénom" : `Prénom Adulte ${i + 1}`
+            }
             required
+            key={i}
           />
         </>
       ))}

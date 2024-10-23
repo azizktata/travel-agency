@@ -60,7 +60,7 @@ export default function Carousel({
             objectFit: "cover",
 
             transition: "opacity 1s ease-in-out",
-            opacity: index === counter ? 1 : 0,
+            opacity: index === counter || index === 0 ? 1 : 0,
           }}
           priority={counter === 0}
         />

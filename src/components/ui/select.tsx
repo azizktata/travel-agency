@@ -2,29 +2,6 @@
 import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
-import { client } from "@/sanity/client";
-import { defineQuery } from "next-sanity";
-
-const _options = { next: { revalidate: 60 } };
-
-const POST_QUERY_COUNT = (typeFilter: string, destinationFilter: string) =>
-  defineQuery(`
-  count(
-    *[_type == "post" 
-    ${typeFilter ? `&& type == "${typeFilter}"` : ""}
-    ${destinationFilter ? `&& destination == "${destinationFilter}"` : ""}
-    ]
-  )
-`);
-const POST_QUERY4_COUNT = (typeFilter: string, destinationFilter: string) =>
-  defineQuery(`
-  count(
-    *[_type == "hotel" 
-    ${typeFilter ? `&& etoile == ${typeFilter}` : ""}
-    ${destinationFilter ? `&& adresse == "${destinationFilter}"` : ""}
-    ]
-  )
-`);
 
 export default function Select({
   options,
@@ -60,38 +37,13 @@ export default function Select({
       router.push(pathname + "?" + params.toString());
     }
   }
-  const currentType = searchParams.get("Type") || false;
-  const [length, setLength] = React.useState(0);
-  const typeFilter =
-    type === "voyage"
-      ? searchParams.get("Type") || ""
-      : searchParams.get("etoile") || "";
-  const destinationFilter = searchParams.get("destination") || "";
-
-  React.useEffect(() => {
-    async function fetchData() {
-      const postsLength =
-        type === "voyage"
-          ? await client.fetch(
-              POST_QUERY_COUNT(typeFilter, destinationFilter),
-              {},
-              _options
-            )
-          : await client.fetch(
-              POST_QUERY4_COUNT(typeFilter, destinationFilter),
-              {},
-              _options
-            );
-      setLength(postsLength);
-    }
-    fetchData();
-  }, [typeFilter, destinationFilter, type]);
+  const currentType = searchParams.get("type") || false;
 
   return (
     <div className="select-container">
       <div>
         {type === "voyage" ? (
-          <select onChange={handleChange} name="Type" className="filter-select">
+          <select onChange={handleChange} name="type" className="filter-select">
             <option value={0}>tous les voyages</option>
             <option
               selected={currentType === "voyage-organise"}
@@ -134,12 +86,6 @@ export default function Select({
           ))}
         </select>
       </div>
-      <p>
-        <strong>
-          {" "}
-          {length > 1 ? `${length} Programmes` : `${length} Programme`}{" "}
-        </strong>
-      </p>
     </div>
   );
 }
