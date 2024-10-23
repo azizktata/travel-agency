@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 
 // Handle POST requests to send email
 export async function POST(req) {
-  const { nom, email, telephone, subject, message, prenom } = await req.json();
+  const { noms, email, telephone, subject, message} = await req.json();
 
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -13,11 +13,12 @@ export async function POST(req) {
   });
 
   try {
+    const lesNoms = noms.map(nomObj => `${nomObj.nom} ${nomObj.prenom}`).join(', ');
     await transporter.sendMail({
       from: `${email} `,
       to: process.env.EMAIL_USER,
       subject: `${subject} `,
-      text: `${message || ""}\n\nemail: ${email}\nnom:${nom}${prenom}\ntelephone: ${telephone}`,
+      text: `${message || ""}\n\n les noms des adultes: ${lesNoms} \n\n email: ${email}\nnom:${noms[0].nom}${noms[0].prenom}\ntelephone: ${telephone}`,
     });
 
     return new Response(JSON.stringify({ message: 'Email sent successfully' }), { status: 200 });

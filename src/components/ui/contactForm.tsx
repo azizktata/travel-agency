@@ -8,6 +8,12 @@ export default function ContactForm({
     hotel: "",
     arrive: "",
     depart: "",
+    nombreAdultes: 1,
+    nombreEnfants: 0,
+    ageEnfant1: 1,
+    ageEnfant2: 1,
+    ageEnfant3: 1,
+    ageEnfant4: 1,
     nombreChambres: 0,
     typeChambre0: 0,
     typeChambre1: 0,
@@ -27,8 +33,12 @@ export default function ContactForm({
   },
 }) {
   const [formData, setFormData] = React.useState({
-    nom: "",
-    prenom: "",
+    noms: [
+      {
+        nom: "",
+        prenom: "",
+      },
+    ],
     email: "",
     telephone: "",
     subject: "",
@@ -36,10 +46,20 @@ export default function ContactForm({
   });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function handleChange(e: any) {
+  function handleInputChange(e: any) {
     const value = e.target.value;
     const name = e.target.name;
     setFormData({ ...formData, [name]: value });
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function handleChange(e: any, index: number) {
+    const { name, value } = e.target;
+
+    // Update the specific `nom` or `prenom` based on the index
+    const updatedNoms = [...formData.noms];
+    updatedNoms[index] = { ...updatedNoms[index], [name]: value };
+
+    setFormData({ ...formData, noms: updatedNoms });
   }
   const [laoding, setLoading] = React.useState(false);
 
@@ -50,10 +70,15 @@ export default function ContactForm({
     if (type === "reservation_hotel") {
       const chambreMessage = `comprenant ${Array.from(
         { length: reservation?.nombreChambres },
-        (_, i) =>
-          `une chambre de type ${reservation[`chambre${i}` as keyof typeof reservation]}`
+        (_, i) => ` ${reservation[`chambre${i}` as keyof typeof reservation]}`
       ).join(" et ")}`;
-      const reservationMessage = `J'aime bien réserver ${reservation?.nombreChambres} chambre(s) du ${reservation?.arrive} au ${reservation?.depart} dans ${reservation.hotel}, ${chambreMessage} avec le service ${reservation?.serviceName}. `;
+      const ageEnfants = `les enfants avec les ages: ${Array.from(
+        { length: reservation?.nombreEnfants },
+        (_, i) => `${reservation[`ageEnfant${i}` as keyof typeof reservation]}`
+      ).join(" et ")}`;
+
+      const lesMembresMessage = `Les membres sont: ${reservation.nombreAdultes} Adultes et ${reservation.nombreEnfants} Enfants, ${ageEnfants}`;
+      const reservationMessage = `J'aime bien réserver ${reservation?.nombreChambres} chambre(s) du ${reservation?.arrive} au ${reservation?.depart} dans ${reservation.hotel}, ${chambreMessage} avec le service ${reservation?.serviceName}. ${lesMembresMessage}`;
       copyFormData = {
         ...formData,
         subject: `Demande Réservation ${reservation.hotel}`,
@@ -83,8 +108,7 @@ export default function ContactForm({
           duration: 4000,
         });
         setFormData({
-          nom: "",
-          prenom: "",
+          noms: [],
           email: "",
           telephone: "",
           subject: "",
@@ -99,24 +123,29 @@ export default function ContactForm({
   }
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
+      {Array.from({ length: reservation.nombreAdultes }).map((_, i) => (
+        <>
+          <input
+            onChange={(e) => handleChange(e, i)}
+            value={formData.noms[i]?.nom || ""}
+            name="nom"
+            type="text"
+            placeholder={`Nom Adulte ${i + 1}`}
+            required
+            key={i}
+          />
+          <input
+            onChange={(e) => handleChange(e, i)}
+            value={formData.noms[i]?.prenom || ""}
+            name="prenom"
+            type="text"
+            placeholder={`Prénom Adulte ${i + 1}`}
+            required
+          />
+        </>
+      ))}
       <input
-        onChange={handleChange}
-        value={formData.nom}
-        name="nom"
-        type="text"
-        placeholder="Nom"
-        required
-      />
-      <input
-        onChange={handleChange}
-        value={formData.prenom}
-        name="prenom"
-        type="text"
-        placeholder="Prénom"
-        required
-      />
-      <input
-        onChange={handleChange}
+        onChange={handleInputChange}
         value={formData.email}
         name="email"
         type="email"
@@ -124,7 +153,7 @@ export default function ContactForm({
         required
       />
       <input
-        onChange={handleChange}
+        onChange={handleInputChange}
         value={formData.telephone}
         name="telephone"
         type="text"
@@ -134,7 +163,7 @@ export default function ContactForm({
       {type === "contact" && (
         <>
           <input
-            onChange={handleChange}
+            onChange={handleInputChange}
             value={formData.subject}
             name="subject"
             type="text"
@@ -143,7 +172,7 @@ export default function ContactForm({
             className="subject"
           />
           <textarea
-            onChange={handleChange}
+            onChange={handleInputChange}
             value={formData.message}
             name="message"
             placeholder="Message"
