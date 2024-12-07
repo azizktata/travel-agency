@@ -5,7 +5,7 @@ import Select from "@/components/ui/select";
 import React, { Suspense } from "react";
 import Footer from "@/components/ui/footer";
 import { defineQuery } from "next-sanity";
-import Elements from "@/components/elements";
+import Elements from "@/components/ui/elements";
 
 const DEST_QUERY = defineQuery(`*[
   _type == "post"

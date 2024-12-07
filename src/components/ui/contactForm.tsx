@@ -55,7 +55,6 @@ export default function ContactForm({
   function handleChange(e: any, index: number) {
     const { name, value } = e.target;
 
-    // Update the specific `nom` or `prenom` based on the index
     const updatedNoms = [...formData.noms];
     updatedNoms[index] = { ...updatedNoms[index], [name]: value };
 
@@ -144,7 +143,7 @@ export default function ContactForm({
               type === "contact" ? "Prénom" : `Prénom Adulte ${i + 1}`
             }
             required
-            key={i}
+            key={i + 1}
           />
         </>
       ))}

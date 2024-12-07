@@ -10,13 +10,13 @@ import { defineQuery } from "next-sanity";
 
 import Footer from "@/components/ui/footer";
 import Header from "@/components/ui/header";
-import TarifVoyage from "@/components/tarifVoyage";
+import TarifVoyage from "@/components/ui/tarifVoyage";
 import {
   CheckIcon,
   ExclamationTriangleIcon,
   HomeIcon,
 } from "@radix-ui/react-icons";
-import Loading from "@/components/loading";
+import Loading from "@/components/ui/loading";
 
 const options = { next: { revalidate: 60 } };
 

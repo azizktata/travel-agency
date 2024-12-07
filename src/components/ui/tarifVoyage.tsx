@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import VisaForm from "./ui/VisaForm";
-import ContactForm from "./ui/contactForm";
+import VisaForm from "./VisaForm";
+import ContactForm from "./contactForm";
 
 interface Periode {
   periode?: string;

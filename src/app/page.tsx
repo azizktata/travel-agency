@@ -6,9 +6,9 @@ import { client } from "@/sanity/client";
 import { defineQuery } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import Carousel from "@/components/carousel";
-import Slider from "@/components/slider";
-import Card from "@/components/card";
+import Carousel from "@/components/ui/carousel";
+import Slider from "@/components/ui/slider";
+import Card from "@/components/ui/card";
 import ContactForm from "@/components/ui/contactForm";
 import { Hotel, Post } from "@/sanity/types";
 

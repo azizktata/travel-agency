@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import ContactForm from "./ui/contactForm";
+import ContactForm from "./contactForm";
 import { toast } from "react-hot-toast";
 
 interface Chambre {

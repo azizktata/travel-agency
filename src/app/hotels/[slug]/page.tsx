@@ -10,9 +10,9 @@ import { defineQuery } from "next-sanity";
 import { PortableText } from "@portabletext/react";
 import Footer from "@/components/ui/footer";
 import Header from "@/components/ui/header";
-import Tarifs from "@/components/tarifs";
+import Tarifs from "@/components/ui/tarifs";
 import { SewingPinIcon } from "@radix-ui/react-icons";
-import Loading from "@/components/loading";
+import Loading from "@/components/ui/loading";
 
 const options = { next: { revalidate: 60 } };
 
